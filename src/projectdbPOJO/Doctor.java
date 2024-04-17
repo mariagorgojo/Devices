@@ -24,5 +24,17 @@ public class Doctor {
 		this.id = id;
 	}
 	
+	private int telefono;
+
+	public int getTelefono() {
+		return telefono;
+	}
+
+	public void setTelefono(int telefono) {
+		this.telefono = telefono;
+	}
+	
+	
+	
 	
 }
