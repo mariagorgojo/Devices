@@ -35,9 +35,7 @@ public class Doctor {
 		return speciality;
 	}
 
-	public void setSpeciality(String speciality) {
-		this.speciality = speciality;
-	}
+	
 	
 	
 	
