@@ -1,5 +1,6 @@
 package projectdbPOJO;
-
+//
+//añadir constructor, hashcode y equals
 public class Doctor {
 
 	private int id;
