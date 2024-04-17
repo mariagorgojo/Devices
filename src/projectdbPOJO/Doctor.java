@@ -2,9 +2,10 @@ package projectdbPOJO;
 
 public class Doctor {
 
-	//prueba 1
-	
+	private int id;
 	private String name;
+	private String surname;
+	private String speciality;
 	
 	public String getName() {
 		return name;
@@ -14,8 +15,6 @@ public class Doctor {
 		this.name = name;
 	}
 
-	private int id;
-
 	public int getId() {
 		return id;
 	}
@@ -23,16 +22,24 @@ public class Doctor {
 	public void setId(int id) {
 		this.id = id;
 	}
+
+	public String getSurname() {
+		return surname;
+	}
+
+	public void setSurname(String surname) {
+		this.surname = surname;
+	}
+
+	public String getSpeciality() {
+		return speciality;
+	}
+
+	public void setSpeciality(String speciality) {
+		this.speciality = speciality;
+	}
 	
-	private int telefono;
-
-	public int getTelefono() {
-		return telefono;
-	}
-
-	public void setTelefono(int telefono) {
-		this.telefono = telefono;
-	}
+	
 	
 	
 	
