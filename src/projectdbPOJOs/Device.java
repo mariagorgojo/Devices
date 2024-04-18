@@ -87,7 +87,7 @@ public class Device implements Serializable{
 	
 	@Override
 	public String toString() {
-		return "Device [ id = " +id+ ", type = " +type+ ", implantation date = " +implantationDate+ ", expiration date = " +expirationDate+ " ]";
+		return "Device [id= " +id+ ", type= " +type+ ", implantation date= " +implantationDate+ ", expiration date= " +expirationDate+ "]";
 	}
 	
 

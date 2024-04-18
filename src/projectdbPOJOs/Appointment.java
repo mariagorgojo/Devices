@@ -76,7 +76,7 @@ public class Appointment implements Serializable {
 	
 	@Override
 	public String toString() {
-		return "Appointment [ id = " +id+ ", date = " +date+ ", description = " +description+ " ]";
+		return "Appointment [id= " +id+ ", date= " +date+ ", description= " +description+ "]";
 	}
 	
 
