@@ -1,4 +1,4 @@
-package projectdbPOJOs;
+package projectPOJOs;
 
 import java.io.Serializable;
 import java.util.Objects;

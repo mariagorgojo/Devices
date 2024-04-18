@@ -1,4 +1,4 @@
-package projectdbPOJOs;
+package projectPOJOs;
 
 import java.io.Serializable;
 import java.sql.Date;
@@ -7,11 +7,11 @@ import java.util.Objects;
 public class Appointment implements Serializable {
 
 	//main de prueba
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		
 		Appointment a = new Appointment(1, null, "prueba");
 		System.out.println(a);
-	}
+	}*/
 	
 	//
 	private static final long serialVersionUID = 5598607402823796111L;

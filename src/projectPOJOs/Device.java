@@ -1,4 +1,4 @@
-package projectdbPOJOs;
+package projectPOJOs;
 
 import java.io.Serializable;
 import java.sql.Date;
@@ -7,11 +7,11 @@ import java.util.Objects;
 public class Device implements Serializable{
 	
 	//main de prueba
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 			
 		Device d = new Device(2, "bomba de insulina", null, null);
 		System.out.println(d);
-	}
+	}*/
 	
 	private static final long serialVersionUID = -4423025978446522586L;
 	

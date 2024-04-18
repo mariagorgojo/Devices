@@ -1,4 +1,4 @@
-package projectdbPOJOs;
+package projectPOJOs;
 
 public class Patient {
 
