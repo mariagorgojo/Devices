@@ -1,4 +1,4 @@
-package projectdbPOJO;
+package projectdbPOJOs;
 //Hay que utilizar la clase Date. Importar librerías: seleccionar import java.sql.Date
 //añadir constructor, hashcode y equals
 public class Doctor {
