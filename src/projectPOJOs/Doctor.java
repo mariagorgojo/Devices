@@ -1,8 +1,6 @@
 package projectPOJOs;
-//Hay que utilizar la clase Date. Importar librerías: seleccionar import java.sql.Date
-//añadir constructor, hashcode y equals
+
 import java.io.Serializable;
-import java.sql.Date;
 import java.util.Objects;
 
 public class Doctor implements Serializable{
