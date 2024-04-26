@@ -5,13 +5,25 @@ import java.sql.Date;
 import java.util.Objects;
 
 public class Patient implements Serializable{
+	
 	private static final long serialVersionUID = -4423025978446522586L;
+	
 	private int id;
 	private String name;
 	private String surname;
 	private String device;
 	private Date birthday;
 	private String diagnosis;
+	
+	public Patient(String name, String surname, String device, Date birthday, String diagnosis) {
+		super();
+		this.name = name;
+		this.surname = surname;
+		this.device = device;
+		this.birthday = birthday;
+		this.diagnosis = diagnosis;
+	}
+
 	public Patient(int id, String name, String surname, String device, Date birthday, String diagnosis) {
 		super();
 		this.id = id;
@@ -21,6 +33,7 @@ public class Patient implements Serializable{
 		this.birthday = birthday;
 		this.diagnosis = diagnosis;
 	}
+	
 	public int getId() {
 		return id;
 	}
@@ -57,10 +70,12 @@ public class Patient implements Serializable{
 	public void setDiagnosis(String diagnosis) {
 		this.diagnosis = diagnosis;
 	}
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(birthday, device, diagnosis, id, name, surname);
 	}
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -74,6 +89,7 @@ public class Patient implements Serializable{
 				&& Objects.equals(diagnosis, other.diagnosis) && id == other.id && Objects.equals(name, other.name)
 				&& Objects.equals(surname, other.surname);
 	}
+	
 	@Override
 	public String toString() {
 		return "Patient [id=" + id + ", name=" + name + ", surname=" + surname + ", device=" + device + ", birthday="
