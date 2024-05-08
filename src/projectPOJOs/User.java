@@ -7,13 +7,21 @@ import java.util.Objects;
 
 public class User implements Serializable{
 
-	private static final long serialVersionUID = -2355453857668484308L;
+	
+	private static final long serialVersionUID = -4542438702065480122L;
 	
 	private Integer id;
 	private String email;
 	private byte[] password;
 	private Role role;
 	
+	public User(String email, byte[] password, Role role) {
+		super();
+		this.email = email;
+		this.password = password;
+		this.role = role;
+	}
+
 	public User() {
 		super();
 	}

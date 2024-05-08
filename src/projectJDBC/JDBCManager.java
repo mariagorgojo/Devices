@@ -7,6 +7,14 @@ import java.sql.Statement;
 
 public class JDBCManager {
 	
+	public static void main(String []args) {
+		
+		JDBCManager prueba = new JDBCManager();
+		if(prueba != null) {
+			System.out.println("database downloaded correctly");
+		}
+	}
+	
 	private Connection c = null;
 	
 	public JDBCManager() {
