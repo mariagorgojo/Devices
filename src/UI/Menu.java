@@ -1,6 +1,7 @@
 package UI;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.security.MessageDigest;
 import java.sql.Date;
@@ -38,6 +39,7 @@ public class Menu {
 				System.out.println("Choose an option");
 				System.out.println("1. Login User");
 				System.out.println("2. Sign-up new user");
+				System.out.println("3. Udpate the password of an exissting user");
 				System.out.println("0. Exit.");
 								
 				choice = Integer.parseInt(reader.readLine());
@@ -45,16 +47,18 @@ public class Menu {
 				switch(choice)
 				{
 				case 1: 
-					login();					
+					login();		
+					break;
 				case 2:
-					System.out.println("Add info of new user.");
 					signUpUser();
+					break;
 				case 3: 
-					System.out.println("Udpate the password of an exissting user.");
 					updatePassword();
+					break;
 				case 0:
 					System.out.println("Exiting application.");
 					jdbcmanager.disconnect();
+					break;
 				}
 				
 			}while(choice!=0);
@@ -64,83 +68,57 @@ public class Menu {
 		{e.printStackTrace();}
 	}
 	
+	//casi completado
 	private static void updatePassword() throws Exception {
 		
 		System.out.println("Email: ");
 		String email = reader.readLine();
 				
-		System.out.println("Enter current Password");
+		System.out.println("Enter current Password: ");
 		String passwd = reader.readLine();
 		
-		System.out.println("Enter new Password");
+		System.out.println("Enter new Password: ");
 		String new_passwd = reader.readLine();
 				
 		User u = usermanager.checkPassword(email, passwd);
 				
-		if(u!=null)
-		{
-			System.out.println("Login of owner successful!");
-			usermanager.changePassword(u, new_passwd);
+		if(u!=null){ //if user already existed
+			usermanager.changePassword(u, new_passwd); //método changePassword todavía por hacer
 		}
 				
 	}
 
+	//completado
 	private static void login() throws Exception {
 		// TODO Auto-generated method stub
 		System.out.println("Email: ");
 		String email = reader.readLine();
 		
-		System.out.println("Password");
+		System.out.println("Password: ");
 		String passwd = reader.readLine();
 		
 		User u = usermanager.checkPassword(email, passwd);
 		
-		if(u!=null & u.getRole().getName().equals("owner"))
-		{
-			System.out.println("Login of owner successful!");
-			//call for owner submenu;
-			ownerMenu(email);
-		}
+		//call for submenus
+		if(u==null) {
+			throw new Exception("User does not exist");
+			
+		}else if(u.getRole().getName().equals("doctor")){ //user is a doctor, we open doctor menu
+				System.out.println("Login of doctor successful!");
+				DoctorMenu.menu(email);
+				
+			}else if(u.getRole().getName().equals("patient")) { //user is a patient, we open patient menu
+				System.out.println("Login of doctor successful!");
+				PatientMenu.menu(email);
+				
+			}else { //user is a manufacturer, we open manufacturer menu
+				System.out.println("Login of doctor successful!");
+				ManufacturerMenu.menu(email);
+			}
 		
 	}
 
-	private static void ownerMenu(String email) {
-		// TODO Auto-generated method stub
-		try {
-			int choice;
-			do {
-				System.out.println("Choose an option");
-				System.out.println("1. Add a new owner.");
-				System.out.println("2. Print all the owners in DB.");
-				System.out.println("3. Add a new pet in the DB");
-				System.out.println("4. Print all the pets of an owner.");
-				System.out.println("0. Return.");
-				
-				choice = Integer.parseInt(reader.readLine());
-								
-				switch(choice)
-				{
-				case 1: 
-					createOwner();
-					break;
-				case 2:
-					getAllowners();
-				case 3:
-					createPet();
-				case 4:
-					printOwnersPets();
-				case 0:
-					System.out.println("Back to main menu");
-					
-				}
-				
-			}while(choice!=0);
-			
-			
-		}catch(Exception e)
-		{e.printStackTrace();}
-	}
-
+	//completado
 	private static void signUpUser() {
 		// TODO Auto-generated method stub
 		try {
@@ -153,6 +131,7 @@ public class Menu {
 			MessageDigest md= MessageDigest.getInstance("MD5");
 			md.update(password.getBytes());
 			byte[] pass = md.digest();
+			//
 			
 			System.out.println("Introduce the role of the user. 1: doctor, 2: patient, 3: manufacturer");
 			Integer rol = Integer.parseInt(reader.readLine());
@@ -162,31 +141,16 @@ public class Menu {
 			
 			usermanager.newUser(u);
 		
-		}
-		catch(Exception e)
-		{
+		}catch(Exception e){
 			e.printStackTrace();
-			}
-	}
-
-	private static void createOwner() throws Exception
-	{
-		System.out.println("Type the name of the owner");
-		String name = reader.readLine();
-		System.out.println("Type the phone of the owner");
-		Integer phone = Integer.parseInt(reader.readLine());
-		System.out.println("Type the cardnumber of the owner");
-		Integer cardnumber = Integer.parseInt(reader.readLine());
-		System.out.println("Type the email of the owner");
-		String email = reader.readLine();
-		
-		Owner o = new Owner(name, email, phone, cardnumber);
-		
-		ownermanager.createOwner(o);
+		}
 	}
 	
-	private static void createPet() throws Exception
-	{
+	
+	//INSPECCIONAR SI ME SIRVEN
+	
+	/*private static void createPet() throws Exception{
+		
 		System.out.println("Type the name of the pet");
 		String name = reader.readLine();
 		System.out.println("Type if it's cured or not");
@@ -207,8 +171,9 @@ public class Menu {
 		Pet p = new Pet(coat,  name,cured, typeOfAnimal, dob, o);
 		petmanager.addPet(p);
 		
-	}
-	private static void getAllowners() throws Exception{
+	}*/
+	
+	/*private static void getAllowners() throws Exception{
 		
 		List<Owner> owners = null;
 		
@@ -216,9 +181,9 @@ public class Menu {
 		
 		System.out.println(owners);
 		
-	}
+	}*/
 	
-	private static void printOwnersPets() throws Exception{
+	/*private static void printOwnersPets() throws Exception{
 		
 		List<Pet> pets = null;
 		
@@ -229,6 +194,6 @@ public class Menu {
 		
 		System.out.println(pets);
 		
-	}
+	}*/
 	
 }

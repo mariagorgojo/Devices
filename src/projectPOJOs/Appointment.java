@@ -20,6 +20,8 @@ public class Appointment implements Serializable {
 	private Date date;
 	private String description;
 	
+	// DIGO YO QUE TENDRÁ QUE TENER COMO ATRIBUTOS EL DOCTOR Y EL PACIENTE QUE ASISTEN !!!!!!!
+	
 	public Appointment(Date date, String description) {
 		super();
 		this.date = date;

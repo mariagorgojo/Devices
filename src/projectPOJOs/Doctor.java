@@ -1,6 +1,8 @@
 package projectPOJOs;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Doctor implements Serializable{
@@ -11,6 +13,10 @@ public class Doctor implements Serializable{
 	private String name;
 	private String surname;
 	private String specialty;
+	private List<Patient> patients = new ArrayList<>();
+	private List<Device> devicesOrdered = new ArrayList<>(); //o al doctor se la pela saber los que ha pedido una vez pedidos??????
+	
+	//lista de appointments??? por paciente???
 	
 	public Doctor(String name, String surname, String speciality) {
 		super();
@@ -78,11 +84,17 @@ public class Doctor implements Serializable{
 		return "Doctor [id=" + id + ", name=" + name + ", surname=" + surname + ", speciality=" + specialty + "]";
 	}
 
+	public Patient searchPatientById(int id) {
+		Patient patient = null;
+		for(Patient p : patients) {
+			if(p.getId()==id) {
+				patient = p;
+			}
+		}
+		
+		return patient;
+	}
 	
-	
-	
-	
-	
-	
+	//el metodo añadir paciente a la lista de pacientes del doctor añadirá un paciente recién creado que se le pasará por pantalla  
 	
 }

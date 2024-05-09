@@ -2,6 +2,8 @@ package projectPOJOs;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Patient implements Serializable{
@@ -14,6 +16,8 @@ public class Patient implements Serializable{
 	private String device;
 	private Date birthday;
 	private String diagnosis;
+	private List<Device> devices = new ArrayList<>();
+	private List<Appointment> appointments = new ArrayList<>();
 	
 	public Patient(String name, String surname, String device, Date birthday, String diagnosis) {
 		super();

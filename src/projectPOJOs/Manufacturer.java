@@ -1,6 +1,8 @@
 package projectPOJOs;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Manufacturer implements Serializable{
@@ -11,6 +13,7 @@ public class Manufacturer implements Serializable{
 	private String name;
 	private String address;
 	private int phoneNumber;
+	private List<Device> devicesOrdered = new ArrayList<>();
 	
 	public Manufacturer(String name, String address, int phoneNumber) {
 		super();
