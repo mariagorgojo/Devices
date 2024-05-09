@@ -1,5 +1,8 @@
 package projectInterfaces;
 
-public class PatientManager {
+import projectPOJOs.Patient;
 
+public interface PatientManager {
+	public void createPatient(Patient p);
+	
 }
