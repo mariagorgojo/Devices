@@ -2,28 +2,37 @@ package UI;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.sql.Date;
+import java.util.List;
 
+import projectJDBC.JDBCAppointmentManager;
+import projectJDBC.JDBCDoctorManager;
+import projectJDBC.JDBCPatientManager;
+import projectPOJOs.Appointment;
 import projectPOJOs.Doctor;
 import projectPOJOs.Patient;
 
 public class DoctorMenu {
 	
 	private static Doctor d;
+	private static Patient p;
+	private static List<Patient> patients;
+	private static Appointment a;
 	private static BufferedReader reader = new BufferedReader (new InputStreamReader(System.in));
 	
-	public static void menu(String email) {
+	public static void menu(JDBCDoctorManager dmanager, JDBCPatientManager pmanager, JDBCAppointmentManager amanager, String email) {
 		// TODO Auto-generated method stub
 		try {
 			int choice;
 			do {
 				System.out.println("Choose an option");
-				System.out.println("1. Edit personal information.");
-				System.out.println("2. Add new patient.");
-				System.out.println("3. Schedule appointment.");
-				System.out.println("4. Cancel appointment.");
+				System.out.println("1. Edit personal information");
+				System.out.println("2. Add new patient");
+				System.out.println("3. Schedule appointment");
+				System.out.println("4. Cancel appointment");
 				System.out.println("5. Order devices.");
-				System.out.println("6. View information about a patient.");
-				System.out.println("0. Return.");
+				System.out.println("6. View information about a patient");
+				System.out.println("0. Return");
 				
 				choice = Integer.parseInt(reader.readLine());
 								
@@ -35,7 +44,7 @@ public class DoctorMenu {
 					addNewPatient();
 					break;
 				case 3:
-					scheduleAppointment();
+					scheduleAppointment(dmanager, pmanager, amanager, email);
 					break;
 				case 4:
 					cancelAppointment();
@@ -117,7 +126,6 @@ public class DoctorMenu {
 	private static void viewInformationPatient() {
 		// TODO Auto-generated method stub
 		try {
-			Patient p = null;
 			int choice;
 			do {
 				System.out.println("1. Choose Patient");
@@ -131,7 +139,6 @@ public class DoctorMenu {
 					System.out.println("Enter patient's id: ");
 					id = Integer.parseInt(reader.readLine());
 					
-					p = d.searchPatientById(id);
 					System.out.println(p.toString());
 					
 					break;
@@ -157,9 +164,19 @@ public class DoctorMenu {
 		
 	}
 
-	private static void scheduleAppointment() {
+	private static void scheduleAppointment(JDBCDoctorManager doctormanager, JDBCPatientManager patientmanager, JDBCAppointmentManager appointmentmanager, String email, int id, Date date) {
 		// TODO Auto-generated method stub
-		
+		d = doctormanager.getDoctorByEmail(email);
+		patients = patientmanager.getListOfPatients();
+		p = patientmanager.getPatientById(id);
+		appointmentmanager.addAppointment(d, p, date);
 	}
 
 }
+
+
+
+
+
+
+

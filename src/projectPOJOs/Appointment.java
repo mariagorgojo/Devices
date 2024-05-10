@@ -19,22 +19,26 @@ public class Appointment implements Serializable {
 	private int id;
 	private Date date;
 	private String description;
+	private Doctor d;
+	private Patient p;
 	
-	// DIGO YO QUE TENDRÁ QUE TENER COMO ATRIBUTOS EL DOCTOR Y EL PACIENTE QUE ASISTEN !!!!!!!
-	
-	public Appointment(Date date, String description) {
+	public Appointment(Date date, String description, Doctor d, Patient p) {
 		super();
 		this.date = date;
 		this.description = description;
+		this.setDoctor(d);
+		this.setPatient(p);
 	}
-	
-	public Appointment(int id, Date date, String description) {
+
+	public Appointment(int id, Date date, String description, Doctor d, Patient p) {
 		super();
 		this.id = id;
 		this.date = date;
 		this.description = description;
+		this.setDoctor(d);
+		this.setPatient(p);
 	}
-	
+
 	public int getId() {
 		return id;
 	}
@@ -59,9 +63,25 @@ public class Appointment implements Serializable {
 		this.description = description;
 	}
 
+	public Doctor getDoctor() {
+		return d;
+	}
+
+	public void setDoctor(Doctor d) {
+		this.d = d;
+	}
+
+	public Patient getPatient() {
+		return p;
+	}
+
+	public void setPatient(Patient p) {
+		this.p = p;
+	}
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(date, description, id);
+		return Objects.hash(d, date, description, id, p);
 	}
 
 	@Override
@@ -73,12 +93,14 @@ public class Appointment implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Appointment other = (Appointment) obj;
-		return Objects.equals(date, other.date) && Objects.equals(description, other.description) && id == other.id;
+		return Objects.equals(d, other.d) && Objects.equals(date, other.date)
+				&& Objects.equals(description, other.description) && id == other.id && Objects.equals(p, other.p);
 	}
-	
+
 	@Override
 	public String toString() {
-		return "Appointment [id= " +id+ ", date= " +date+ ", description= " +description+ "]";
+		return "Appointment [id=" + id + ", date=" + date + ", description=" + description + ", d=" + d + ", p=" + p
+				+ "]";
 	}
 	
 

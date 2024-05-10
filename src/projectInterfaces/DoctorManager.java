@@ -11,6 +11,7 @@ public interface DoctorManager {
 	public void createDoctor(Doctor d);
 	public List<Doctor> getListOfDoctors();
 	public Doctor searchDoctorById(Integer id);
+	public Doctor getDoctorByEmail(String email);
 	public void orderAppointment(Patient p, Date date);
 
 }

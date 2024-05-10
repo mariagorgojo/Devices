@@ -41,7 +41,8 @@ public class JDBCManager {
 			Statement stmt = c.createStatement();
 			
 			String sql = "CREATE TABLE doctors ("
-					+ "doctor_id INTEGER PRIMARY KEY,"
+					+ "doctor_id INTEGER PRIMARY KEY AUTOINCREMENT,"
+					+ "email TEXT NOT NULL,"
 					+ "name TEXT,"
 					+ "surname TEXT,"
 					+ "specialty TEXT "
@@ -49,7 +50,8 @@ public class JDBCManager {
 			stmt.executeUpdate(sql);
 			
 			sql = "CREATE TABLE patients ("
-					+ "patient_id INTEGER PRIMARY KEY,"
+					+ "patient_id INTEGER PRIMARY KEY AUTOINCREMENT,"
+					+ "email TEXT NOT NULL,"
 					+ "name TEXT,"
 					+ "surname TEXT,"
 					+ "device TEXT"
@@ -61,7 +63,7 @@ public class JDBCManager {
 			stmt.executeUpdate(sql);
 			
 			sql = "CREATE TABLE devices ("
-					+ "device_id INTEGER PRIMARY KEY,"
+					+ "device_id INTEGER PRIMARY KEY AUTOINCREMENT,"
 					+ "type TEXT,"
 					+ "implantation_date TEXT,"
 					+ "expiration_date TEXT,"
@@ -73,10 +75,10 @@ public class JDBCManager {
 			stmt.executeUpdate(sql);
 			
 			sql = "CREATE TABLE appointments ("
-					+ "appointment_id INTEGER PRIMARY KEY,"
+					+ "appointment_id INTEGER PRIMARY KEY AUTOINCREMENT,"
 					+ "date TEXT,"
 					+ "description TEXT,"
-					+ "manufacturer_id	INTEGER,"
+					+ "doctor_id	INTEGER,"
 					+ "patient_id	INTEGER,"
 					+ "FOREIGN KEY(doctor_id) REFERENCES doctors(doctor_id),"
 					+ "FOREIGN KEY(patient_id) REFERENCES patients(patient_id) "
@@ -84,7 +86,8 @@ public class JDBCManager {
 			stmt.executeUpdate(sql);
 			
 			sql = "CREATE TABLE manufacturers ("
-					+ "manufacturer_id	INTEGER PRIMARY KEY,"
+					+ "manufacturer_id	INTEGER PRIMARY KEY AUTOINCREMENT,"
+					+ "email TEXT NOT NULL,"
 					+ "name	TEXT,"
 					+ "address	TEXT,"
 					+ "phonenumber	INTEGER"

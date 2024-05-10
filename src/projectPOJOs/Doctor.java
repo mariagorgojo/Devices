@@ -10,35 +10,31 @@ public class Doctor implements Serializable{
 	private static final long serialVersionUID = -4423025978446522586L;
 	
 	private int id;
+	private String email;
 	private String name;
 	private String surname;
 	private String specialty;
 	private List<Patient> patients = new ArrayList<>();
 	private List<Device> devicesOrdered = new ArrayList<>(); //o al doctor se la pela saber los que ha pedido una vez pedidos??????
+	private List<Appointment> appointments = new ArrayList<>();
 	
 	//lista de appointments??? por paciente???
 	
-	public Doctor(String name, String surname, String speciality) {
+	public Doctor(String email, String name, String surname, String specialty) {
 		super();
+		this.email = email;
 		this.name = name;
 		this.surname = surname;
-		this.specialty = speciality;
+		this.specialty = specialty;
 	}
 
-	public Doctor(int id, String name, String surname, String speciality) {
+	public Doctor(int id, String email, String name, String surname, String specialty) {
 		super();
 		this.id = id;
+		this.email = email;
 		this.name = name;
 		this.surname = surname;
-		this.specialty = speciality;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
+		this.specialty = specialty;
 	}
 
 	public int getId() {
@@ -49,6 +45,22 @@ public class Doctor implements Serializable{
 		this.id = id;
 	}
 
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+	
 	public String getSurname() {
 		return surname;
 	}
@@ -61,9 +73,37 @@ public class Doctor implements Serializable{
 		return specialty;
 	}
 
+	public void setSpecialty(String specialty) {
+		this.specialty = specialty;
+	}
+
+	public List<Patient> getPatients() {
+		return patients;
+	}
+
+	public void setPatients(List<Patient> patients) {
+		this.patients = patients;
+	}
+
+	public List<Device> getDevicesOrdered() {
+		return devicesOrdered;
+	}
+
+	public void setDevicesOrdered(List<Device> devicesOrdered) {
+		this.devicesOrdered = devicesOrdered;
+	}
+
+	public List<Appointment> getAppointments() {
+		return appointments;
+	}
+
+	public void setAppointments(List<Appointment> appointments) {
+		this.appointments = appointments;
+	}
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(id, name, specialty, surname);
+		return Objects.hash(email, id, name, specialty, surname);
 	}
 
 	@Override
@@ -75,26 +115,16 @@ public class Doctor implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Doctor other = (Doctor) obj;
-		return id == other.id && Objects.equals(name, other.name) && Objects.equals(specialty, other.specialty)
-				&& Objects.equals(surname, other.surname);
+		return Objects.equals(email, other.email) && id == other.id && Objects.equals(name, other.name)
+				&& Objects.equals(specialty, other.specialty) && Objects.equals(surname, other.surname);
 	}
 
 	@Override
 	public String toString() {
-		return "Doctor [id=" + id + ", name=" + name + ", surname=" + surname + ", speciality=" + specialty + "]";
-	}
-
-	public Patient searchPatientById(int id) {
-		Patient patient = null;
-		for(Patient p : patients) {
-			if(p.getId()==id) {
-				patient = p;
-			}
-		}
-		
-		return patient;
+		return "Doctor [id=" + id + ", email=" + email + ", name=" + name + ", surname=" + surname + ", specialty="
+				+ specialty + ", patients=" + patients + ", devicesOrdered=" + devicesOrdered + ", appointments="
+				+ appointments + "]";
 	}
 	
-	//el metodo añadir paciente a la lista de pacientes del doctor añadirá un paciente recién creado que se le pasará por pantalla  
 	
 }

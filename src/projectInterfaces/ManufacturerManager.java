@@ -1,5 +1,5 @@
 package projectInterfaces;
 
-public class ManufacturerManager {
+public interface ManufacturerManager {
 
 }

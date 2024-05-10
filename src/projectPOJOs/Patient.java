@@ -11,29 +11,29 @@ public class Patient implements Serializable{
 	private static final long serialVersionUID = -4423025978446522586L;
 	
 	private int id;
+	private String email;
 	private String name;
 	private String surname;
-	private String device;
 	private Date birthday;
 	private String diagnosis;
-	private List<Device> devices = new ArrayList<>();
-	private List<Appointment> appointments = new ArrayList<>();
+	private List<Device> devices = new ArrayList<Device>();
+	private List<Appointment> appointments = new ArrayList<Appointment>();
 	
-	public Patient(String name, String surname, String device, Date birthday, String diagnosis) {
+	public Patient(String email, String name, String surname, Date birthday, String diagnosis) {
 		super();
+		this.email = email;
 		this.name = name;
 		this.surname = surname;
-		this.device = device;
 		this.birthday = birthday;
 		this.diagnosis = diagnosis;
 	}
 
-	public Patient(int id, String name, String surname, String device, Date birthday, String diagnosis) {
+	public Patient(int id, String email, String name, String surname, Date birthday, String diagnosis) {
 		super();
 		this.id = id;
+		this.email = email;
 		this.name = name;
 		this.surname = surname;
-		this.device = device;
 		this.birthday = birthday;
 		this.diagnosis = diagnosis;
 	}
@@ -44,6 +44,15 @@ public class Patient implements Serializable{
 	public void setId(int id) {
 		this.id = id;
 	}
+	
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	public String getName() {
 		return name;
 	}
@@ -56,12 +65,7 @@ public class Patient implements Serializable{
 	public void setSurname(String surname) {
 		this.surname = surname;
 	}
-	public String getDevice() {
-		return device;
-	}
-	public void setDevice(String device) {
-		this.device = device;
-	}
+	
 	public Date getBirthday() {
 		return birthday;
 	}
@@ -75,11 +79,27 @@ public class Patient implements Serializable{
 		this.diagnosis = diagnosis;
 	}
 	
+	public List<Device> getDevices() {
+		return devices;
+	}
+
+	public void setDevices(List<Device> devices) {
+		this.devices = devices;
+	}
+
+	public List<Appointment> getAppointments() {
+		return appointments;
+	}
+
+	public void setAppointments(List<Appointment> appointments) {
+		this.appointments = appointments;
+	}
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(birthday, device, diagnosis, id, name, surname);
+		return Objects.hash(birthday, diagnosis, email, id, name, surname);
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -89,16 +109,20 @@ public class Patient implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Patient other = (Patient) obj;
-		return Objects.equals(birthday, other.birthday) && Objects.equals(device, other.device)
-				&& Objects.equals(diagnosis, other.diagnosis) && id == other.id && Objects.equals(name, other.name)
+		return Objects.equals(birthday, other.birthday) && Objects.equals(diagnosis, other.diagnosis)
+				&& Objects.equals(email, other.email) && id == other.id && Objects.equals(name, other.name)
 				&& Objects.equals(surname, other.surname);
 	}
-	
+
 	@Override
 	public String toString() {
-		return "Patient [id=" + id + ", name=" + name + ", surname=" + surname + ", device=" + device + ", birthday="
-				+ birthday + ", diagnosis=" + diagnosis + "]";
+		return "Patient [id=" + id + ", email=" + email + ", name=" + name + ", surname=" + surname + ", birthday="
+				+ birthday + ", diagnosis=" + diagnosis + ", devices=" + devices + ", appointments=" + appointments
+				+ "]";
 	}
+
+	
+
 	
 	
 

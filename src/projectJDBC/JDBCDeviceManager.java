@@ -1,5 +1,13 @@
 package projectJDBC;
 
-public class JDBCDeviceManager {
+import projectInterfaces.DeviceManager;
+
+public class JDBCDeviceManager implements DeviceManager{
+	private JDBCManager manager;
+
+	public JDBCDeviceManager(JDBCManager m) {
+		// TODO Auto-generated constructor stub
+		this.manager = m;
+	}
 
 }

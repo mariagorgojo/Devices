@@ -1,5 +1,12 @@
 package projectInterfaces;
 
-public class AppointmentManager {
+import java.sql.Date;
+
+import projectPOJOs.Doctor;
+import projectPOJOs.Patient;
+
+public interface AppointmentManager {
+	
+	public void addAppointment(Doctor d, Patient p, Date date);
 
 }

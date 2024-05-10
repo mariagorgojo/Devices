@@ -1,5 +1,5 @@
 package projectInterfaces;
 
-public class DeviceManager {
+public interface DeviceManager {
 
 }
