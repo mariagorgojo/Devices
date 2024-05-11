@@ -50,7 +50,7 @@ public class DoctorMenu {
 					createPatient(dmanager,pmanager);
 					break;
 				case 3:
-					scheduleAppointment(dmanager, pmanager, amanager, email);
+					scheduleAppointment(dmanager, pmanager, amanager, email,);
 					break;
 				case 4:
 					cancelAppointment();
@@ -114,13 +114,13 @@ public class DoctorMenu {
 				
 				switch(choice) {
 				case 1:
-					editName();
+					editName(dmanager);
 					break;
 				case 2:
-					editSurname();
+					editSurname(dmanager);
 					break;
 				case 3:
-					editSpecialty();
+					editSpecialty(dmanager);
 					break;
 				case 0:
 					System.out.println("Back to doctor menu");
@@ -214,11 +214,19 @@ public class DoctorMenu {
 		
 	}
 
-	private static void scheduleAppointment(JDBCDoctorManager doctormanager, JDBCPatientManager patientmanager, JDBCAppointmentManager appointmentmanager, String email, int id, Date date) {
+	private static void scheduleAppointment(JDBCDoctorManager doctormanager, JDBCPatientManager patientmanager, JDBCAppointmentManager appointmentmanager) throws Exception{
 		// TODO Auto-generated method stub
+		System.out.println("Email: ");
+		String email = reader.readLine();
 		d = doctormanager.getDoctorByEmail(email);
 		patients = patientmanager.getListOfPatients();
+		System.out.println("Enter patient's id: ");
+		int id = Integer.parseInt(reader.readLine());
 		p = patientmanager.getPatientById(id);
+		System.out.println("Type the date in formal yyyy/mm/dd");
+		String dob = reader.readLine();
+		DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+		Date date = (Date) df.parse(dob);
 		appointmentmanager.addAppointment(d, p, date);
 	}
 
