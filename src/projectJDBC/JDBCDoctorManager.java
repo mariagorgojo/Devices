@@ -141,4 +141,22 @@ public class JDBCDoctorManager implements DoctorManager {
 		// TODO Auto-generated method stub
 		
 	}
+	@Override
+	public void editName(Doctor d,String name) {
+		d.setName(name);
+		
+		
+	}
+	@Override
+	public void editSurname(Doctor d,String surname) {
+		d.setSurname(surname);
+		
+	}
+	
+	public void editSpecialty(Doctor d,String specialty) {
+		d.setSpecialty(specialty);
+		
+	}
+
+	
 }

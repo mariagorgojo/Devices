@@ -1,6 +1,7 @@
 package projectJDBC;
 
 import java.sql.Date;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -87,5 +88,28 @@ public class JDBCPatientManager implements PatientManager{
 		
 		return p;
 	}
+	public void addPatient(Patient p) {
+		try {
+			 String sql = "INSERT INTO patients (email, name, surname, birthday, diagnosis)"
+					 + "VALUES(?,?,?,?,?,?)";
+			 
+			 PreparedStatement prep = manager.getConnection().prepareStatement(sql);
+			 
+		
+			 prep.setString(2, p.getEmail());
+			 prep.setString(3, p.getName());
+			 prep.setString(4, p.getSurname());
+			 prep.setDate(5, p.getBirthday());
+			 prep.setString(6, p.getDiagnosis());
+				
+			 prep.executeUpdate();
+			 
+			}catch(Exception e)
+			{
+				e.printStackTrace();
+			}
+		
+	}
+	
 
 }

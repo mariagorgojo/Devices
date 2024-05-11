@@ -3,8 +3,11 @@ package UI;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
+import VetClinicPOJOs.Owner;
 import projectJDBC.JDBCAppointmentManager;
 import projectJDBC.JDBCDoctorManager;
 import projectJDBC.JDBCPatientManager;
@@ -21,6 +24,9 @@ public class DoctorMenu {
 	private static BufferedReader reader = new BufferedReader (new InputStreamReader(System.in));
 	
 	public static void menu(JDBCDoctorManager dmanager, JDBCPatientManager pmanager, JDBCAppointmentManager amanager, String email) {
+		//DUDA!!! EN VETCLINIC no pasa nada como argumento para el menu, ESTA BIEN LO NUESTRO???
+		//DUDA->NO TENDRIAMOS QUE PONER UN MAIN????
+		//EN SCHEDULEAPPOINTMENT FALTARIA PONER LA FECHA COMO ARGUMENTO
 		// TODO Auto-generated method stub
 		try {
 			int choice;
@@ -41,7 +47,7 @@ public class DoctorMenu {
 					editInformation();
 					break;
 				case 2:
-					addNewPatient();
+					createPatient(dmanager,pmanager);
 					break;
 				case 3:
 					scheduleAppointment(dmanager, pmanager, amanager, email);
@@ -68,9 +74,29 @@ public class DoctorMenu {
 		}
 	}
 
-	private static void addNewPatient() {
+	private static void createPatient(JDBCDoctorManager doctormanager,JDBCPatientManager patientmanager) throws Exception {
 		// TODO Auto-generated method stub
 		// llamará al método addPatient para añadirlo a la lista de pacientes de este Doctor
+		System.out.println("Type the email of the patient");
+		String email = reader.readLine();
+		System.out.println("Type the name of the patient");
+		String name = reader.readLine();
+		System.out.println("Type the surname of the patient");
+		String surname = reader.readLine();
+		System.out.println("Type the birthday of the patient in formal yyyy/mm/dd");
+		String dob = reader.readLine();
+		DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+		Date birthday = (Date) df.parse(dob);
+		System.out.println("Type the diagnosis of the patient");
+		String diagnosis = reader.readLine();
+		System.out.println("Type the doctor id of the patient");
+		Integer doctor_id = Integer.parseInt(reader.readLine());
+		
+		Doctor o = doctormanager.searchDoctorById(doctor_id);
+		Patient p=new Patient(email,name,surname,birthday,diagnosis);
+		patientmanager.addPatient(p);
+		
+
 	}
 
 	private static void editInformation() {
@@ -107,18 +133,42 @@ public class DoctorMenu {
 		}
 	}
 	
-	//métodos para editar info doctor HACER
-	private static void editName() {
+	
+	private static void editName(JDBCDoctorManager doctormanager)throws Exception {
 		// TODO Auto-generated method stub
+		System.out.println("Email: ");
+		String email = reader.readLine();
+		d = doctormanager.getDoctorByEmail(email);
+		System.out.println("Enter new name: ");
+		String name = reader.readLine();
+		doctormanager.editName(d,name);//NO ENTIENDO XQ ME DICE QUE ESTA MAL
+		
 		
 	}
 	
-	private static void editSurname() {
+	private static void editSurname(JDBCDoctorManager doctormanager)throws Exception  {
 		// TODO Auto-generated method stub
+				
+		System.out.println("Email: ");
+		String email = reader.readLine();
+		d = doctormanager.getDoctorByEmail(email);
+		System.out.println("Enter new surname: ");
+		String surname = reader.readLine();
+		doctormanager.editSurname(d,surname);
+				
 		
 	}
 	
-	private static void editSpecialty() {
+	private static void editSpecialty(JDBCDoctorManager doctormanager) throws Exception{
+		System.out.println("Email: ");
+		String email = reader.readLine();
+		d = doctormanager.getDoctorByEmail(email);
+		System.out.println("Enter new specialty: ");
+		String specialty = reader.readLine();
+		doctormanager.editSpecialty(d,specialty);
+		
+		
+		
 		// TODO Auto-generated method stub
 		
 	}
