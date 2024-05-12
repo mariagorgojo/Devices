@@ -144,17 +144,31 @@ public class JDBCDoctorManager implements DoctorManager {
 	@Override
 	public void editName(Doctor d,String name) {
 		d.setName(name);
-		
+		//FALTA PONER CON TABLAS
+		//try {
+			//String sql = "UPDATE vets SET specialty= ? WHERE id= ?;";
+		//	PreparedStatement prep = manager.getConnection().prepareStatement(sql);
+			
+			//prep.setString(1, n_speciality);
+			//prep.setInt(2, vet_id);
+			
+			//prep.executeQuery();
+		//}
+		//catch(Exception e){
+		//	e.printStackTrace();
+			
+		//}	
 		
 	}
 	@Override
 	public void editSurname(Doctor d,String surname) {
 		d.setSurname(surname);
-		
+		//FALTA PONER CON TABLAS
 	}
 	
 	public void editSpecialty(Doctor d,String specialty) {
 		d.setSpecialty(specialty);
+		//FALTA PONER CON TABLAS
 		
 	}
 

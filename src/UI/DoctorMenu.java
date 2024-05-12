@@ -27,6 +27,7 @@ public class DoctorMenu {
 		//DUDA!!! EN VETCLINIC no pasa nada como argumento para el menu, ESTA BIEN LO NUESTRO???
 		//DUDA->NO TENDRIAMOS QUE PONER UN MAIN????
 		//EN SCHEDULEAPPOINTMENT FALTARIA PONER LA FECHA COMO ARGUMENTO
+		//FALTA PONER CON TABLAS EL EDIT
 		// TODO Auto-generated method stub
 		try {
 			int choice;
