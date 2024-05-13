@@ -144,12 +144,13 @@ public class JDBCDoctorManager implements DoctorManager {
 	@Override
 	public void editName(Doctor d,String name) {
 		d.setName(name);
+		int id = d.getId();
 		//FALTA PONER CON TABLAS
 		//try {
 			//String sql = "UPDATE vets SET specialty= ? WHERE id= ?;";
 		//	PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			
-			//prep.setString(1, n_speciality);
+			//prep.setString(1, n_speciality); //????
 			//prep.setInt(2, vet_id);
 			
 			//prep.executeQuery();
