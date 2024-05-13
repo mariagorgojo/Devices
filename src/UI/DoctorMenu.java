@@ -209,8 +209,23 @@ public class DoctorMenu {
 		
 	}
 
-	private static void cancelAppointment() {
+	private static void cancelAppointment(JDBCDoctorManager doctormanager, JDBCPatientManager patientmanager,JDBCAppointmentManager appointmentmanager)throws Exception {
+		
 		// TODO Auto-generated method stub
+		System.out.println("Email: ");
+		String email = reader.readLine();
+		d = doctormanager.getDoctorByEmail(email);
+		patients = patientmanager.getListOfPatients();
+		System.out.println("Enter patient's id: ");
+		int id = Integer.parseInt(reader.readLine());
+		p = patientmanager.getPatientById(id);
+		System.out.println("Type the date in formal yyyy/mm/dd");
+		String dob = reader.readLine();
+		DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+		Date date = (Date) df.parse(dob);
+		appointmentmanager.deleteAppointment(d, p, date);
+		
+		
 		
 	}
 

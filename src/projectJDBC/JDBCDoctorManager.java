@@ -147,7 +147,7 @@ public class JDBCDoctorManager implements DoctorManager {
 		int id = d.getId();
 		//FALTA PONER CON TABLAS
 		//try {
-			//String sql = "UPDATE vets SET specialty= ? WHERE id= ?;";
+			//String sql = "UPDATE doctors SET name= ? WHERE id= ?;";
 		//	PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			
 			//prep.setString(1, n_speciality); //????

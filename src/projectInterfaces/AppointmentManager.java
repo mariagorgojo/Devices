@@ -8,5 +8,6 @@ import projectPOJOs.Patient;
 public interface AppointmentManager {
 	
 	public void addAppointment(Doctor d, Patient p, Date date);
+	public void deleteAppointment(Doctor d, Patient p,Date date);
 
 }

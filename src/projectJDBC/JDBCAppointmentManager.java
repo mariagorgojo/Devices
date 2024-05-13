@@ -41,5 +41,19 @@ public class JDBCAppointmentManager implements AppointmentManager{
 			e.printStackTrace();
 		}
 	}
+	public void deleteAppointment(Doctor d, Patient p,Date date) {
+		try {
+			String sql= "DELETE FROM appointments WHERE date=" + date;
+			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
+			//QUE PONER AQUI
+			prep.executeUpdate();		
+			
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			
+		}
+		
+	}
 
 }
