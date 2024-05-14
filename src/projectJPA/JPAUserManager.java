@@ -54,7 +54,7 @@ public class JPAUserManager implements UserManager {
 	public void connect() {
 		// TODO Auto-generated method stub
 		
-		em = Persistence.createEntityManagerFactory("vetclinic-provider").createEntityManager();
+		em = Persistence.createEntityManagerFactory("hospital-provider").createEntityManager();
 	
 		em.getTransaction().begin();
 		em.createNativeQuery("PRAGMA foreign_keys = ON").executeUpdate();
@@ -62,10 +62,10 @@ public class JPAUserManager implements UserManager {
 		
 		if(this.getRoles().isEmpty())
 		{
-			Role owner = new Role("owner");
-			Role vet = new Role("vet");
-			this.newRole(owner);
-			this.newRole(vet);
+			Role patient = new Role("patient");
+			Role doctor = new Role("doctor");
+			this.newRole(patient);
+			this.newRole(doctor);
 		}
 		
 	}

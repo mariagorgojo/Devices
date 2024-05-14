@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import projectInterfaces.PatientManager;
+import projectPOJOs.Device;
 import projectPOJOs.Patient;
 
 public class JDBCPatientManager implements PatientManager{
@@ -109,6 +110,12 @@ public class JDBCPatientManager implements PatientManager{
 				e.printStackTrace();
 			}
 		
+	}
+	//yo no pasaria el paciente usaria el atributo p
+	public void addDevice(Device d, Patient p) {
+		try {
+			String sql = "INSERT INTO devices (type, )"
+		}
 	}
 	
 

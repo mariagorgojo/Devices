@@ -1,11 +1,6 @@
 package projectJDBC;
 
 import java.sql.Date;
-import java.sql.Connection;
-
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.sql.PreparedStatement;
 
 import projectInterfaces.AppointmentManager;
@@ -24,6 +19,7 @@ public class JDBCAppointmentManager implements AppointmentManager{
 	// REVISAAAAAAAAR
 	
 	//método intermedio que rellene los atributos del appointment y cree el objeto
+	
 	
 	public void addAppointment(Doctor d, Patient p, Date date) { //para que luego a este método se le pase el objeto appointment ya creado
 		// TODO Auto-generated method stub
@@ -45,26 +41,6 @@ public class JDBCAppointmentManager implements AppointmentManager{
 		{
 			e.printStackTrace();
 		}
-	}
-	public void deleteAppointment(Doctor d, Patient p,Date date) {
-		try {
-
-			String sql= "DELETE FROM appointments WHERE date=" + date;
-			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
-			prep.setInt(1, d.getId());
-			prep.setInt(1,p.getId());
-			prep.executeUpdate();
-			System.out.println("Deletion finished.");
-			// Remove an employee: end
-			// Close database connection
-			prep.close();
-	
-						
-		}catch(Exception e) {
-			e.printStackTrace();
-			
-		}
-		
 	}
 
 }

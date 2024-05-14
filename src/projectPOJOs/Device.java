@@ -1,8 +1,10 @@
 package projectPOJOs;
 
 import java.io.Serializable;
+
 import java.sql.Date;
 import java.util.Objects;
+
 
 public class Device implements Serializable{
 	
@@ -16,23 +18,23 @@ public class Device implements Serializable{
 	private static final long serialVersionUID = -4423025978446522586L;
 	
 	private int id;
-	private String type;
 	private Date implantationDate;
 	private Date expirationDate;	
+	private EnumDevices enumDevices;
 	
-	public Device(String type, Date implantationDate, Date expirationDate) {
+	public Device(Date implantationDate, Date expirationDate, EnumDevices enumDevices) {
 		super();
-		this.type = type;
 		this.implantationDate = implantationDate;
 		this.expirationDate = expirationDate;
+		this.enumDevices = enumDevices;
 	}
 
-	public Device(int id, String type, Date implantationDate, Date expirationDate) {
+	public Device(int id, Date implantationDate, Date expirationDate, EnumDevices enumDevices) {
 		super();
 		this.id = id;
-		this.type = type;
 		this.implantationDate = implantationDate;
 		this.expirationDate = expirationDate;
+		this.enumDevices = enumDevices;
 	}
 
 	public int getId() {
@@ -42,15 +44,13 @@ public class Device implements Serializable{
 	public void setId(int id) {
 		this.id = id;
 	}
-	
-	public String getType() {
-		return type;
+	public EnumDevices getEnumDevices() {
+		return enumDevices;
 	}
-	
-	public void setType(String type) {
-		this.type = type;
+	public void setEnumDevices(EnumDevices enumDevices) {
+		this.enumDevices = enumDevices;
 	}
-	
+
 	public Date getImplantationDate() {
 		return implantationDate;
 	}
@@ -69,7 +69,7 @@ public class Device implements Serializable{
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(expirationDate, id, implantationDate, type);
+		return Objects.hash(expirationDate, id, implantationDate, enumDevices);
 	}
 
 	@Override
@@ -82,12 +82,12 @@ public class Device implements Serializable{
 			return false;
 		Device other = (Device) obj;
 		return Objects.equals(expirationDate, other.expirationDate) && id == other.id
-				&& Objects.equals(implantationDate, other.implantationDate) && Objects.equals(type, other.type);
+				&& Objects.equals(implantationDate, other.implantationDate) && Objects.equals(enumDevices, other.enumDevices);
 	}
 	
 	@Override
 	public String toString() {
-		return "Device [id= " +id+ ", type= " +type+ ", implantation date= " +implantationDate+ ", expiration date= " +expirationDate+ "]";
+		return "Device [id= " +id+ ", type= " +enumDevices+ ", implantation date= " +implantationDate+ ", expiration date= " +expirationDate+ "]";
 	}
 	
 

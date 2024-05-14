@@ -1,10 +1,12 @@
 package UI;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import VetClinicPOJOs.Owner;
@@ -13,6 +15,7 @@ import projectJDBC.JDBCDoctorManager;
 import projectJDBC.JDBCPatientManager;
 import projectPOJOs.Appointment;
 import projectPOJOs.Doctor;
+import projectPOJOs.EnumDevices;
 import projectPOJOs.Patient;
 
 public class DoctorMenu {
@@ -24,10 +27,7 @@ public class DoctorMenu {
 	private static BufferedReader reader = new BufferedReader (new InputStreamReader(System.in));
 	
 	public static void menu(JDBCDoctorManager dmanager, JDBCPatientManager pmanager, JDBCAppointmentManager amanager, String email) {
-	
-		//EN SCHEDULEAPPOINTMENT FALTARIA PONER LA FECHA COMO ARGUMENTO
-		//FALTA PONER CON TABLAS EL EDIT
-		// TODO Auto-generated method stub
+			// TODO Auto-generated method stub
 		try {
 			int choice;
 			do {
@@ -50,10 +50,10 @@ public class DoctorMenu {
 					createPatient(dmanager,pmanager);
 					break;
 				case 3:
-					scheduleAppointment(dmanager, pmanager, amanager, email,);
+					scheduleAppointment(dmanager, pmanager, amanager);
 					break;
 				case 4:
-					cancelAppointment();
+					cancelAppointment(dmanager, pmanager, amanager);
 					break;
 				case 5:
 					orderDevices();
@@ -204,8 +204,30 @@ public class DoctorMenu {
 		}
 	}
 
-	private static void orderDevices() {
+	private static void orderDevice(JDBCPatientManager patientManager) throws Exception {
 		// TODO Auto-generated method stub
+		EnumDevices typeDevice;
+		ArrayList <EnumDevices> devices = new ArrayList<>();
+		System.out.println("How many devices do you want to order?");
+		int num = Integer.parseInt(reader.readLine());
+		for(int i = 0; i < num; i++) {
+			System.out.println("What type of device do you want to order?");
+			String type = reader.readLine();
+			if(type.equalsIgnoreCase("pacemaker")) {
+				//XQ ESTA MAL???
+				typeDevice = EnumDevices.PACEMAKER;
+				devices.add(typeDevice);
+			}else if(type.equalsIgnoreCase("prosthetic limb")) {
+				typeDevice = EnumDevices.PROSTHETICLIMB;
+				devices.add(typeDevice);
+			}else if(type.equalsIgnoreCase("insulin pump")){
+				typeDevice = EnumDevices.INSULINPUMP;
+				devices.add(typeDevice);
+			}
+		}
+		
+		//volver
+		
 		
 	}
 
@@ -239,9 +261,9 @@ public class DoctorMenu {
 		int id = Integer.parseInt(reader.readLine());
 		p = patientmanager.getPatientById(id);
 		System.out.println("Type the date in formal yyyy/mm/dd");
-		String dob = reader.readLine();
+		String da = reader.readLine();
 		DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
-		Date date = (Date) df.parse(dob);
+		Date date = (Date) df.parse(da);
 		appointmentmanager.addAppointment(d, p, date);
 	}
 
