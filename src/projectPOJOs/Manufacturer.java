@@ -62,6 +62,10 @@ public class Manufacturer implements Serializable{
 		this.phoneNumber = phoneNumber;
 	}
 
+	public List<Device> getDevicesOrdered() {
+		return devicesOrdered;
+	}
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(address, id, name, phoneNumber);

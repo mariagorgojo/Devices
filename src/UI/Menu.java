@@ -18,6 +18,7 @@ import projectInterfaces.DeviceManager;
 import projectInterfaces.DoctorManager;
 import projectInterfaces.ManufacturerManager;
 import projectInterfaces.PatientManager;
+import projectJDBC.JDBCAppointmentManager;
 import projectJDBC.JDBCDoctorManager;
 import projectJDBC.JDBCManager;
 import projectJDBC.JDBCManufacturerManager;
@@ -29,6 +30,7 @@ public class Menu {
 	private static JDBCDoctorManager doctormanager;
 	private static JDBCPatientManager patientmanager;
 	private static JDBCManufacturerManager manufacturermanager;
+	private static JDBCAppointmentManager appointmentmanager;
 	private static UserManager usermanager;
 	private static BufferedReader reader = new BufferedReader (new InputStreamReader(System.in));
 	
@@ -38,6 +40,7 @@ public class Menu {
 		doctormanager = new JDBCDoctorManager(jdbcmanager);
 		patientmanager = new JDBCPatientManager(jdbcmanager);
 		manufacturermanager = new JDBCManufacturerManager(jdbcmanager);
+		appointmentmanager = new JDBCAppointmentManager(jdbcmanager);
 		usermanager = new JPAUserManager();
 		
 		try {
@@ -114,7 +117,7 @@ public class Menu {
 			
 		}else if(u.getRole().getName().equals("doctor")){ //user is a doctor, we open doctor menu
 				System.out.println("Login of doctor successful!");
-				DoctorMenu.menu(doctormanager, patientmanager, email);
+				DoctorMenu.menu(doctormanager, patientmanager, appointmentmanager, email);
 				
 			}else if(u.getRole().getName().equals("patient")) { //user is a patient, we open patient menu
 				System.out.println("Login of doctor successful!");

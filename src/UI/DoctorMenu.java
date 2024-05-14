@@ -1,29 +1,24 @@
 package UI;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.List;
 
-import VetClinicPOJOs.Owner;
 import projectJDBC.JDBCAppointmentManager;
 import projectJDBC.JDBCDoctorManager;
 import projectJDBC.JDBCPatientManager;
 import projectPOJOs.Appointment;
+import projectPOJOs.Device;
 import projectPOJOs.Doctor;
-import projectPOJOs.EnumDevices;
 import projectPOJOs.Patient;
 
 public class DoctorMenu {
 	
 	private static Doctor d;
 	private static Patient p;
-	private static List<Patient> patients;
-	private static Appointment a;
+	private static Device device;
 	private static BufferedReader reader = new BufferedReader (new InputStreamReader(System.in));
 	
 	public static void menu(JDBCDoctorManager dmanager, JDBCPatientManager pmanager, JDBCAppointmentManager amanager, String email) {
@@ -44,22 +39,22 @@ public class DoctorMenu {
 								
 				switch(choice){
 				case 1: 
-					editInformation();
+					editInformation(dmanager, email);
 					break;
 				case 2:
-					createPatient(dmanager,pmanager);
+					createPatient(dmanager, pmanager);
 					break;
 				case 3:
-					scheduleAppointment(dmanager, pmanager, amanager);
+					scheduleAppointment(dmanager, pmanager, email);
 					break;
 				case 4:
-					cancelAppointment(dmanager, pmanager, amanager);
+					cancelAppointment(dmanager);
 					break;
 				case 5:
-					orderDevices();
+					orderDevice(dmanager);
 					break;
 				case 6:
-					viewInformationPatient();
+					viewInformationPatient(pmanager);
 					break;
 				case 0:
 					System.out.println("Back to main menu");
@@ -74,16 +69,17 @@ public class DoctorMenu {
 		}
 	}
 
+	//REVISAR
 	private static void createPatient(JDBCDoctorManager doctormanager,JDBCPatientManager patientmanager) throws Exception {
 		// TODO Auto-generated method stub
 		// llamará al método addPatient para añadirlo a la lista de pacientes de este Doctor
-		System.out.println("Type the email of the patient");
+		System.out.println("Enter the email of the patient");
 		String email = reader.readLine();
-		System.out.println("Type the name of the patient");
+		System.out.println("Enter the name of the patient");
 		String name = reader.readLine();
-		System.out.println("Type the surname of the patient");
+		System.out.println("Enter the surname of the patient");
 		String surname = reader.readLine();
-		System.out.println("Type the birthday of the patient in formal yyyy/mm/dd");
+		System.out.println("Enter the birthday of the patient in format yyyy/mm/dd");
 		String dob = reader.readLine();
 		DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
 		Date birthday = (Date) df.parse(dob);
@@ -92,14 +88,14 @@ public class DoctorMenu {
 		System.out.println("Type the doctor id of the patient");
 		Integer doctor_id = Integer.parseInt(reader.readLine());
 		
-		Doctor o = doctormanager.searchDoctorById(doctor_id);
-		Patient p=new Patient(email,name,surname,birthday,diagnosis);
+		doctormanager.searchDoctorById(doctor_id);
+		Patient p = new Patient(email,name,surname,birthday,diagnosis);
 		patientmanager.addPatient(p);
 		
-
 	}
 
-	private static void editInformation() {
+	//ok
+	private static void editInformation(JDBCDoctorManager dmanager, String email) {
 		
 		try {
 			int choice;
@@ -114,13 +110,13 @@ public class DoctorMenu {
 				
 				switch(choice) {
 				case 1:
-					editName(dmanager);
+					editName(dmanager, email);
 					break;
 				case 2:
-					editSurname(dmanager);
+					editSurname(dmanager, email);
 					break;
 				case 3:
-					editSpecialty(dmanager);
+					editSpecialty(dmanager, email);
 					break;
 				case 0:
 					System.out.println("Back to doctor menu");
@@ -133,69 +129,57 @@ public class DoctorMenu {
 		}
 	}
 	
-	
-	private static void editName(JDBCDoctorManager doctormanager)throws Exception {
+	//ok
+	private static void editName(JDBCDoctorManager doctormanager, String email)throws Exception {
 		// TODO Auto-generated method stub
-		System.out.println("Email: ");
-		String email = reader.readLine();
+
 		d = doctormanager.getDoctorByEmail(email);
 		System.out.println("Enter new name: ");
 		String name = reader.readLine();
-		doctormanager.editName(d,name);//NO ENTIENDO XQ ME DICE QUE ESTA MAL
-		
+		doctormanager.editName(d,name);
 		
 	}
 	
-	private static void editSurname(JDBCDoctorManager doctormanager)throws Exception  {
+	//ok
+	private static void editSurname(JDBCDoctorManager doctormanager, String email)throws Exception  {
 		// TODO Auto-generated method stub
 				
-		System.out.println("Email: ");
-		String email = reader.readLine();
 		d = doctormanager.getDoctorByEmail(email);
 		System.out.println("Enter new surname: ");
 		String surname = reader.readLine();
 		doctormanager.editSurname(d,surname);
 				
-		
 	}
 	
-	private static void editSpecialty(JDBCDoctorManager doctormanager) throws Exception{
-		System.out.println("Email: ");
-		String email = reader.readLine();
+	//ok
+	private static void editSpecialty(JDBCDoctorManager doctormanager, String email) throws Exception{
+		// TODO Auto-generated method stub
+
 		d = doctormanager.getDoctorByEmail(email);
 		System.out.println("Enter new specialty: ");
 		String specialty = reader.readLine();
 		doctormanager.editSpecialty(d,specialty);
 		
-		
-		
-		// TODO Auto-generated method stub
-		
 	}
 
-	private static void viewInformationPatient() {
+	//ok
+	private static void viewInformationPatient(JDBCPatientManager pmanager) {
 		// TODO Auto-generated method stub
 		try {
 			int choice;
 			do {
 				System.out.println("1. Choose Patient");
-				System.out.println("0. Return");
+				System.out.println("0. Return\n");
 
 				choice = Integer.parseInt(reader.readLine());
 				
 				switch(choice) {
 				case 1:
-					int id;
-					System.out.println("Enter patient's id: ");
-					id = Integer.parseInt(reader.readLine());
-					
-					System.out.println(p.toString());
-					
+					printPatient(pmanager);
 					break;
 				case 0:
 					System.out.println("Back to doctor menu");
 					break;					
-				
 				}
 
 			}while(choice!=0);
@@ -204,67 +188,67 @@ public class DoctorMenu {
 		}
 	}
 
-	private static void orderDevice(JDBCPatientManager patientManager) throws Exception {
+	//ok
+	private static void printPatient(JDBCPatientManager pmanager) throws Exception {
+		System.out.println("Enter patient's id: ");
+		int id = Integer.parseInt(reader.readLine());
+		p = pmanager.getPatientById(id);
+		System.out.println(p.toString());
+	}
+	
+	//ok
+	private static void orderDevice(JDBCDoctorManager dmanager) throws Exception {
 		// TODO Auto-generated method stub
-		EnumDevices typeDevice;
-		ArrayList <EnumDevices> devices = new ArrayList<>();
-		System.out.println("How many devices do you want to order?");
-		int num = Integer.parseInt(reader.readLine());
-		for(int i = 0; i < num; i++) {
-			System.out.println("What type of device do you want to order?");
-			String type = reader.readLine();
-			if(type.equalsIgnoreCase("pacemaker")) {
-				//XQ ESTA MAL???
-				typeDevice = EnumDevices.PACEMAKER;
-				devices.add(typeDevice);
-			}else if(type.equalsIgnoreCase("prosthetic limb")) {
-				typeDevice = EnumDevices.PROSTHETICLIMB;
-				devices.add(typeDevice);
-			}else if(type.equalsIgnoreCase("insulin pump")){
-				typeDevice = EnumDevices.INSULINPUMP;
-				devices.add(typeDevice);
-			}
-		}
 		
-		//volver
+		//type of device
+		System.out.println("Enter type: ");
+		String type = reader.readLine();
+		//implantation date
+		System.out.println("Enter date of implantation in format yyyy/mm/dd: ");
+		String date1 = reader.readLine();
+		DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+		Date implantationDate = (Date) df.parse(date1);
+		//expiration date
+		System.out.println("Enter date of expiration in format yyyy/mm/dd: ");
+		String date2 = reader.readLine();
+		DateFormat df2 = new SimpleDateFormat("yyyy/MM/dd");
+		Date expirationDate = (Date) df2.parse(date2);
 		
+		device = new Device(type, implantationDate, expirationDate);
+		dmanager.orderDevice(device);
+	}
+
+	//ok
+	private static void cancelAppointment(JDBCDoctorManager doctormanager)throws Exception {
+		// TODO Auto-generated method stub
+
+		System.out.println("Enter the appointments'id: ");
+		Integer a_id = Integer.parseInt(reader.readLine());
+		doctormanager.deleteAppointment(a_id);
 		
 	}
 
-	private static void cancelAppointment(JDBCDoctorManager doctormanager, JDBCPatientManager patientmanager,JDBCAppointmentManager appointmentmanager)throws Exception {
-		
+	//ok
+	private static void scheduleAppointment(JDBCDoctorManager doctormanager, JDBCPatientManager patientmanager, String email) throws Exception{
 		// TODO Auto-generated method stub
-		System.out.println("Email: ");
-		String email = reader.readLine();
-		d = doctormanager.getDoctorByEmail(email);
-		patients = patientmanager.getListOfPatients();
-		System.out.println("Enter patient's id: ");
-		int id = Integer.parseInt(reader.readLine());
-		p = patientmanager.getPatientById(id);
-		System.out.println("Type the date in formal yyyy/mm/dd");
-		String dob = reader.readLine();
-		DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
-		Date date = (Date) df.parse(dob);
-		appointmentmanager.deleteAppointment(d, p, date);
-		
-		
-		
-	}
 
-	private static void scheduleAppointment(JDBCDoctorManager doctormanager, JDBCPatientManager patientmanager, JDBCAppointmentManager appointmentmanager) throws Exception{
-		// TODO Auto-generated method stub
-		System.out.println("Email: ");
-		String email = reader.readLine();
-		d = doctormanager.getDoctorByEmail(email);
-		patients = patientmanager.getListOfPatients();
-		System.out.println("Enter patient's id: ");
-		int id = Integer.parseInt(reader.readLine());
-		p = patientmanager.getPatientById(id);
-		System.out.println("Type the date in formal yyyy/mm/dd");
-		String da = reader.readLine();
+		//ask for date of appointment
+		System.out.println("Enter date of appointment in format yyyy/mm/dd: ");
+		String ad = reader.readLine();
 		DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
-		Date date = (Date) df.parse(da);
-		appointmentmanager.addAppointment(d, p, date);
+		Date date = (Date) df.parse(ad);
+		//description
+		System.out.println("Description: ");
+		String description = reader.readLine();
+		//doctor
+		d = doctormanager.getDoctorByEmail(email);
+		//patient
+		System.out.println("Enter patient's id: ");
+		Integer p_id = Integer.parseInt(reader.readLine());
+		p = patientmanager.getPatientById(p_id);
+		
+		Appointment a = new Appointment(date, description, d, p);
+		doctormanager.addAppointment(a);
 	}
 
 }

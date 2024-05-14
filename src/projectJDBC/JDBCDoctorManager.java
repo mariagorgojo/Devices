@@ -1,6 +1,5 @@
 package projectJDBC;
 
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -8,10 +7,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import projectInterfaces.DoctorManager;
+import projectPOJOs.Appointment;
+import projectPOJOs.Device;
 import projectPOJOs.Doctor;
-import projectPOJOs.Patient;
 
-// no sabemos que métodos son necesarios para cada entity :/
 
 public class JDBCDoctorManager implements DoctorManager {
 	
@@ -22,6 +21,7 @@ public class JDBCDoctorManager implements DoctorManager {
 		this.manager = m;
 	}
 
+	//ok pero duda
 	@Override
 	public void createDoctor(Doctor d) {
 		// TODO Auto-generated method stub
@@ -39,13 +39,13 @@ public class JDBCDoctorManager implements DoctorManager {
 			prep.executeUpdate();				
 					
 		}
-		catch(Exception e)
-		{
+		catch(Exception e){
 			e.printStackTrace();
 		}
 		
 	}
 
+	//ok
 	@Override
 	public List<Doctor> getListOfDoctors() {
 		// TODO Auto-generated method stub
@@ -56,8 +56,7 @@ public class JDBCDoctorManager implements DoctorManager {
 			String sql = "SELECT * FROM doctors";
 			ResultSet rs = stmt.executeQuery(sql);
 			
-			while(rs.next())
-			{
+			while(rs.next()){
 				Integer id = rs.getInt("id");
 				String email = rs.getString("email");
 				String name = rs.getString("name");
@@ -71,20 +70,17 @@ public class JDBCDoctorManager implements DoctorManager {
 			rs.close();
 			stmt.close();
 			
-		}catch(Exception e)
-		{
+		}catch(Exception e){
 			e.printStackTrace();
 		
 		}
-		
-		
 		return doctors;
 	}
 
+	//ok
 	@Override
 	public Doctor searchDoctorById(Integer id) {
 		// TODO Auto-generated method stub
-		
 		
 		try {
 			Statement stmt = manager.getConnection().createStatement();
@@ -103,12 +99,14 @@ public class JDBCDoctorManager implements DoctorManager {
 		    rs.close();
 		    stmt.close();
 		    
-		}catch(Exception e) {e.printStackTrace();}
-		
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 		
 		return d;
 	}
 	
+	//ok
 	@Override
 	public Doctor getDoctorByEmail(String email) {
 		
@@ -136,36 +134,90 @@ public class JDBCDoctorManager implements DoctorManager {
 		return d;
 	}
 
+	//ok
 	@Override
-	public void orderAppointment(Patient p, Date date) {
+	public void addAppointment(Appointment a) {
 		// TODO Auto-generated method stub
+		try {
+			String sql= "INSERT INTO appointments (date, description, doctor, patient)"
+					+ "VALUES (?,?,?,?)";
+		
+			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
+			prep.setDate(1, a.getDate());
+			prep.setString(2, a.getDescription());
+			prep.setInt(3, a.getDoctor().getId());
+			prep.setInt(4, a.getPatient().getId());
+			
+			prep.executeUpdate();				
+					
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
 		
 	}
+	
+	//ok
+	@Override
+	public void deleteAppointment(Integer appointment_id) {
+		// TODO Auto-generated method stub
+		try {
+			String sql = "DELETE from appointments WHERE id= ?";
+
+			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
+			prep.setInt(1, appointment_id);
+			prep.executeUpdate();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	//ok
+	@Override
+	public void orderDevice(Device d) {
+		try {
+			String sql = "INSERT INTO devices (type, implantation_date, expiration_date)"
+					+ "VALUES (?,?,?)";
+			
+			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
+			prep.setString(1, d.getType());
+			prep.setDate(2, d.getImplantationDate());
+			prep.setDate(3, d.getExpirationDate());
+			
+			prep.executeUpdate();	
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	//ok
 	@Override
 	public void editName(Doctor d,String name) {
 		try{
-		d.setName(name);
-		int id = d.getId();
-		String sql = "UPDATE departments SET name=? WHERE id=?";
-		PreparedStatement prep = manager.getConnection().prepareStatement(sql);
-		prep.setString(1, name);	
-		prep.setInt(2, d.getId());
-		prep.executeUpdate();
-		System.out.println("Update finished.");
-		prep.close();
-		System.out.println("Database connection closed.");
+			d.setName(name);
+			String sql = "UPDATE doctors SET name=? WHERE id=?";
+			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
+			prep.setString(1, name);	
+			prep.setInt(2, d.getId());
+			prep.executeUpdate();
+			System.out.println("Update finished.");
+			prep.close();
+			System.out.println("Database connection closed.");
 		}catch(Exception e) {
 			e.printStackTrace();
 			
 		}
 	}
+	
+	//ok
 	@Override
 	public void editSurname(Doctor d,String surname) {
 		d.setSurname(surname);
 		try{
 			d.setSurname(surname);
-			int id = d.getId();
-			String sql = "UPDATE departments SET name=? WHERE id=?";
+			String sql = "UPDATE doctors SET name=? WHERE id=?";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setString(1, surname);	
 			prep.setInt(2, d.getId());
@@ -173,19 +225,19 @@ public class JDBCDoctorManager implements DoctorManager {
 			System.out.println("Update finished.");
 			prep.close();
 			System.out.println("Database connection closed.");
-			}catch(Exception e) {
+		}catch(Exception e) {
 				e.printStackTrace();
 				
-			}
 		}
 	}
 	
+	//ok
+	@Override
 	public void editSpecialty(Doctor d,String specialty) {
 		d.setSpecialty(specialty);
 		try{
 			d.setName(specialty);
-			int id = d.getId();
-			String sql = "UPDATE departments SET specialty=? WHERE id=?";
+			String sql = "UPDATE doctors SET specialty=? WHERE id=?";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setString(1, specialty);	
 			prep.setInt(2, d.getId());
@@ -193,13 +245,9 @@ public class JDBCDoctorManager implements DoctorManager {
 			System.out.println("Update finished.");
 			prep.close();
 			System.out.println("Database connection closed.");
-			}catch(Exception e) {
-				e.printStackTrace();
-				
-			}
+		}catch(Exception e) {
+			e.printStackTrace();			
 		}
-		//FALTA PONER CON TABLAS
-		
 	}
 
 	
