@@ -143,32 +143,61 @@ public class JDBCDoctorManager implements DoctorManager {
 	}
 	@Override
 	public void editName(Doctor d,String name) {
+		try{
 		d.setName(name);
 		int id = d.getId();
-		//FALTA PONER CON TABLAS
-		//try {
-			//String sql = "UPDATE doctors SET name= ? WHERE id= ?;";
-		//	PreparedStatement prep = manager.getConnection().prepareStatement(sql);
+		String sql = "UPDATE departments SET name=? WHERE id=?";
+		PreparedStatement prep = manager.getConnection().prepareStatement(sql);
+		prep.setString(1, name);	
+		prep.setInt(2, d.getId());
+		prep.executeUpdate();
+		System.out.println("Update finished.");
+		prep.close();
+		System.out.println("Database connection closed.");
+		}catch(Exception e) {
+			e.printStackTrace();
 			
-			//prep.setString(1, n_speciality); //????
-			//prep.setInt(2, vet_id);
-			
-			//prep.executeQuery();
-		//}
-		//catch(Exception e){
-		//	e.printStackTrace();
-			
-		//}	
-		
+		}
 	}
 	@Override
 	public void editSurname(Doctor d,String surname) {
 		d.setSurname(surname);
-		//FALTA PONER CON TABLAS
+		try{
+			d.setSurname(surname);
+			int id = d.getId();
+			String sql = "UPDATE departments SET name=? WHERE id=?";
+			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
+			prep.setString(1, surname);	
+			prep.setInt(2, d.getId());
+			prep.executeUpdate();
+			System.out.println("Update finished.");
+			prep.close();
+			System.out.println("Database connection closed.");
+			}catch(Exception e) {
+				e.printStackTrace();
+				
+			}
+		}
 	}
 	
 	public void editSpecialty(Doctor d,String specialty) {
 		d.setSpecialty(specialty);
+		try{
+			d.setName(specialty);
+			int id = d.getId();
+			String sql = "UPDATE departments SET specialty=? WHERE id=?";
+			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
+			prep.setString(1, specialty);	
+			prep.setInt(2, d.getId());
+			prep.executeUpdate();
+			System.out.println("Update finished.");
+			prep.close();
+			System.out.println("Database connection closed.");
+			}catch(Exception e) {
+				e.printStackTrace();
+				
+			}
+		}
 		//FALTA PONER CON TABLAS
 		
 	}
