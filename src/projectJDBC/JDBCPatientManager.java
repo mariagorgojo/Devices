@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import projectInterfaces.PatientManager;
+import projectPOJOs.Doctor;
 import projectPOJOs.Patient;
 
 public class JDBCPatientManager implements PatientManager{
@@ -23,6 +24,22 @@ public class JDBCPatientManager implements PatientManager{
 	@Override
 	public void createPatient(Patient p) {
 		// TODO Auto-generated method stub
+		try {
+			String sql= "INSERT INTO patients (email, name, surname, birthday, diagnosis)"
+						+ "VALUES (?,?,?,?)";
+			
+			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
+			prep.setString(1, p.getEmail());
+			prep.setString(2, p.getName());
+			prep.setString(3, p.getSurname());
+			prep.setDate(4, p.getBirthday());
+			prep.setString(5, p.getDiagnosis());
+			prep.executeUpdate();				
+			prep.close();
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
 		
 	}
 
@@ -108,6 +125,56 @@ public class JDBCPatientManager implements PatientManager{
 				e.printStackTrace();
 			}
 		
+	}
+	//NOSE PUEDE USAR EL ATRIBUTO P????
+	public void editName(Patient p,String name) {
+		try{
+			p.setName(name);
+			String sql = "UPDATE patients SET name=? WHERE id=?";
+			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
+			prep.setString(1, name);	
+			prep.setInt(2, p.getId());
+			prep.executeUpdate();
+			System.out.println("Update finished.");
+			prep.close();
+			System.out.println("Database connection closed.");
+		}catch(Exception e) {
+			e.printStackTrace();
+			
+		}
+	}
+	public void editSurname(Patient p,String surname) {
+		p.setSurname(surname);
+		try{
+			p.setSurname(surname);
+			String sql = "UPDATE patients SET surname=? WHERE id=?";
+			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
+			prep.setString(1, surname);	
+			prep.setInt(2, p.getId());
+			prep.executeUpdate();
+			System.out.println("Update finished.");
+			prep.close();
+			System.out.println("Database connection closed.");
+		}catch(Exception e) {
+				e.printStackTrace();
+				
+		}
+	}
+	public void editEmail(Patient p,String email) {
+		p.setEmail(email);
+		try{
+			p.setEmail(email);
+			String sql = "UPDATE patients SET email=? WHERE id=?";
+			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
+			prep.setString(1, email);	
+			prep.setInt(2, p.getId());
+			prep.executeUpdate();
+			System.out.println("Update finished.");
+			prep.close();
+			System.out.println("Database connection closed.");
+		}catch(Exception e) {
+				e.printStackTrace();
+		}
 	}
 	
 

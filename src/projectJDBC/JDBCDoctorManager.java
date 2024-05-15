@@ -135,6 +135,7 @@ public class JDBCDoctorManager implements DoctorManager {
 	}
 
 	//ok
+	/*
 	@Override
 	public void addAppointment(Appointment a) {
 		// TODO Auto-generated method stub
@@ -157,7 +158,7 @@ public class JDBCDoctorManager implements DoctorManager {
 		
 	}
 	
-	//ok
+
 	@Override
 	public void deleteAppointment(Integer appointment_id) {
 		// TODO Auto-generated method stub
@@ -172,7 +173,7 @@ public class JDBCDoctorManager implements DoctorManager {
 			e.printStackTrace();
 		}
 	}
-	
+	*/
 	//ok
 	@Override
 	public void orderDevice(Device d) {

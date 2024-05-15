@@ -45,10 +45,10 @@ public class DoctorMenu {
 					createPatient(dmanager, pmanager);
 					break;
 				case 3:
-					scheduleAppointment(dmanager, pmanager, email);
+					scheduleAppointment(dmanager, pmanager, amanager, email);
 					break;
 				case 4:
-					cancelAppointment(dmanager);
+					cancelAppointment(amanager);
 					break;
 				case 5:
 					orderDevice(dmanager);
@@ -219,17 +219,17 @@ public class DoctorMenu {
 	}
 
 	//ok
-	private static void cancelAppointment(JDBCDoctorManager doctormanager)throws Exception {
+	private static void cancelAppointment(JDBCAppointmentManager amanager)throws Exception {
 		// TODO Auto-generated method stub
 
 		System.out.println("Enter the appointments'id: ");
 		Integer a_id = Integer.parseInt(reader.readLine());
-		doctormanager.deleteAppointment(a_id);
+		amanager.deleteAppointment(a_id);
 		
 	}
 
 	//ok
-	private static void scheduleAppointment(JDBCDoctorManager doctormanager, JDBCPatientManager patientmanager, String email) throws Exception{
+	private static void scheduleAppointment(JDBCDoctorManager doctormanager, JDBCPatientManager patientmanager, JDBCAppointmentManager amanager, String email) throws Exception{
 		// TODO Auto-generated method stub
 
 		//ask for date of appointment
@@ -248,7 +248,7 @@ public class DoctorMenu {
 		p = patientmanager.getPatientById(p_id);
 		
 		Appointment a = new Appointment(date, description, d, p);
-		doctormanager.addAppointment(a);
+		amanager.addAppointment(a);
 	}
 
 }
