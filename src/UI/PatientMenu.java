@@ -30,6 +30,7 @@ public class PatientMenu {
 				System.out.println("1. Edit personal information");
 				System.out.println("2. Schedule appointment");
 				System.out.println("3. Cancel appointment");
+				System.out.println("4. View information about device");
 				System.out.println("0. Return");
 				
 				choice = Integer.parseInt(reader.readLine());
@@ -44,6 +45,9 @@ public class PatientMenu {
 				case 3:
 					cancelAppointment(amanager);
 					break;
+				case 4:
+					viewInfoDevice();
+					break;
 				case 0:
 					System.out.println("Back to main menu");
 					break;
@@ -55,6 +59,11 @@ public class PatientMenu {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	private static void viewInfoDevice() {
+		// TODO Auto-generated method stub
+		
 	}
 
 	private static void scheduleAppointment(JDBCDoctorManager doctormanager, JDBCPatientManager patientmanager, JDBCAppointmentManager amanager, String email) throws Exception{
@@ -69,15 +78,16 @@ public class PatientMenu {
 		System.out.println("Description: ");
 		String description = reader.readLine();
 		//doctor
-		d = doctormanager.getDoctorByEmail(email);
+		System.out.println("Enter doctor's id: ");
+		Integer d_id = Integer.parseInt(reader.readLine());
+		d = doctormanager.searchDoctorById(d_id);
 		//patient
-		System.out.println("Enter patient's id: ");
-		Integer p_id = Integer.parseInt(reader.readLine());
-		p = patientmanager.getPatientById(p_id);
+		p = patientmanager.getPatientByEmail(email);
 		
 		Appointment a = new Appointment(date, description, d, p);
 		amanager.addAppointment(a);
 	}
+	
 	private static void cancelAppointment(JDBCAppointmentManager amanager)throws Exception {
 		// TODO Auto-generated method stub
 
@@ -94,7 +104,7 @@ public class PatientMenu {
 				System.out.println("Choose an option");
 				System.out.println("1. Edit name");
 				System.out.println("2. Edit surname");
-				System.out.println("3. Edit email");
+				System.out.println("3. Edit diagnosis");
 				System.out.println("0. Return");
 				
 				choice = Integer.parseInt(reader.readLine());
@@ -107,7 +117,7 @@ public class PatientMenu {
 					editSurname(pmanager, id);
 					break;
 				case 3:
-					editEmail(pmanager, id);
+					editDiagnosis(pmanager, id);
 					break;
 				case 0:
 					System.out.println("Back to doctor menu");
@@ -119,6 +129,7 @@ public class PatientMenu {
 			e.printStackTrace();
 		}
 	}
+    
     private static void editName(JDBCPatientManager pmanager, Integer id)throws Exception {
 		// TODO Auto-generated method stub
 
@@ -128,6 +139,7 @@ public class PatientMenu {
 		pmanager.editName(p,name);
 		
 	}
+    
     private static void editSurname(JDBCPatientManager pmanager, Integer id)throws Exception  {
 		// TODO Auto-generated method stub
 				
@@ -137,6 +149,17 @@ public class PatientMenu {
 		pmanager.editSurname(p, surname);
 				
 	}
+    
+    private static void editDiagnosis(JDBCPatientManager pmanager, Integer id)throws Exception  {
+		// TODO Auto-generated method stub
+				
+		p = pmanager.getPatientById(id);
+		System.out.println("Enter new diagnosis: ");
+		String diagnosis = reader.readLine();
+		pmanager.editDiagnosis(p, diagnosis);
+				
+	}
+    
     private static void editEmail(JDBCPatientManager pmanager, Integer id)throws Exception  {
 		// TODO Auto-generated method stub
 				

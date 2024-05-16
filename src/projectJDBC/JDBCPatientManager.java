@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import projectInterfaces.PatientManager;
-import projectPOJOs.Doctor;
 import projectPOJOs.Patient;
 
 public class JDBCPatientManager implements PatientManager{
@@ -21,6 +20,7 @@ public class JDBCPatientManager implements PatientManager{
 		this.manager = m;
 	}
 
+	//ok
 	@Override
 	public void createPatient(Patient p) {
 		// TODO Auto-generated method stub
@@ -43,6 +43,7 @@ public class JDBCPatientManager implements PatientManager{
 		
 	}
 
+	//ok
 	@Override
 	public List<Patient> getListOfPatients() {
 		// TODO Auto-generated method stub
@@ -77,6 +78,7 @@ public class JDBCPatientManager implements PatientManager{
 		return patients;
 	}
 
+	//ok
 	@Override
 	public Patient getPatientById(Integer id) {
 		// TODO Auto-generated method stub
@@ -105,6 +107,40 @@ public class JDBCPatientManager implements PatientManager{
 		
 		return p;
 	}
+	
+	//ok
+	@Override
+	public Patient getPatientByEmail(String email) {
+		
+		try {
+			Statement stmt = manager.getConnection().createStatement();
+			String sql = "SELECT * FROM patients WHERE email=" + email;
+		
+			ResultSet rs = stmt.executeQuery(sql);
+			
+			Integer id = rs.getInt("id");
+			String d_email = rs.getString("email"); 
+			String name = rs.getString("name");
+			String surname = rs.getString("surname");
+			Date bd = rs.getDate("birthday");
+			String diagnosis = rs.getString("diagnosis");
+			//List <Device> devices = rs.getList??? e incluir los devices en el constructor?
+
+			
+		    p = new Patient (id, d_email, name, surname, bd, diagnosis);
+		    
+		    rs.close();
+		    stmt.close();
+		    
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return p;
+	}
+	
+	//ok
+	@Override
 	public void addPatient(Patient p) {
 		try {
 			 String sql = "INSERT INTO patients (email, name, surname, birthday, diagnosis)"
@@ -126,7 +162,10 @@ public class JDBCPatientManager implements PatientManager{
 			}
 		
 	}
+	
+	//ok
 	//NOSE PUEDE USAR EL ATRIBUTO P????
+	@Override
 	public void editName(Patient p,String name) {
 		try{
 			p.setName(name);
@@ -143,23 +182,54 @@ public class JDBCPatientManager implements PatientManager{
 			
 		}
 	}
+	
+	//ok
+	@Override
 	public void editSurname(Patient p,String surname) {
 		p.setSurname(surname);
 		try{
-			p.setSurname(surname);
+			p.setSurname(surname); //actualizas el objeto
+			
 			String sql = "UPDATE patients SET surname=? WHERE id=?";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
+			
 			prep.setString(1, surname);	
 			prep.setInt(2, p.getId());
 			prep.executeUpdate();
+			
 			System.out.println("Update finished.");
 			prep.close();
 			System.out.println("Database connection closed.");
+			
 		}catch(Exception e) {
 				e.printStackTrace();
-				
 		}
 	}
+	
+	//ok
+	@Override
+	public void editDiagnosis(Patient p, String diagnosis) {
+		try {
+			
+			p.setDiagnosis(diagnosis);
+			
+			String sql = "UPDATE patients SET diagnosis=? WHERE id=?";
+			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
+			
+			prep.setString(1, diagnosis);
+			prep.setInt(2, p.getId());
+			prep.executeUpdate();
+			
+			System.out.println("Update finished.");
+			prep.close();
+			System.out.println("Database connection closed.");
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	// se queda en stand by no sabemos si lo vamos a necesitar
 	public void editEmail(Patient p,String email) {
 		p.setEmail(email);
 		try{
