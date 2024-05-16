@@ -5,6 +5,8 @@ import java.io.InputStreamReader;
 import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 import projectJDBC.JDBCAppointmentManager;
 import projectJDBC.JDBCDoctorManager;
@@ -16,6 +18,7 @@ import projectPOJOs.Patient;
 
 public class DoctorMenu {
 	
+	private static List<Patient> patients = new ArrayList<Patient>();
 	private static Doctor d;
 	private static Patient p;
 	private static Device device;
@@ -243,6 +246,11 @@ public class DoctorMenu {
 		//doctor
 		d = doctormanager.getDoctorByEmail(email);
 		//patient
+		patients = patientmanager.getListOfPatients();
+		System.out.println("Patients available: ");
+		for(Patient p : patients) {
+			System.out.println(p.toString());
+		}
 		System.out.println("Enter patient's id: ");
 		Integer p_id = Integer.parseInt(reader.readLine());
 		p = patientmanager.getPatientById(p_id);

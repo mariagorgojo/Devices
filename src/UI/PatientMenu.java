@@ -5,6 +5,8 @@ import java.io.InputStreamReader;
 import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 import projectJDBC.JDBCAppointmentManager;
 import projectJDBC.JDBCDoctorManager;
@@ -16,12 +18,13 @@ import projectPOJOs.Patient;
 
 public class PatientMenu {
 	
+	private static List<Doctor> doctors = new ArrayList<Doctor>();
 	private static Doctor d;
 	private static Patient p;
-	private static Device device;
+	private static List<Device> devices = new ArrayList<Device>();
 	private static BufferedReader reader = new BufferedReader (new InputStreamReader(System.in));
 	
-	public static void menu(JDBCPatientManager pmanager, JDBCDoctorManager dmanager, JDBCAppointmentManager amanager, Integer id, String email) {
+	public static void menu(JDBCPatientManager pmanager, JDBCDoctorManager dmanager, JDBCAppointmentManager amanager, String email) {
 		// TODO Auto-generated method stub
 		try {
 			int choice;
@@ -30,14 +33,14 @@ public class PatientMenu {
 				System.out.println("1. Edit personal information");
 				System.out.println("2. Schedule appointment");
 				System.out.println("3. Cancel appointment");
-				System.out.println("4. View information about device");
+				System.out.println("4. View information about devices");
 				System.out.println("0. Return");
 				
 				choice = Integer.parseInt(reader.readLine());
 								
 				switch(choice){
 				case 1: 
-					editInformation(pmanager, id);
+					editInformation(pmanager, email);
 					break;
 				case 2:
 					scheduleAppointment(dmanager, pmanager, amanager, email);
@@ -46,7 +49,7 @@ public class PatientMenu {
 					cancelAppointment(amanager);
 					break;
 				case 4:
-					viewInfoDevice();
+					viewInfoDevices(pmanager, email);
 					break;
 				case 0:
 					System.out.println("Back to main menu");
@@ -61,11 +64,19 @@ public class PatientMenu {
 		}
 	}
 
-	private static void viewInfoDevice() {
+	//ok
+	private static void viewInfoDevices(JDBCPatientManager patientmanager, String email) {
 		// TODO Auto-generated method stub
+		p = patientmanager.getPatientByEmail(email);
+		Integer p_id = p.getId();
 		
+		devices = patientmanager.getListOfDevices(p_id);
+		for(Device d : devices) {
+			System.out.println(d.toString());
+		}
 	}
 
+	//ok
 	private static void scheduleAppointment(JDBCDoctorManager doctormanager, JDBCPatientManager patientmanager, JDBCAppointmentManager amanager, String email) throws Exception{
 		// TODO Auto-generated method stub
 
@@ -78,6 +89,11 @@ public class PatientMenu {
 		System.out.println("Description: ");
 		String description = reader.readLine();
 		//doctor
+		doctors = doctormanager.getListOfDoctors();
+		System.out.println("Doctors available: ");
+		for(Doctor d : doctors) {
+			System.out.println(d.toString());
+		}
 		System.out.println("Enter doctor's id: ");
 		Integer d_id = Integer.parseInt(reader.readLine());
 		d = doctormanager.searchDoctorById(d_id);
@@ -88,6 +104,7 @@ public class PatientMenu {
 		amanager.addAppointment(a);
 	}
 	
+	//ok
 	private static void cancelAppointment(JDBCAppointmentManager amanager)throws Exception {
 		// TODO Auto-generated method stub
 
@@ -96,8 +113,12 @@ public class PatientMenu {
 		amanager.deleteAppointment(a_id);
 	}
 
-    private static void editInformation(JDBCPatientManager pmanager, Integer id) {
+	//ok
+    private static void editInformation(JDBCPatientManager pmanager, String email) {
 		
+    	p = pmanager.getPatientByEmail(email);
+    	Integer id = p.getId();
+    			
 		try {
 			int choice;
 			do {
@@ -130,6 +151,7 @@ public class PatientMenu {
 		}
 	}
     
+    //ok
     private static void editName(JDBCPatientManager pmanager, Integer id)throws Exception {
 		// TODO Auto-generated method stub
 
@@ -140,6 +162,7 @@ public class PatientMenu {
 		
 	}
     
+    //ok
     private static void editSurname(JDBCPatientManager pmanager, Integer id)throws Exception  {
 		// TODO Auto-generated method stub
 				
@@ -150,6 +173,7 @@ public class PatientMenu {
 				
 	}
     
+    //ok
     private static void editDiagnosis(JDBCPatientManager pmanager, Integer id)throws Exception  {
 		// TODO Auto-generated method stub
 				
@@ -160,7 +184,7 @@ public class PatientMenu {
 				
 	}
     
-    private static void editEmail(JDBCPatientManager pmanager, Integer id)throws Exception  {
+    /*private static void editEmail(JDBCPatientManager pmanager, Integer id)throws Exception  {
 		// TODO Auto-generated method stub
 				
 		p = pmanager.getPatientById(id);
@@ -168,7 +192,7 @@ public class PatientMenu {
 		String email = reader.readLine();
 		pmanager.editEmail(p, email);
 				
-	}
+	}*/
   
 
 }
