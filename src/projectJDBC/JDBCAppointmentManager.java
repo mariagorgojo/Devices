@@ -14,6 +14,8 @@ public class JDBCAppointmentManager implements AppointmentManager{
 		// TODO Auto-generated constructor stub
 		this.manager = m;
 	}
+	
+	@Override
 	public void addAppointment(Appointment a) {
 		// TODO Auto-generated method stub
 		try {
@@ -34,6 +36,8 @@ public class JDBCAppointmentManager implements AppointmentManager{
 		}
 		
 	}
+	
+	@Override
 	public void deleteAppointment(Integer appointment_id) {
 		// TODO Auto-generated method stub
 		try {

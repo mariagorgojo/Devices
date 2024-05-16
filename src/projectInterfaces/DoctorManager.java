@@ -2,7 +2,6 @@ package projectInterfaces;
 
 import java.util.List;
 
-import projectPOJOs.Appointment;
 import projectPOJOs.Device;
 import projectPOJOs.Doctor;
 
