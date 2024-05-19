@@ -1,20 +1,11 @@
 package projectJDBC;
 
 import java.sql.Connection;
-
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
 public class JDBCManager {
-	
-	public static void main(String []args) {
-		
-		JDBCManager prueba = new JDBCManager();
-		if(prueba != null) {
-			System.out.println("database downloaded correctly");
-		}
-	}
 	
 	private Connection c = null;
 	
@@ -42,8 +33,7 @@ public class JDBCManager {
 			Statement stmt = c.createStatement();
 			
 			String sql = "CREATE TABLE doctors ("
-					+ "doctor_id INTEGER PRIMARY KEY AUTOINCREMENT,"
-					+ "email TEXT NOT NULL,"
+					+ "doctor_id INTEGER PRIMARY KEY,"
 					+ "name TEXT,"
 					+ "surname TEXT,"
 					+ "specialty TEXT "
@@ -51,8 +41,7 @@ public class JDBCManager {
 			stmt.executeUpdate(sql);
 			
 			sql = "CREATE TABLE patients ("
-					+ "patient_id INTEGER PRIMARY KEY AUTOINCREMENT,"
-					+ "email TEXT NOT NULL,"
+					+ "patient_id INTEGER PRIMARY KEY,"
 					+ "name TEXT,"
 					+ "surname TEXT,"
 					+ "device TEXT"
@@ -64,7 +53,7 @@ public class JDBCManager {
 			stmt.executeUpdate(sql);
 			
 			sql = "CREATE TABLE devices ("
-					+ "device_id INTEGER PRIMARY KEY AUTOINCREMENT,"
+					+ "device_id INTEGER PRIMARY KEY,"
 					+ "type TEXT,"
 					+ "implantation_date TEXT,"
 					+ "expiration_date TEXT,"
@@ -76,10 +65,10 @@ public class JDBCManager {
 			stmt.executeUpdate(sql);
 			
 			sql = "CREATE TABLE appointments ("
-					+ "appointment_id INTEGER PRIMARY KEY AUTOINCREMENT,"
+					+ "appointment_id INTEGER PRIMARY KEY,"
 					+ "date TEXT,"
 					+ "description TEXT,"
-					+ "doctor_id	INTEGER,"
+					+ "manufacturer_id	INTEGER,"
 					+ "patient_id	INTEGER,"
 					+ "FOREIGN KEY(doctor_id) REFERENCES doctors(doctor_id),"
 					+ "FOREIGN KEY(patient_id) REFERENCES patients(patient_id) "
@@ -87,8 +76,7 @@ public class JDBCManager {
 			stmt.executeUpdate(sql);
 			
 			sql = "CREATE TABLE manufacturers ("
-					+ "manufacturer_id	INTEGER PRIMARY KEY AUTOINCREMENT,"
-					+ "email TEXT NOT NULL,"
+					+ "manufacturer_id	INTEGER PRIMARY KEY,"
 					+ "name	TEXT,"
 					+ "address	TEXT,"
 					+ "phonenumber	INTEGER"
@@ -131,3 +119,4 @@ public class JDBCManager {
 	}
 
 }
+

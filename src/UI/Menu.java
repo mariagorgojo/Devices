@@ -120,11 +120,11 @@ public class Menu {
 				DoctorMenu.menu(doctormanager, patientmanager, appointmentmanager, email);
 				
 			}else if(u.getRole().getName().equals("patient")) { //user is a patient, we open patient menu
-				System.out.println("Login of doctor successful!");
+				System.out.println("Login of patient successful!");
 				PatientMenu.menu(patientmanager, doctormanager, appointmentmanager, email);
 				
 			}else { //user is a manufacturer, we open manufacturer menu
-				System.out.println("Login of doctor successful!");
+				System.out.println("Login of manufacturer successful!");
 				ManufacturerMenu.menu(email);
 			}
 		
