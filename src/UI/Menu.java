@@ -76,8 +76,9 @@ public class Menu {
 			}while(choice!=0);
 			
 			
-		}catch(Exception e)
-		{e.printStackTrace();}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 	}
 	
 	//casi completado
@@ -125,12 +126,12 @@ public class Menu {
 				
 			}else { //user is a manufacturer, we open manufacturer menu
 				System.out.println("Login of manufacturer successful!");
-				ManufacturerMenu.menu(email);
+				ManufacturerMenu.menu(doctormanager, manufacturermanager, email);
 			}
 		
 	}
 
-	//completado
+	//REVISAR DUDA
 	private static void signUpUser() {
 		// TODO Auto-generated method stub
 		try {
