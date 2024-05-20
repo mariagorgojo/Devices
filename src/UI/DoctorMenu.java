@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import projectJDBC.JDBCAppointmentManager;
+import projectJDBC.JDBCDeviceManager;
 import projectJDBC.JDBCDoctorManager;
 import projectJDBC.JDBCPatientManager;
 import projectPOJOs.Appointment;
@@ -24,7 +25,7 @@ public class DoctorMenu {
 	private static Device device;
 	private static BufferedReader reader = new BufferedReader (new InputStreamReader(System.in));
 	
-	public static void menu(JDBCDoctorManager dmanager, JDBCPatientManager pmanager, JDBCAppointmentManager amanager, String email) {
+	public static void menu(JDBCDoctorManager dmanager, JDBCPatientManager pmanager, JDBCAppointmentManager amanager, JDBCDeviceManager devicemanager, String email) {
 			// TODO Auto-generated method stub
 		try {
 			int choice;
@@ -54,7 +55,7 @@ public class DoctorMenu {
 					cancelAppointment(amanager);
 					break;
 				case 5:
-					orderDevice(dmanager);
+					orderDevice(devicemanager);
 					break;
 				case 6:
 					viewInformationPatient(pmanager);
@@ -200,7 +201,7 @@ public class DoctorMenu {
 	}
 	
 	//ok
-	private static void orderDevice(JDBCDoctorManager dmanager) throws Exception {
+	private static void orderDevice(JDBCDeviceManager devicemanager) throws Exception {
 		// TODO Auto-generated method stub
 		
 		//type of device
@@ -218,7 +219,7 @@ public class DoctorMenu {
 		Date expirationDate = (Date) df2.parse(date2);
 		
 		device = new Device(type, implantationDate, expirationDate);
-		dmanager.orderDevice(device);
+		devicemanager.orderDevice(device);
 	}
 
 	//ok

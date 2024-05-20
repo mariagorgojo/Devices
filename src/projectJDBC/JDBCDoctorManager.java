@@ -132,25 +132,6 @@ public class JDBCDoctorManager implements DoctorManager {
 		
 		return d;
 	}
-
-	//ok
-	@Override
-	public void orderDevice(Device d) {
-		try {
-			String sql = "INSERT INTO devices (type, implantation_date, expiration_date)"
-					+ "VALUES (?,?,?)";
-			
-			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
-			prep.setString(1, d.getType());
-			prep.setDate(2, d.getImplantationDate());
-			prep.setDate(3, d.getExpirationDate());
-			
-			prep.executeUpdate();	
-			
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-	}
 	
 	//ok
 	@Override

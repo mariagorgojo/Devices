@@ -231,7 +231,7 @@ public class JDBCPatientManager implements PatientManager{
 	}
 	
 	// se queda en stand by no sabemos si lo vamos a necesitar
-	public void editEmail(Patient p,String email) {
+	/*public void editEmail(Patient p,String email) {
 		p.setEmail(email);
 		try{
 			p.setEmail(email);
@@ -246,41 +246,6 @@ public class JDBCPatientManager implements PatientManager{
 		}catch(Exception e) {
 				e.printStackTrace();
 		}
-	}
+	}*/
 	
-	//REVISAR
-	//hace falta incluir las foreign keys?
-	@Override
-	public List<Device> getListOfDevices(Integer patient_id) {
-		// TODO Auto-generated method stub
-		List<Device> devices= new ArrayList<Device>();
-		
-		try {
-			Statement stmt = manager.getConnection().createStatement();
-			String sql = "SELECT * FROM devices WHERE patient_id=" +patient_id;
-			ResultSet rs = stmt.executeQuery(sql);
-			
-			while(rs.next())
-			{
-				Integer id = rs.getInt("id");
-				String type = rs.getString("type");
-				Date implantation_date = rs.getDate("implantation_date");
-				Date expiration_date = rs.getDate("expiration_date");
-				
-				Device d = new Device (id, type, implantation_date, expiration_date);
-				devices.add(d);
-			}
-			
-			rs.close();
-			stmt.close();
-			
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		
-		
-		return devices;	
-	}
-	
-
 }

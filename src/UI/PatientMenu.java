@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import projectJDBC.JDBCAppointmentManager;
+import projectJDBC.JDBCDeviceManager;
 import projectJDBC.JDBCDoctorManager;
 import projectJDBC.JDBCPatientManager;
 import projectPOJOs.Appointment;
@@ -24,7 +25,7 @@ public class PatientMenu {
 	private static List<Device> devices = new ArrayList<Device>();
 	private static BufferedReader reader = new BufferedReader (new InputStreamReader(System.in));
 	
-	public static void menu(JDBCPatientManager pmanager, JDBCDoctorManager dmanager, JDBCAppointmentManager amanager, String email) {
+	public static void menu(JDBCPatientManager pmanager, JDBCDoctorManager dmanager, JDBCAppointmentManager amanager, JDBCDeviceManager devicemanager, String email) {
 		// TODO Auto-generated method stub
 		try {
 			int choice;
@@ -49,7 +50,7 @@ public class PatientMenu {
 					cancelAppointment(amanager);
 					break;
 				case 4:
-					viewInfoDevices(pmanager, email);
+					viewInfoDevices(pmanager, devicemanager, email);
 					break;
 				case 0:
 					System.out.println("Back to main menu");
@@ -65,12 +66,12 @@ public class PatientMenu {
 	}
 
 	//ok
-	private static void viewInfoDevices(JDBCPatientManager patientmanager, String email) {
+	private static void viewInfoDevices(JDBCPatientManager patientmanager, JDBCDeviceManager devicemanager, String email) {
 		// TODO Auto-generated method stub
 		p = patientmanager.getPatientByEmail(email);
 		Integer p_id = p.getId();
 		
-		devices = patientmanager.getListOfDevices(p_id);
+		devices = devicemanager.getListOfDevices(p_id);
 		for(Device d : devices) {
 			System.out.println(d.toString());
 		}

@@ -19,6 +19,7 @@ import projectJPA.JPAUserManager;
 import projectPOJOs.Role;
 import projectPOJOs.User;
 import projectJDBC.JDBCAppointmentManager;
+import projectJDBC.JDBCDeviceManager;
 import projectJDBC.JDBCDoctorManager;
 import projectJDBC.JDBCManager;
 import projectJDBC.JDBCManufacturerManager;
@@ -31,6 +32,7 @@ public class Menu {
 	private static JDBCPatientManager patientmanager;
 	private static JDBCManufacturerManager manufacturermanager;
 	private static JDBCAppointmentManager appointmentmanager;
+	private static JDBCDeviceManager devicemanager;
 	private static UserManager usermanager;
 	private static BufferedReader reader = new BufferedReader (new InputStreamReader(System.in));
 	
@@ -41,6 +43,7 @@ public class Menu {
 		patientmanager = new JDBCPatientManager(jdbcmanager);
 		manufacturermanager = new JDBCManufacturerManager(jdbcmanager);
 		appointmentmanager = new JDBCAppointmentManager(jdbcmanager);
+		devicemanager = new JDBCDeviceManager(jdbcmanager);
 		usermanager = new JPAUserManager();
 		
 		try {
@@ -81,7 +84,7 @@ public class Menu {
 		}
 	}
 	
-	//casi completado
+	//completado
 	private static void updatePassword() throws Exception {
 		
 		System.out.println("Email: ");
@@ -96,7 +99,7 @@ public class Menu {
 		User u = usermanager.checkPassword(email, passwd);
 				
 		if(u!=null){ //if user already existed
-			usermanager.changePassword(u, new_passwd); //método changePassword todavía por hacer
+			usermanager.changePassword(u, new_passwd);
 		}
 				
 	}
@@ -118,11 +121,11 @@ public class Menu {
 			
 		}else if(u.getRole().getName().equals("doctor")){ //user is a doctor, we open doctor menu
 				System.out.println("Login of doctor successful!");
-				DoctorMenu.menu(doctormanager, patientmanager, appointmentmanager, email);
+				DoctorMenu.menu(doctormanager, patientmanager, appointmentmanager, devicemanager, email);
 				
 			}else if(u.getRole().getName().equals("patient")) { //user is a patient, we open patient menu
 				System.out.println("Login of patient successful!");
-				PatientMenu.menu(patientmanager, doctormanager, appointmentmanager, email);
+				PatientMenu.menu(patientmanager, doctormanager, appointmentmanager, devicemanager, email);
 				
 			}else { //user is a manufacturer, we open manufacturer menu
 				System.out.println("Login of manufacturer successful!");

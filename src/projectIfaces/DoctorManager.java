@@ -11,7 +11,6 @@ public interface DoctorManager {
 	public List<Doctor> getListOfDoctors();
 	public Doctor searchDoctorById(Integer id);
 	public Doctor getDoctorByEmail(String email);
-	public void orderDevice(Device d);
 	
 	public void editName(Doctor d,String name);
 	public void editSurname(Doctor d,String surname);
