@@ -124,6 +124,7 @@ public class JPAUserManager implements UserManager {
 	public void changePassword(User u, String new_passwd) {
 		// TODO Auto-generated method stub
 		
+		
 	}
 
 	
