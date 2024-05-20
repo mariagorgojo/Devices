@@ -6,17 +6,40 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import VetClinicXMLutils.SQLDateAdapter;
+
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement (name = "Patient")
+@XmlType(propOrder = {"name", "surname","birthday", "Device"})
 public class Patient implements Serializable{
 	
 	private static final long serialVersionUID = -4423025978446522586L;
-	
+	@XmlTransient
 	private int id;
+	@XmlElement
 	private String email;
+	@XmlAttribute
 	private String name;
+	@XmlElement
 	private String surname;
+	@XmlJavaTypeAdapter(SQLDateAdapter.class)
 	private Date birthday;
 	private String diagnosis;
+	@XmlElement (name = "Device")
+	@XmlElementWrapper(name = "Devices")
 	private List<Device> devices = new ArrayList<Device>();
+	@XmlElement (name = "Appointment")
+	@XmlElementWrapper(name = "Appointments")
 	private List<Appointment> appointments = new ArrayList<Appointment>();
 	
 	public Patient(String email, String name, String surname, Date birthday, String diagnosis) {
