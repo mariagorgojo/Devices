@@ -8,8 +8,8 @@ import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
+import projectIfaces.UserManager;
 import projectPOJOs.Role;
-import projectInterfaces.UserManager;
 import projectPOJOs.User;
 
 public class JPAUserManager implements UserManager {

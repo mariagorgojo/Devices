@@ -3,7 +3,7 @@ package projectJDBC;
 
 import java.sql.PreparedStatement;
 
-import projectInterfaces.AppointmentManager;
+import projectIfaces.AppointmentManager;
 import projectPOJOs.Appointment;
 
 public class JDBCAppointmentManager implements AppointmentManager{

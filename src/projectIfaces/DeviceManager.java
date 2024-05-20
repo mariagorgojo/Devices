@@ -1,4 +1,4 @@
-package projectInterfaces;
+package projectIfaces;
 
 public interface DeviceManager {
 

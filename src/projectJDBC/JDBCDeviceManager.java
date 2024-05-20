@@ -1,6 +1,6 @@
 package projectJDBC;
 
-import projectInterfaces.DeviceManager;
+import projectIfaces.DeviceManager;
 
 public class JDBCDeviceManager implements DeviceManager{
 	

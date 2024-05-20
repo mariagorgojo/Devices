@@ -7,7 +7,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import projectInterfaces.PatientManager;
+import projectIfaces.PatientManager;
 import projectPOJOs.Device;
 import projectPOJOs.Patient;
 

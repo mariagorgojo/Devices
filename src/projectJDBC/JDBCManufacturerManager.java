@@ -1,6 +1,6 @@
 package projectJDBC;
 
-import projectInterfaces.ManufacturerManager;
+import projectIfaces.ManufacturerManager;
 
 public class JDBCManufacturerManager implements ManufacturerManager{
 	

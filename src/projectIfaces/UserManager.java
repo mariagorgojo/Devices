@@ -1,4 +1,4 @@
-package projectInterfaces;
+package projectIfaces;
 
 import java.util.List;
 

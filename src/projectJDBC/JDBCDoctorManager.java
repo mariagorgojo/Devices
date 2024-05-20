@@ -6,7 +6,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import projectInterfaces.DoctorManager;
+import projectIfaces.DoctorManager;
 import projectPOJOs.Device;
 import projectPOJOs.Doctor;
 
