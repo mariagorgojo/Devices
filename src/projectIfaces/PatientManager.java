@@ -12,7 +12,6 @@ public interface PatientManager {
 	public List<Patient> getListOfPatients();
 	public void createPatient(Patient p);
 	public Patient getPatientByEmail(String email);
-	public List<Device> getListOfDevices(Integer patient_id);
 	
 	public void editName(Patient p, String name);
 	public void editSurname(Patient p, String surname);
