@@ -3,6 +3,8 @@ package UI;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 
 import projectJDBC.JDBCManufacturerManager;
 import projectJDBC.JDBCDoctorManager;
@@ -17,6 +19,7 @@ public class ManufacturerMenu {
 	private static Patient p;
 	private static Device device;
 	private static Manufacturer m;
+	private static List <Device> devicesNeeded = new ArrayList<Device>();
 	private static BufferedReader reader = new BufferedReader (new InputStreamReader(System.in));
 
 	public static void menu(JDBCDoctorManager dmanager, JDBCManufacturerManager mmanager, String email) {
@@ -27,7 +30,6 @@ public class ManufacturerMenu {
 				System.out.println("Choose an option");
 				System.out.println("1. Edit personal information");
 				System.out.println("2. View devices needed");
-				System.out.println("3. Confirm devices");
 				System.out.println("0. Return");
 				
 				choice = Integer.parseInt(reader.readLine());
@@ -37,10 +39,7 @@ public class ManufacturerMenu {
 					editInformation(mmanager, email);
 					break;
 				case 2:
-					viewDevices();
-					break;
-				case 3:
-					confirmDevices();
+					viewDevices(mmanager);
 					break;
 				case 0:
 					System.out.println("Back to main menu");
@@ -55,14 +54,12 @@ public class ManufacturerMenu {
 		}
 	}
 
-	private static void confirmDevices() {
+	private static void viewDevices(JDBCManufacturerManager mmanager) {
 		// TODO Auto-generated method stub
-		
-	}
-
-	private static void viewDevices() {
-		// TODO Auto-generated method stub
-		
+		devicesNeeded = mmanager.getDeviceOrder();
+		for(Device d : devicesNeeded) {
+			System.out.println(d.toString());
+		}
 	}
 
 	private static void editInformation(JDBCManufacturerManager mmanager, String email) {

@@ -1,9 +1,7 @@
 package projectJDBC;
 
 import projectPOJOs.Device;
-import projectPOJOs.Doctor;
 import projectPOJOs.Manufacturer;
-import projectPOJOs.Patient;
 
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -17,6 +15,7 @@ public class JDBCManufacturerManager implements ManufacturerManager{
 	
 	private JDBCManager manager;
 	private Manufacturer m;
+	private List<Device> devices;
 
 	public JDBCManufacturerManager(JDBCManager jdbcmanager) {
 		// TODO Auto-generated constructor stub
@@ -129,6 +128,40 @@ public class JDBCManufacturerManager implements ManufacturerManager{
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
+		
+	}
+
+	//doble query
+	@Override
+	public List<Device> getDeviceOrder() {
+		// TODO Auto-generated method stub
+
+		try {
+			Statement stmt = manager.getConnection().createStatement();
+			String sql = "SELECT * FROM orders";
+			ResultSet rs = stmt.executeQuery(sql);
+			
+			while(rs.next()){
+				Integer device_id = rs.getInt("device_id"); //you obtain the id of the type of device ordered
+				
+				Statement stmt2 = manager.getConnection().createStatement();
+				String sql2 = "SELECT * FROM devices WHERE id=" +device_id; //you use that id to search the type of device associated with it and add it to the list you return
+				ResultSet rs2 = stmt2.executeQuery(sql2);
+				
+				Integer id = rs2.getInt("id");
+				String type = rs2.getString("type");
+				Date expiration_date = rs2.getDate("expiration_date");
+						
+				Device d = new Device (id, type, expiration_date);					
+				devices.add(d);
+			}
+			rs.close();
+			stmt.close();
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return devices;
 		
 	}
 
