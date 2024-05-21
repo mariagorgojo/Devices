@@ -92,5 +92,11 @@ public class XMLManagerlmpl implements XMLManager{
 		}
 		
 	}
+
+	@Override
+	public Manufacturer manufacturer2xml(File xml) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }
