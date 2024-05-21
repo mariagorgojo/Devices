@@ -92,7 +92,7 @@ public class JDBCManager {
 					+ ")";
 			stmt.executeUpdate(sql);
 			
-			sql = "CREATE TABLE device_patients ("
+			sql = "CREATE TABLE devices_patient ("
 					+ "patient_id	INTEGER,"
 					+ "device_id	INTEGER,"
 					+ "FOREIGN KEY(doctor_id) REFERENCES doctors,"

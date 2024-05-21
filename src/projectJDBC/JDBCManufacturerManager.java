@@ -78,7 +78,7 @@ public class JDBCManufacturerManager implements ManufacturerManager{
 		// TODO Auto-generated method stub
 		try{
 			m.setPhoneNumber(phonenumber);
-			String sql = "UPDATE doctors SET phonenumber=? WHERE id=?";
+			String sql = "UPDATE manufacturers SET phonenumber=? WHERE id=?";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setInt(1, phonenumber);	
 			prep.setInt(2, m.getId());

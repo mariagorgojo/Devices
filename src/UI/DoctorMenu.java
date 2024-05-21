@@ -1,6 +1,7 @@
 package UI;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.sql.Date;
 import java.text.DateFormat;
@@ -20,6 +21,7 @@ import projectPOJOs.Patient;
 public class DoctorMenu {
 	
 	private static List<Patient> patients = new ArrayList<Patient>();
+	private static List<Device> devices = new ArrayList<Device>();
 	private static Doctor d;
 	private static Patient p;
 	private static Device device;
@@ -35,8 +37,9 @@ public class DoctorMenu {
 				System.out.println("2. Add new patient");
 				System.out.println("3. Schedule appointment");
 				System.out.println("4. Cancel appointment");
-				System.out.println("5. Order devices.");
-				System.out.println("6. View information about a patient");
+				System.out.println("5. Order device");
+				System.out.println("6. Assign device to patient");
+				System.out.println("7. View information about a patient");
 				System.out.println("0. Return");
 				
 				choice = Integer.parseInt(reader.readLine());
@@ -58,6 +61,9 @@ public class DoctorMenu {
 					orderDevice(devicemanager, dmanager, email);
 					break;
 				case 6:
+					assignDevice(devicemanager, pmanager, email);
+					break;
+				case 7:
 					viewInformationPatient(pmanager);
 					break;
 				case 0:
@@ -71,6 +77,32 @@ public class DoctorMenu {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	private static void assignDevice(JDBCDeviceManager devicemanager, JDBCPatientManager patientmanager, String email) throws IOException {
+		// TODO Auto-generated method stub
+
+		//selection of patient
+		patients = patientmanager.getListOfPatients();
+		System.out.println("Patients available: ");			
+		for(Patient p : patients) {
+			System.out.println(p.toString());
+		}
+		System.out.println("Enter patient's id: ");
+		Integer p_id = Integer.parseInt(reader.readLine());
+		p = patientmanager.getPatientById(p_id);
+		
+		//selection of device
+		devices = devicemanager.getDevices();
+		System.out.println("Devices available: ");
+		for(Device d : devices) {
+			System.out.println(d.toString());
+		}
+		System.out.println("Enter the type of the device: ");
+		String type = reader.readLine();
+		
+		device = devicemanager.getDeviceByType(type);
+		devicemanager.assignDeviceToPatient(device, p);
 	}
 
 	//REVISAR

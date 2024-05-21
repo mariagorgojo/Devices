@@ -10,6 +10,7 @@ import java.util.List;
 import projectIfaces.DeviceManager;
 import projectPOJOs.Device;
 import projectPOJOs.Doctor;
+import projectPOJOs.Patient;
 
 public class JDBCDeviceManager implements DeviceManager{
 	
@@ -41,6 +42,25 @@ public class JDBCDeviceManager implements DeviceManager{
 		}
 	}
 	
+	@Override
+	public void assignDeviceToPatient(Device device, Patient p) {
+		// TODO Auto-generated method stub
+		try {
+			
+			String sql = "INSERT INTO devices_patient (patient_id, device_id)"
+					+ "VALUES (?, ?)";
+			
+			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
+			prep.setInt(1, p.getId());
+			prep.setInt(2, device.getId());
+			
+			prep.executeUpdate();
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+	
 	//REVISAR
 	//hace falta incluir las foreign keys?
 	@Override
@@ -50,7 +70,7 @@ public class JDBCDeviceManager implements DeviceManager{
 			
 		try {
 			Statement stmt = manager.getConnection().createStatement();
-			String sql = "SELECT * FROM devices WHERE patient_id=" +patient_id;
+			String sql = "SELECT * FROM (devices_patient AS dp JOIN devices AS d ON dp.device_id=d.device_id) WHERE patient_id=" +patient_id;
 			ResultSet rs = stmt.executeQuery(sql);
 				
 			while(rs.next()){
@@ -90,6 +110,33 @@ public class JDBCDeviceManager implements DeviceManager{
 			e.printStackTrace();
 		}
 		return d;
+	}
+
+	public List<Device> getDevices() {
+		// TODO Auto-generated method stub
+		List<Device> devices= new ArrayList<Device>();
+		
+		try {
+			Statement stmt = manager.getConnection().createStatement();
+			String sql = "SELECT * FROM devices";
+			ResultSet rs = stmt.executeQuery(sql);
+				
+			while(rs.next()){
+				Integer id = rs.getInt("id");
+				String type = rs.getString("type");
+				Date expiration_date = rs.getDate("expiration_date");
+					
+				Device d = new Device (id, type, expiration_date);					
+				devices.add(d);
+			}
+			rs.close();
+			stmt.close();
+				
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+			
+		return devices;	
 	}
 		
 
