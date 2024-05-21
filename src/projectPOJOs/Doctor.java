@@ -14,11 +14,12 @@ public class Doctor implements Serializable{
 	private String name;
 	private String surname;
 	private String specialty;
-	private List<Patient> patients = new ArrayList<>();
-	private List<Device> devicesOrdered = new ArrayList<>(); //o al doctor se la pela saber los que ha pedido una vez pedidos??????
-	private List<Appointment> appointments = new ArrayList<>();
-	
-	//lista de appointments??? por paciente???
+	private List<Appointment> appointments;
+		
+	public Doctor() {
+		super();
+		appointments = new ArrayList<>();
+	}
 	
 	public Doctor(String email, String name, String surname, String specialty) {
 		super();
@@ -26,6 +27,7 @@ public class Doctor implements Serializable{
 		this.name = name;
 		this.surname = surname;
 		this.specialty = specialty;
+		appointments = new ArrayList<>();
 	}
 
 	public Doctor(int id, String email, String name, String surname, String specialty) {
@@ -35,6 +37,7 @@ public class Doctor implements Serializable{
 		this.name = name;
 		this.surname = surname;
 		this.specialty = specialty;
+		appointments = new ArrayList<>();
 	}
 
 	public int getId() {
@@ -77,22 +80,6 @@ public class Doctor implements Serializable{
 		this.specialty = specialty;
 	}
 
-	public List<Patient> getPatients() {
-		return patients;
-	}
-
-	public void setPatients(List<Patient> patients) {
-		this.patients = patients;
-	}
-
-	public List<Device> getDevicesOrdered() {
-		return devicesOrdered;
-	}
-
-	public void setDevicesOrdered(List<Device> devicesOrdered) {
-		this.devicesOrdered = devicesOrdered;
-	}
-
 	public List<Appointment> getAppointments() {
 		return appointments;
 	}
@@ -122,8 +109,7 @@ public class Doctor implements Serializable{
 	@Override
 	public String toString() {
 		return "Doctor [id=" + id + ", email=" + email + ", name=" + name + ", surname=" + surname + ", specialty="
-				+ specialty + ", patients=" + patients + ", devicesOrdered=" + devicesOrdered + ", appointments="
-				+ appointments + "]";
+				+ specialty + ", appointments=" + appointments + "]";
 	}
 	
 	

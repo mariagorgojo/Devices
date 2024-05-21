@@ -13,13 +13,14 @@ public class Manufacturer implements Serializable{
 	private String name;
 	private String address;
 	private int phoneNumber;
-	private List<Device> devicesOrdered = new ArrayList<>();
+	private List<Device> devices;
 	
 	public Manufacturer(String name, String address, int phoneNumber) {
 		super();
 		this.name = name;
 		this.address = address;
 		this.phoneNumber = phoneNumber;
+		devices = new ArrayList<>();
 	}
 	
 	public Manufacturer(int id, String name, String address, int phoneNumber) {
@@ -28,6 +29,7 @@ public class Manufacturer implements Serializable{
 		this.name = name;
 		this.address = address;
 		this.phoneNumber = phoneNumber;
+		devices = new ArrayList<>();
 	}
 	
 	public int getId() {
@@ -62,8 +64,8 @@ public class Manufacturer implements Serializable{
 		this.phoneNumber = phoneNumber;
 	}
 
-	public List<Device> getDevicesOrdered() {
-		return devicesOrdered;
+	public List<Device> getDevices() {
+		return devices;
 	}
 	
 	@Override
@@ -86,8 +88,8 @@ public class Manufacturer implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Manufacturer [id=" + id + ", name=" + name + ", address=" + address + ", phoneNumber=" + phoneNumber + "]";
+		return "Manufacturer [id=" + id + ", name=" + name + ", address=" + address + ", phoneNumber=" + phoneNumber
+				+ ", devices=" + devices + "]";
 	}
-	
 
 }
