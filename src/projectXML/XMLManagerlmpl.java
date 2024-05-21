@@ -27,7 +27,8 @@ public class XMLManagerlmpl implements XMLManager{
 	private ManufacturerManager manufacturermanager;
 	private DeviceManager devicemanager;
 	
-	public void patient2xml() {
+	@Override
+	public void patient2xml(Integer id) {
 		Patient p=null;
 		List<Device> devices=new ArrayList<Device>();
 		manager = new JDBCManager();
@@ -35,9 +36,9 @@ public class XMLManagerlmpl implements XMLManager{
 		devicemanager = new JDBCDeviceManager(manager);
 		try {
 			//Do a sql query to get the patient by the id
-			p = patientmanager.searchPatientById(id);
+			p = patientmanager.getPatientById(id);
 			//search for the pets of the owner
-			devices = patientmanager.getPatientOfanOwner(id);
+			devices = devicemanager.getListOfDevices(id);
 			p.setDevices(devices);
 			
 			//export the patient to an xml file
@@ -53,27 +54,6 @@ public class XMLManagerlmpl implements XMLManager{
 		}
 		
 	}
-	
-	
-	
-
-
-
-
-
-
-	@Override
-	public void patient2xml(Integer id) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-
-
-
-
-
 
 	@Override
 	public Patient xml2Patient(File xml) {
