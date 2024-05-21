@@ -33,7 +33,7 @@ public class JDBCManager {
 			Statement stmt = c.createStatement();
 			
 			String sql = "CREATE TABLE doctors ("
-					+ "doctor_id INTEGER PRIMARY KEY,"
+					+ "doctor_id INTEGER PRIMARY KEY AUTOINCREMENT,"
 					+ "name TEXT,"
 					+ "surname TEXT,"
 					+ "specialty TEXT "
@@ -41,7 +41,7 @@ public class JDBCManager {
 			stmt.executeUpdate(sql);
 			
 			sql = "CREATE TABLE patients ("
-					+ "patient_id INTEGER PRIMARY KEY,"
+					+ "patient_id INTEGER PRIMARY KEY AUTOINCREMENT,"
 					+ "name TEXT,"
 					+ "surname TEXT,"
 					+ "device TEXT"
@@ -53,7 +53,7 @@ public class JDBCManager {
 			stmt.executeUpdate(sql);
 			
 			sql = "CREATE TABLE devices ("
-					+ "device_id INTEGER PRIMARY KEY,"
+					+ "device_id INTEGER PRIMARY KEY AUTOINCREMENT,"
 					+ "type TEXT,"
 					+ "implantation_date TEXT,"
 					+ "expiration_date TEXT,"
@@ -65,7 +65,7 @@ public class JDBCManager {
 			stmt.executeUpdate(sql);
 			
 			sql = "CREATE TABLE appointments ("
-					+ "appointment_id INTEGER PRIMARY KEY,"
+					+ "appointment_id INTEGER PRIMARY KEY AUTOINCREMENT,"
 					+ "date TEXT,"
 					+ "description TEXT,"
 					+ "manufacturer_id	INTEGER,"
@@ -76,21 +76,28 @@ public class JDBCManager {
 			stmt.executeUpdate(sql);
 			
 			sql = "CREATE TABLE manufacturers ("
-					+ "manufacturer_id	INTEGER PRIMARY KEY,"
+					+ "manufacturer_id	INTEGER PRIMARY KEY AUTOINCREMENT,"
 					+ "name	TEXT,"
 					+ "address	TEXT,"
 					+ "phonenumber	INTEGER"
 					+ ")";
 			stmt.executeUpdate(sql);
 			
-			sql = "CREATE TABLE device_doctor ("
+			sql = "CREATE TABLE orders ("
 					+ "doctor_id	INTEGER,"
 					+ "device_id	INTEGER,"
-					+ "amount	INTEGER,"
-					+ "date	TEXT,"
 					+ "FOREIGN KEY(doctor_id) REFERENCES doctors,"
 					+ "FOREIGN KEY(device_id) REFERENCES device,"
 					+ "PRIMARY KEY(doctor_id,device_id)"
+					+ ")";
+			stmt.executeUpdate(sql);
+			
+			sql = "CREATE TABLE device_patients ("
+					+ "patient_id	INTEGER,"
+					+ "device_id	INTEGER,"
+					+ "FOREIGN KEY(doctor_id) REFERENCES doctors,"
+					+ "FOREIGN KEY(device_id) REFERENCES device,"
+					+ "PRIMARY KEY(patient_id,device_id)"
 					+ ")";
 			stmt.executeUpdate(sql);
 			

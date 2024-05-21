@@ -55,7 +55,7 @@ public class DoctorMenu {
 					cancelAppointment(amanager);
 					break;
 				case 5:
-					orderDevice(devicemanager);
+					orderDevice(devicemanager, dmanager, email);
 					break;
 				case 6:
 					viewInformationPatient(pmanager);
@@ -201,25 +201,16 @@ public class DoctorMenu {
 	}
 	
 	//ok
-	private static void orderDevice(JDBCDeviceManager devicemanager) throws Exception {
+	private static void orderDevice(JDBCDeviceManager devicemanager, JDBCDoctorManager dmanager, String email) throws Exception {
 		// TODO Auto-generated method stub
 		
 		//type of device
 		System.out.println("Enter type: ");
 		String type = reader.readLine();
-		//implantation date
-		System.out.println("Enter date of implantation in format yyyy/mm/dd: ");
-		String date1 = reader.readLine();
-		DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
-		Date implantationDate = (Date) df.parse(date1);
-		//expiration date
-		System.out.println("Enter date of expiration in format yyyy/mm/dd: ");
-		String date2 = reader.readLine();
-		DateFormat df2 = new SimpleDateFormat("yyyy/MM/dd");
-		Date expirationDate = (Date) df2.parse(date2);
 		
-		device = new Device(type, implantationDate, expirationDate);
-		devicemanager.orderDevice(device);
+		device = devicemanager.getDeviceByType(type);
+		d = dmanager.getDoctorByEmail(email);
+		devicemanager.orderDevice(d, device);
 	}
 
 	//ok

@@ -9,10 +9,12 @@ import java.util.List;
 
 import projectIfaces.DeviceManager;
 import projectPOJOs.Device;
+import projectPOJOs.Doctor;
 
 public class JDBCDeviceManager implements DeviceManager{
 	
 	private JDBCManager manager;
+	private Device d;
 
 	public JDBCDeviceManager(JDBCManager m) {
 		// TODO Auto-generated constructor stub
@@ -21,15 +23,16 @@ public class JDBCDeviceManager implements DeviceManager{
 
 	//ok
 	@Override
-	public void orderDevice(Device d) {
+	public void orderDevice(Doctor doctor, Device d) {
 		try {
-			String sql = "INSERT INTO devices (type, implantation_date, expiration_date)"
-					+ "VALUES (?,?,?)";
+			Integer device_id = d.getId(); //you get the id of the type of device you want to order
+			
+			String sql = "INSERT INTO orders (doctor_id, device_id)"
+					+ "VALUES (?,?)";
 			
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
-			prep.setString(1, d.getType());
-			prep.setDate(2, d.getImplantationDate());
-			prep.setDate(3, d.getExpirationDate());
+			prep.setInt(1, doctor.getId());
+			prep.setInt(2, device_id);
 			
 			prep.executeUpdate();	
 			
@@ -53,10 +56,9 @@ public class JDBCDeviceManager implements DeviceManager{
 			while(rs.next()){
 				Integer id = rs.getInt("id");
 				String type = rs.getString("type");
-				Date implantation_date = rs.getDate("implantation_date");
 				Date expiration_date = rs.getDate("expiration_date");
 					
-				Device d = new Device (id, type, implantation_date, expiration_date);					
+				Device d = new Device (id, type, expiration_date);					
 				devices.add(d);
 			}
 			rs.close();
@@ -67,6 +69,27 @@ public class JDBCDeviceManager implements DeviceManager{
 		}
 			
 		return devices;	
+	}
+
+	public Device getDeviceByType(String type) {
+		// TODO Auto-generated method stub
+		
+		try {
+			Statement stmt = manager.getConnection().createStatement();
+			String sql = "SELECT * FROM devices WHERE type=" +type;
+			ResultSet rs = stmt.executeQuery(sql);
+				
+			Integer id = rs.getInt("id");
+			Date expiration_date = rs.getDate("expiration_date");	
+			d = new Device (id, type, expiration_date);					
+			
+			rs.close();
+			stmt.close();
+				
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return d;
 	}
 		
 

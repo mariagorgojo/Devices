@@ -19,21 +19,18 @@ public class Device implements Serializable{
 	
 	private int id;
 	private String type;
-	private Date implantationDate;
 	private Date expirationDate;	
 
-	public Device(int id, String type, Date implantationDate, Date expirationDate) {
+	public Device(int id, String type, Date expirationDate) {
 		super();
 		this.id = id;
 		this.type = type;
-		this.implantationDate = implantationDate;
 		this.expirationDate = expirationDate;
 	}
 	
-	public Device(String type, Date implantationDate, Date expirationDate) {
+	public Device(String type, Date expirationDate) {
 		super();
 		this.type = type;
-		this.implantationDate = implantationDate;
 		this.expirationDate = expirationDate;
 	}
 
@@ -53,14 +50,6 @@ public class Device implements Serializable{
 		this.type = type;
 	}
 	
-	public Date getImplantationDate() {
-		return implantationDate;
-	}
-	
-	public void setImplantationDate(Date implantationDate) {
-		this.implantationDate = implantationDate;
-	}
-	
 	public Date getExpirationDate() {
 		return expirationDate;
 	}
@@ -71,7 +60,7 @@ public class Device implements Serializable{
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(expirationDate, id, implantationDate, type);
+		return Objects.hash(expirationDate, id, type);
 	}
 
 	@Override
@@ -84,12 +73,12 @@ public class Device implements Serializable{
 			return false;
 		Device other = (Device) obj;
 		return Objects.equals(expirationDate, other.expirationDate) && id == other.id
-				&& Objects.equals(implantationDate, other.implantationDate) && Objects.equals(type, other.type);
+				&& Objects.equals(type, other.type);
 	}
 
 	@Override
 	public String toString() {
-		return "Device [id=" + id + ", type=" + type + ", implantationDate=" + implantationDate + ", expirationDate="
+		return "Device [id=" + id + ", type=" + type + ", expirationDate="
 				+ expirationDate + "]";
 	}
 	
