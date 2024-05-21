@@ -14,8 +14,10 @@ import projectIfaces.ManufacturerManager;
 import projectIfaces.PatientManager;
 import projectIfaces.XMLManager;
 import projectJDBC.JDBCManager;
+import projectJDBC.JDBCManufacturerManager;
 import projectPOJOs.Patient;
 import projectPOJOs.Device;
+import projectPOJOs.Manufacturer;
 import projectJDBC.JDBCPatientManager;
 import projectJDBC.JDBCDeviceManager;
 
@@ -62,5 +64,33 @@ public class XMLManagerlmpl implements XMLManager{
 		return null;
 	}
 	
+	@Override
+	public void manufacturer2xml(Integer id){
+		Manufacturer m = null;
+		List<Device> devices=new ArrayList<Device>();
+		manager = new JDBCManager();
+		manufacturermanager = new JDBCManufacturerManager(manager);
+		devicemanager = new JDBCDeviceManager(manager);
+		
+		try {
+			//Do a sql query to get the manufacturer by the id
+			m = manufacturermanager.getManufacturerById(id);
+			//search for the devices of the manufacturer
+			devices = devicemanager.getListOfDevices(id);
+			m.setDevices(devices);
+			
+			//export the manufacturer to an xml file
+			JAXBContext jaxbContext = JAXBContext.newInstance(Manufacturer.class);
+			Marshaller marshaller = jaxbContext.createMarshaller();
+			
+			File file = new File("Manufacturer.xml");
+			marshaller.marshal(m, file);
+			System.out.print(m);
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
 	
 }

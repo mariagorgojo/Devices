@@ -1,11 +1,15 @@
 package projectJDBC;
 
+import projectPOJOs.Device;
 import projectPOJOs.Doctor;
 import projectPOJOs.Manufacturer;
+import projectPOJOs.Patient;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.List;
 
 import projectIfaces.ManufacturerManager;
 
@@ -33,6 +37,32 @@ public class JDBCManufacturerManager implements ManufacturerManager{
 			Integer phoneNumber = rs.getInt("phonenumber");
 			
 		    m = new Manufacturer (id, name, address, phoneNumber);
+		    
+		    rs.close();
+		    stmt.close();
+		    
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return m;
+	}
+	@Override
+	public Manufacturer getManufacturerById(Integer id) {
+		// TODO Auto-generated method stub
+		try {
+			
+			Statement stmt = manager.getConnection().createStatement();
+			String sql = "SELECT * FROM manufacturers WHERE id=" + id;
+		
+			ResultSet rs = stmt.executeQuery(sql);
+			
+			Integer m_id = rs.getInt("id"); 
+			String name = rs.getString("name");
+			String address = rs.getString("adrress");
+			Integer phonenumber = rs.getInt("phonenumber");
+
+		    m = new Manufacturer (m_id, name, address, phonenumber);
 		    
 		    rs.close();
 		    stmt.close();

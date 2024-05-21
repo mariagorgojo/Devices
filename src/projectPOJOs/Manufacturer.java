@@ -24,11 +24,16 @@ import projectXMLutils.SQLDateAdapter;
 public class Manufacturer implements Serializable{
 
 	private static final long serialVersionUID = -2756263737120347160L;
-	
+	@XmlTransient
 	private int id;
+	@XmlAttribute
 	private String name;
+	@XmlElement
 	private String address;
+	@XmlElement
 	private int phonenumber;
+	@XmlElement(name = "Device")
+	@XmlElementWrapper(name = "devices")
 	private List<Device> devices;
 	
 	public Manufacturer(String name, String address, int phonenumber) {
@@ -63,6 +68,9 @@ public class Manufacturer implements Serializable{
 	public void setName(String name) {
 		this.name = name;
 	}
+	public void setDevices(List<Device>devices){
+		this.devices = devices;
+	}
 	
 	public String getAddress() {
 		return address;
@@ -72,11 +80,11 @@ public class Manufacturer implements Serializable{
 		this.address = address;
 	}
 	
-	public int getphonenumber() {
+	public int getPhoneNumber() {
 		return phonenumber;
 	}
 	
-	public void setphonenumber(int phonenumber) {
+	public void setPhoneNumber(int phonenumber) {
 		this.phonenumber = phonenumber;
 	}
 
