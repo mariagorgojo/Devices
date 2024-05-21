@@ -34,10 +34,11 @@ public class XMLManagerlmpl implements XMLManager{
 		manager = new JDBCManager();
 		patientmanager = new JDBCPatientManager(manager);
 		devicemanager = new JDBCDeviceManager(manager);
+		
 		try {
 			//Do a sql query to get the patient by the id
 			p = patientmanager.getPatientById(id);
-			//search for the pets of the owner
+			//search for the devices of the patient
 			devices = devicemanager.getListOfDevices(id);
 			p.setDevices(devices);
 			
