@@ -5,6 +5,22 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import projectXMLutils.SQLDateAdapter;
+
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement (name = "Manufacturer")
+@XmlType(propOrder = {"name", "address","phonenumber", "Device"})
+
 public class Manufacturer implements Serializable{
 
 	private static final long serialVersionUID = -2756263737120347160L;
@@ -12,23 +28,23 @@ public class Manufacturer implements Serializable{
 	private int id;
 	private String name;
 	private String address;
-	private int phoneNumber;
+	private int phonenumber;
 	private List<Device> devices;
 	
-	public Manufacturer(String name, String address, int phoneNumber) {
+	public Manufacturer(String name, String address, int phonenumber) {
 		super();
 		this.name = name;
 		this.address = address;
-		this.phoneNumber = phoneNumber;
+		this.phonenumber = phonenumber;
 		devices = new ArrayList<>();
 	}
 	
-	public Manufacturer(int id, String name, String address, int phoneNumber) {
+	public Manufacturer(int id, String name, String address, int phonenumber) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.address = address;
-		this.phoneNumber = phoneNumber;
+		this.phonenumber = phonenumber;
 		devices = new ArrayList<>();
 	}
 	
@@ -56,12 +72,12 @@ public class Manufacturer implements Serializable{
 		this.address = address;
 	}
 	
-	public int getPhoneNumber() {
-		return phoneNumber;
+	public int getphonenumber() {
+		return phonenumber;
 	}
 	
-	public void setPhoneNumber(int phoneNumber) {
-		this.phoneNumber = phoneNumber;
+	public void setphonenumber(int phonenumber) {
+		this.phonenumber = phonenumber;
 	}
 
 	public List<Device> getDevices() {
@@ -70,7 +86,7 @@ public class Manufacturer implements Serializable{
 	
 	@Override
 	public int hashCode() {
-		return Objects.hash(address, id, name, phoneNumber);
+		return Objects.hash(address, id, name, phonenumber);
 	}
 
 	@Override
@@ -83,12 +99,12 @@ public class Manufacturer implements Serializable{
 			return false;
 		Manufacturer other = (Manufacturer) obj;
 		return Objects.equals(address, other.address) && id == other.id && Objects.equals(name, other.name)
-				&& phoneNumber == other.phoneNumber;
+				&& phonenumber == other.phonenumber;
 	}
 
 	@Override
 	public String toString() {
-		return "Manufacturer [id=" + id + ", name=" + name + ", address=" + address + ", phoneNumber=" + phoneNumber
+		return "Manufacturer [id=" + id + ", name=" + name + ", address=" + address + ", phonenumber=" + phonenumber
 				+ ", devices=" + devices + "]";
 	}
 
