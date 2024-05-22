@@ -54,7 +54,7 @@ public class JPAUserManager implements UserManager {
 	public void connect() {
 		// TODO Auto-generated method stub
 		
-		em = Persistence.createEntityManagerFactory("hospital-provider").createEntityManager();
+		em = Persistence.createEntityManagerFactory("devices-provider").createEntityManager();
 	
 		em.getTransaction().begin();
 		em.createNativeQuery("PRAGMA foreign_keys = ON").executeUpdate();

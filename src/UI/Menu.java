@@ -44,7 +44,7 @@ public class Menu {
 		manufacturermanager = new JDBCManufacturerManager(jdbcmanager);
 		appointmentmanager = new JDBCAppointmentManager(jdbcmanager);
 		devicemanager = new JDBCDeviceManager(jdbcmanager);
-		usermanager = new JPAUserManager();
+		//usermanager = new JPAUserManager();
 		
 		try {
 			int choice;
@@ -62,13 +62,13 @@ public class Menu {
 				switch(choice)
 				{
 				case 1: 
-					login();		
+					//login();		
 					break;
 				case 2:
-					signUpUser();
+					//signUpUser();
 					break;
 				case 3: 
-					updatePassword();
+					//updatePassword();
 					break;
 				case 0:
 					System.out.println("Exiting application.");
@@ -85,7 +85,7 @@ public class Menu {
 	}
 	
 	//completado
-	private static void updatePassword() throws Exception {
+/*	private static void updatePassword() throws Exception {
 		
 		System.out.println("Email: ");
 		String email = reader.readLine();
@@ -162,7 +162,7 @@ public class Menu {
 		}
 	}
 	
-	
+*/
 	//INSPECCIONAR SI ME SIRVEN
 	
 	/*private static void createPet() throws Exception{
