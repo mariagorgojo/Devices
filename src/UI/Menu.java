@@ -1,19 +1,8 @@
 package UI;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.security.MessageDigest;
-import java.sql.Date;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.List;
-
-import projectIfaces.AppointmentManager;
-import projectIfaces.DeviceManager;
-import projectIfaces.DoctorManager;
-import projectIfaces.ManufacturerManager;
-import projectIfaces.PatientManager;
 import projectIfaces.UserManager;
 import projectJPA.JPAUserManager;
 import projectPOJOs.Role;
@@ -44,7 +33,7 @@ public class Menu {
 		manufacturermanager = new JDBCManufacturerManager(jdbcmanager);
 		appointmentmanager = new JDBCAppointmentManager(jdbcmanager);
 		devicemanager = new JDBCDeviceManager(jdbcmanager);
-		//usermanager = new JPAUserManager();
+		usermanager = new JPAUserManager();
 		
 		try {
 			int choice;
@@ -62,13 +51,13 @@ public class Menu {
 				switch(choice)
 				{
 				case 1: 
-					//login();		
+					login();		
 					break;
 				case 2:
-					//signUpUser();
+					signUpUser();
 					break;
 				case 3: 
-					//updatePassword();
+					updatePassword();
 					break;
 				case 0:
 					System.out.println("Exiting application.");
@@ -85,7 +74,7 @@ public class Menu {
 	}
 	
 	//completado
-/*	private static void updatePassword() throws Exception {
+   	private static void updatePassword() throws Exception {
 		
 		System.out.println("Email: ");
 		String email = reader.readLine();
@@ -140,7 +129,7 @@ public class Menu {
 		try {
 			System.out.println("Introduce email: ");
 			String email = reader.readLine();
-			System.out.println("Introduce the password");
+			System.out.println("Introduce password: ");
 			String password = reader.readLine();
 			
 			// no entiendo
@@ -161,55 +150,5 @@ public class Menu {
 			e.printStackTrace();
 		}
 	}
-	
-*/
-	//INSPECCIONAR SI ME SIRVEN
-	
-	/*private static void createPet() throws Exception{
-		
-		System.out.println("Type the name of the pet");
-		String name = reader.readLine();
-		System.out.println("Type if it's cured or not");
-		Boolean cured = Boolean.valueOf(reader.readLine());
-		System.out.println("Type the type of animal(dog, cat, bird, hamster)");
-		String typeOfAnimal = reader.readLine();
-		System.out.println("Type the dob of the pet in formal yyyy/mm/dd");
-		String dob_str = reader.readLine();
-		DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
-		Date dob = (Date) df.parse(dob_str);
-		System.out.println("Type the coat of the pet");
-		String coat = reader.readLine();
-		System.out.println("Type the owner id of the pet");
-		Integer owner_id = Integer.parseInt(reader.readLine());
-		
-		Owner o = ownermanager.searchOwnerById(owner_id);
-		
-		Pet p = new Pet(coat,  name,cured, typeOfAnimal, dob, o);
-		petmanager.addPet(p);
-		
-	}*/
-	
-	/*private static void getAllowners() throws Exception{
-		
-		List<Owner> owners = null;
-		
-		owners = ownermanager.getListOfOwners();
-		
-		System.out.println(owners);
-		
-	}*/
-	
-	/*private static void printOwnersPets() throws Exception{
-		
-		List<Pet> pets = null;
-		
-		System.out.println("Type the id of the owner");
-		Integer o_id = Integer.parseInt(reader.readLine());
-		
-		pets = petmanager.getPetsOfanOwner(o_id);
-		
-		System.out.println(pets);
-		
-	}*/
 	
 }

@@ -1,6 +1,7 @@
 package projectJPA;
 
 import java.security.MessageDigest;
+import java.sql.PreparedStatement;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -62,10 +63,12 @@ public class JPAUserManager implements UserManager {
 		
 		if(this.getRoles().isEmpty())
 		{
-			Role patient = new Role("patient");
 			Role doctor = new Role("doctor");
-			this.newRole(patient);
+			Role patient = new Role("patient");
+			Role manufacturer = new Role("manufacturer");
 			this.newRole(doctor);
+			this.newRole(patient);
+			this.newRole(manufacturer);
 		}
 		
 	}
@@ -120,12 +123,26 @@ public class JPAUserManager implements UserManager {
 		return u;
 	}
 
-	@Override
+	/*@Override
 	public void changePassword(User u, String new_passwd) {
 		// TODO Auto-generated method stub
+		try{
+			//u.setPassword(new_passwd);
+			Integer user_id = u.getId();
+			String sql = "UPDATE users SET password=? WHERE id=?";
+			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
+			prep.setString(1, new_passwd);	
+			prep.setInt(2, user_id);
+			prep.executeUpdate();
+			System.out.println("Update finished.");
+			prep.close();
+			System.out.println("Database connection closed.");
+		}catch(Exception e) {
+			e.printStackTrace();
+			
+		}
 		
-		
-	}
+	}*/
 
 	
 

@@ -47,8 +47,6 @@ public class JDBCManager {
 					+ "device TEXT"
 					+ "birthdate TEXT,"
 					+ "diagnosis TEXT,"
-					+ "doctor_id INTEGER,"
-					+ "FOREIGN KEY(doctor_id) REFERENCES doctors (doctor_id) "
 					+ ")";
 			stmt.executeUpdate(sql);
 			
