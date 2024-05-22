@@ -12,7 +12,7 @@ public class JDBCManager {
 	public JDBCManager() {
 		try {
 			Class.forName("org.sqlite.JDBC");
-			c = DriverManager.getConnection("jdbc:sqlite:./db/Project.db");
+			c = DriverManager.getConnection("jdbc:sqlite:./db/DataBase.db");
 			c.createStatement().execute("PRAGMA foreign_keys=ON");
 			
 			System.out.print("Database Connection opened.");
@@ -68,9 +68,8 @@ public class JDBCManager {
 					+ "appointment_id INTEGER PRIMARY KEY AUTOINCREMENT,"
 					+ "date TEXT,"
 					+ "description TEXT,"
-					+ "manufacturer_id	INTEGER,"
 					+ "patient_id	INTEGER,"
-					+ "FOREIGN KEY(doctor_id) REFERENCES doctors(doctor_id),"
+					+ "doctor_id REFERENCES doctors(doctor_id),"
 					+ "FOREIGN KEY(patient_id) REFERENCES patients(patient_id) "
 					+ ")";
 			stmt.executeUpdate(sql);
@@ -87,7 +86,7 @@ public class JDBCManager {
 					+ "doctor_id	INTEGER,"
 					+ "device_id	INTEGER,"
 					+ "FOREIGN KEY(doctor_id) REFERENCES doctors,"
-					+ "FOREIGN KEY(device_id) REFERENCES device,"
+					+ "FOREIGN KEY(device_id) REFERENCES devices,"
 					+ "PRIMARY KEY(doctor_id,device_id)"
 					+ ")";
 			stmt.executeUpdate(sql);
@@ -95,8 +94,8 @@ public class JDBCManager {
 			sql = "CREATE TABLE devices_patient ("
 					+ "patient_id	INTEGER,"
 					+ "device_id	INTEGER,"
-					+ "FOREIGN KEY(doctor_id) REFERENCES doctors,"
-					+ "FOREIGN KEY(device_id) REFERENCES device,"
+					+ "FOREIGN KEY(patient_id) REFERENCES patients,"
+					+ "FOREIGN KEY(device_id) REFERENCES devices,"
 					+ "PRIMARY KEY(patient_id,device_id)"
 					+ ")";
 			stmt.executeUpdate(sql);
