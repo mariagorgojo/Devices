@@ -8,5 +8,5 @@ public interface XMLManager {
 	public void patient2xml(Integer id);
 	public Patient xml2Patient(File xml);
 	public void manufacturer2xml(Integer id);
-	public Manufacturer manufacturer2xml(File xml);
+	public Manufacturer xml2Manufacturer(File xml);
 }
