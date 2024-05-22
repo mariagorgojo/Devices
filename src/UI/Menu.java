@@ -44,7 +44,7 @@ public class Menu {
 				System.out.println("1. Login User");
 				System.out.println("2. Sign-up new user");
 				System.out.println("3. Udpate the password of an exissting user");
-				System.out.println("0. Exit.");
+				System.out.println("0. Exit");
 								
 				choice = Integer.parseInt(reader.readLine());
 								
@@ -57,7 +57,7 @@ public class Menu {
 					signUpUser();
 					break;
 				case 3: 
-					updatePassword();
+					//updatePassword();
 					break;
 				case 0:
 					System.out.println("Exiting application.");
@@ -74,7 +74,7 @@ public class Menu {
 	}
 	
 	//completado
-   	private static void updatePassword() throws Exception {
+   	/*private static void updatePassword() throws Exception {
 		
 		System.out.println("Email: ");
 		String email = reader.readLine();
@@ -91,7 +91,7 @@ public class Menu {
 			usermanager.changePassword(u, new_passwd);
 		}
 				
-	}
+	}*/
 
 	//completado
 	private static void login() throws Exception {
@@ -138,7 +138,7 @@ public class Menu {
 			byte[] pass = md.digest();
 			//
 			
-			System.out.println("Introduce the role of the user. 1: doctor, 2: patient, 3: manufacturer");
+			System.out.println("Introduce the role of the user. 51: doctor, 52: patient, 53: manufacturer");
 			Integer rol = Integer.parseInt(reader.readLine());
 			Role r = usermanager.getRole(rol);
 			

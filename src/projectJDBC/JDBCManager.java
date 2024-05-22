@@ -46,7 +46,7 @@ public class JDBCManager {
 					+ "surname TEXT,"
 					+ "device TEXT"
 					+ "birthdate TEXT,"
-					+ "diagnosis TEXT,"
+					+ "diagnosis TEXT"
 					+ ")";
 			stmt.executeUpdate(sql);
 			
