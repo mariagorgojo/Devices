@@ -70,7 +70,7 @@ public class JDBCDeviceManager implements DeviceManager{
 			
 		try {
 			Statement stmt = manager.getConnection().createStatement();
-			String sql = "SELECT * FROM (devices_patient AS dp JOIN devices AS d ON dp.device_id=d.device_id) WHERE patient_id=" +patient_id;
+			String sql = "SELECT * FROM devices_patient AS dp JOIN devices AS d ON dp.device_id=d.device_id WHERE patient_id=" +patient_id;
 			ResultSet rs = stmt.executeQuery(sql);
 				
 			while(rs.next()){
