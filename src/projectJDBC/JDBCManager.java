@@ -66,8 +66,9 @@ public class JDBCManager {
 					+ "appointment_id INTEGER PRIMARY KEY AUTOINCREMENT,"
 					+ "date TEXT,"
 					+ "description TEXT,"
-					+ "patient_id	INTEGER,"
-					+ "doctor_id REFERENCES doctors(doctor_id),"
+					+ "doctor_id INTEGER,"
+					+ "patient_id INTEGER,"
+					+ "FOREIGN KEY (doctor_id) REFERENCES doctors(doctor_id),"
 					+ "FOREIGN KEY(patient_id) REFERENCES patients(patient_id) "
 					+ ")";
 			stmt.executeUpdate(sql);
@@ -81,19 +82,19 @@ public class JDBCManager {
 			stmt.executeUpdate(sql);
 			
 			sql = "CREATE TABLE orders ("
-					+ "doctor_id	INTEGER,"
-					+ "device_id	INTEGER,"
-					+ "FOREIGN KEY(doctor_id) REFERENCES doctors,"
-					+ "FOREIGN KEY(device_id) REFERENCES devices,"
+					+ "doctor_id	INTEGER AUTOINCREMENT,"
+					+ "device_id	INTEGER AUTOINCREMENT,"
+					+ "FOREIGN KEY(doctor_id) REFERENCES doctors(doctor_id),"
+					+ "FOREIGN KEY(device_id) REFERENCES devices(device_id),"
 					+ "PRIMARY KEY(doctor_id,device_id)"
 					+ ")";
 			stmt.executeUpdate(sql);
 			
 			sql = "CREATE TABLE devices_patient ("
-					+ "patient_id	INTEGER,"
-					+ "device_id	INTEGER,"
-					+ "FOREIGN KEY(patient_id) REFERENCES patients,"
-					+ "FOREIGN KEY(device_id) REFERENCES devices,"
+					+ "patient_id	INTEGER AUTOINCREMENT,"
+					+ "device_id	INTEGER AUTOINCREMENT,"
+					+ "FOREIGN KEY(patient_id) REFERENCES patients(patient_id),"
+					+ "FOREIGN KEY(device_id) REFERENCES devices(device_id),"
 					+ "PRIMARY KEY(patient_id,device_id)"
 					+ ")";
 			stmt.executeUpdate(sql);
