@@ -23,6 +23,7 @@ public class Menu {
 	private static JDBCAppointmentManager appointmentmanager;
 	private static JDBCDeviceManager devicemanager;
 	private static UserManager usermanager;
+	private static User u;
 	private static BufferedReader reader = new BufferedReader (new InputStreamReader(System.in));
 	
 	public static void main(String[] args) {
@@ -57,7 +58,7 @@ public class Menu {
 					signUpUser();
 					break;
 				case 3: 
-					//updatePassword();
+					updatePassword();
 					break;
 				case 0:
 					System.out.println("Exiting application.");
@@ -74,7 +75,7 @@ public class Menu {
 	}
 	
 	//completado
-   	/*private static void updatePassword() throws Exception {
+   	private static void updatePassword() throws Exception {
 		
 		System.out.println("Email: ");
 		String email = reader.readLine();
@@ -85,13 +86,13 @@ public class Menu {
 		System.out.println("Enter new Password: ");
 		String new_passwd = reader.readLine();
 				
-		User u = usermanager.checkPassword(email, passwd);
+		u = usermanager.checkPassword(email, passwd);
 				
 		if(u!=null){ //if user already existed
-			usermanager.changePassword(u, new_passwd);
+			u = usermanager.changePassword(u, new_passwd);
 		}
 				
-	}*/
+	}
 
 	//completado
 	private static void login() throws Exception {

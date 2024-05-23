@@ -123,27 +123,26 @@ public class JPAUserManager implements UserManager {
 		return u;
 	}
 
-	/*@Override
-	public void changePassword(User u, String new_passwd) {
+	@Override
+	public User changePassword(User u, String new_passwd) {
 		// TODO Auto-generated method stub
 		try{
 			//u.setPassword(new_passwd);
-			Integer user_id = u.getId();
-			String sql = "UPDATE users SET password=? WHERE id=?";
-			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
-			prep.setString(1, new_passwd);	
-			prep.setInt(2, user_id);
-			prep.executeUpdate();
-			System.out.println("Update finished.");
-			prep.close();
-			System.out.println("Database connection closed.");
+			Query q = em.createNativeQuery("SELECT * FROM users WHERE email=? AND password=?", User.class);
+			q.setParameter(1, u.getEmail());
+			q.setParameter(2, u.getPassword());
+			u = (User) q.getSingleResult();
+			
+			em.getTransaction().begin();
+			u.setPassword(new_passwd.getBytes());
+			em.getTransaction().commit();
+						
 		}catch(Exception e) {
 			e.printStackTrace();
-			
 		}
 		
-	}*/
+		return u;
+	}
 
-	
 
 }
