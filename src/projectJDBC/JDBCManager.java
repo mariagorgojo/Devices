@@ -2,6 +2,7 @@ package projectJDBC;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -17,7 +18,7 @@ public class JDBCManager {
 			
 			System.out.print("Database Connection opened.");
 			this.createTables();
-			this.createDevices();
+			//this.createDevices();
 			
 		}
 		catch(SQLException e) {
@@ -28,13 +29,22 @@ public class JDBCManager {
 		}
 	}
 	
-	private void createDevices() {
+	/*private void createDevices() {
 		try {
+			
+			Statement stmt = c.createStatement();
+			
+			String sql = "INSERT INTO devices (type, expiration_date)"
+					+ "VALUES (?,?)";
+			
+			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
+			prep.setString(1, d.getEmail());
+			prep.setDate(2, d.getName());
 			
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}
-	}
+	}*/
 	
 	private void createTables() {
 		try {
