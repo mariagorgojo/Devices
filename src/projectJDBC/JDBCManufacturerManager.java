@@ -35,7 +35,7 @@ public class JDBCManufacturerManager implements ManufacturerManager{
 			String address = rs.getString("address");
 			Integer phoneNumber = rs.getInt("phonenumber");
 			
-		    m = new Manufacturer (id, name, address, phoneNumber);
+		    m = new Manufacturer (id, email, name, address, phoneNumber);
 		    
 		    rs.close();
 		    stmt.close();
@@ -57,11 +57,12 @@ public class JDBCManufacturerManager implements ManufacturerManager{
 			ResultSet rs = stmt.executeQuery(sql);
 			
 			Integer m_id = rs.getInt("id"); 
+			String email = rs.getString("email");
 			String name = rs.getString("name");
 			String address = rs.getString("adrress");
 			Integer phonenumber = rs.getInt("phonenumber");
 
-		    m = new Manufacturer (m_id, name, address, phonenumber);
+		    m = new Manufacturer (m_id, email, name, address, phonenumber);
 		    
 		    rs.close();
 		    stmt.close();
