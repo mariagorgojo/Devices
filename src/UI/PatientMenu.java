@@ -142,7 +142,7 @@ public class PatientMenu {
 					editDiagnosis(pmanager, id);
 					break;
 				case 0:
-					System.out.println("Back to doctor menu");
+					System.out.println("Back to patient menu");
 					break;
 				}
 				
@@ -184,16 +184,5 @@ public class PatientMenu {
 		pmanager.editDiagnosis(p, diagnosis);
 				
 	}
-    
-    /*private static void editEmail(JDBCPatientManager pmanager, Integer id)throws Exception  {
-		// TODO Auto-generated method stub
-				
-		p = pmanager.getPatientById(id);
-		System.out.println("Enter new email: ");
-		String email = reader.readLine();
-		pmanager.editEmail(p, email);
-				
-	}*/
-  
 
 }

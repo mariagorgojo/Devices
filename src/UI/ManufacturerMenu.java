@@ -86,7 +86,7 @@ public class ManufacturerMenu {
 					editPhoneNumber(mmanager, email);
 					break;
 				case 0:
-					System.out.println("Back to doctor menu");
+					System.out.println("Back to manufacturer menu");
 					break;
 				}
 				
