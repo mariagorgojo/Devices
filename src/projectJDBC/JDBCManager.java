@@ -17,6 +17,7 @@ public class JDBCManager {
 			
 			System.out.print("Database Connection opened.");
 			this.createTables();
+			this.createDevices();
 			
 		}
 		catch(SQLException e) {
@@ -24,6 +25,14 @@ public class JDBCManager {
 		}
 		catch(ClassNotFoundException e) {
 			System.out.print("Libraries not loaded");
+		}
+	}
+	
+	private void createDevices() {
+		try {
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
 		}
 	}
 	
