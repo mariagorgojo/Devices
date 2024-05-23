@@ -26,6 +26,8 @@ public class Manufacturer implements Serializable{
 	private static final long serialVersionUID = -2756263737120347160L;
 	@XmlTransient
 	private int id;
+	@XmlElement
+	private String email;
 	@XmlAttribute
 	private String name;
 	@XmlElement
@@ -36,17 +38,19 @@ public class Manufacturer implements Serializable{
 	@XmlElementWrapper(name = "devices")
 	private List<Device> devices;
 	
-	public Manufacturer(String name, String address, int phonenumber) {
+	public Manufacturer(String email, String name, String address, int phonenumber) {
 		super();
+		this.email = email;
 		this.name = name;
 		this.address = address;
 		this.phonenumber = phonenumber;
 		devices = new ArrayList<>();
 	}
 	
-	public Manufacturer(int id, String name, String address, int phonenumber) {
+	public Manufacturer(int id, String email, String name, String address, int phonenumber) {
 		super();
 		this.id = id;
+		this.email = email;
 		this.name = name;
 		this.address = address;
 		this.phonenumber = phonenumber;
@@ -61,6 +65,14 @@ public class Manufacturer implements Serializable{
 		this.id = id;
 	}
 	
+	public String getEmail() {
+		return email;
+	}
+	
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	public String getName() {
 		return name;
 	}
