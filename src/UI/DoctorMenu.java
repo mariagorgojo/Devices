@@ -226,8 +226,15 @@ public class DoctorMenu {
 	}
 
 	private static void printPatient(JDBCPatientManager pmanager) throws Exception {
+		patients = pmanager.getListOfPatients();
+		System.out.println("Patients available: ");
+		for(Patient p : patients) {
+			System.out.println(p.toString());
+		}
+		
 		System.out.println("Enter patient's id: ");
 		int id = Integer.parseInt(reader.readLine());
+		
 		p = pmanager.getPatientById(id);
 		System.out.println(p.toString());
 	}
@@ -237,6 +244,12 @@ public class DoctorMenu {
 		// TODO Auto-generated method stub
 		
 		//type of device
+		System.out.println("Devices available: ");
+		devices = devicemanager.getDevices();
+		for(Device d : devices) {
+			System.out.println(d.toString());
+		}
+		
 		System.out.println("Enter type: ");
 		String type = reader.readLine();
 		
@@ -245,6 +258,7 @@ public class DoctorMenu {
 		devicemanager.orderDevice(d, device);
 	}
 
+	//REVISAR, imprimir la lista de los appointments, comprobar que el doctor_id coincida para que no pueda cancelar un appointment que no sea suyo
 	//case 4
 	private static void cancelAppointment(JDBCAppointmentManager amanager)throws Exception {
 		// TODO Auto-generated method stub

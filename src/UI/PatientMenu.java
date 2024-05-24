@@ -116,6 +116,7 @@ public class PatientMenu {
 		amanager.addAppointment(a);
 	}
 	
+	//REVISAR, imprimir la lista de los appointments, comprobar que el patient_id coincida para que no pueda cancelar un appointment que no sea suyo
 	//case 3
 	private static void cancelAppointment(JDBCAppointmentManager amanager)throws Exception {
 		// TODO Auto-generated method stub
