@@ -1,10 +1,11 @@
 package projectJDBC;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 
 public class JDBCManager {
 	
@@ -18,7 +19,7 @@ public class JDBCManager {
 			
 			System.out.print("Database Connection opened.");
 			this.createTables();
-			//this.createDevices();
+			this.createDevices();
 			
 		}
 		catch(SQLException e) {
@@ -29,22 +30,38 @@ public class JDBCManager {
 		}
 	}
 	
-	/*private void createDevices() {
+	private void createDevices() {
 		try {
 			
 			Statement stmt = c.createStatement();
 			
-			String sql = "INSERT INTO devices (type, expiration_date)"
-					+ "VALUES (?,?)";
+			LocalDate date = LocalDate.of(2030, 01, 01);
+			Date expiration_date = Date.valueOf(date);
 			
-			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
-			prep.setString(1, d.getEmail());
-			prep.setDate(2, d.getName());
+			String sql = "INSERT INTO devices (type, expiration_date)"
+					+ "VALUES (" +"pacemaker"+ ", " +expiration_date+ ")";
+			stmt.executeUpdate(sql);
+			
+			sql = "INSERT INTO devices (type, expiration_date)"
+					+ "VALUES (" +"prosthetic limb"+ ", " +expiration_date+ ")";
+			stmt.executeUpdate(sql);
+			
+			sql = "INSERT INTO devices (type, expiration_date)"
+					+ "VALUES (" +"insulin pump"+ ", " +expiration_date+ ")";
+			stmt.executeUpdate(sql);
+			
+			sql = "INSERT INTO devices (type, expiration_date)"
+					+ "VALUES (" +"coclear implant"+ ", " +expiration_date+ ")";
+			stmt.executeUpdate(sql);
+			
+			sql = "INSERT INTO devices (type, expiration_date)"
+					+ "VALUES (" +"bionic eye"+ ", " +expiration_date+ ")";
+			stmt.executeUpdate(sql);
 			
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}
-	}*/
+	}
 	
 	private void createTables() {
 		try {

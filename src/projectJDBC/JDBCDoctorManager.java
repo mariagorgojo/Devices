@@ -7,9 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import projectIfaces.DoctorManager;
-import projectPOJOs.Device;
 import projectPOJOs.Doctor;
-import projectPOJOs.Patient;
 
 
 public class JDBCDoctorManager implements DoctorManager {

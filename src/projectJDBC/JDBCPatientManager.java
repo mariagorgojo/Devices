@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import projectIfaces.PatientManager;
-import projectPOJOs.Device;
 import projectPOJOs.Patient;
 
 public class JDBCPatientManager implements PatientManager{
@@ -229,23 +228,5 @@ public class JDBCPatientManager implements PatientManager{
 			e.printStackTrace();
 		}
 	}
-	
-	// se queda en stand by no sabemos si lo vamos a necesitar
-	/*public void editEmail(Patient p,String email) {
-		p.setEmail(email);
-		try{
-			p.setEmail(email);
-			String sql = "UPDATE patients SET email=? WHERE id=?";
-			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
-			prep.setString(1, email);	
-			prep.setInt(2, p.getId());
-			prep.executeUpdate();
-			System.out.println("Update finished.");
-			prep.close();
-			System.out.println("Database connection closed.");
-		}catch(Exception e) {
-				e.printStackTrace();
-		}
-	}*/
 	
 }

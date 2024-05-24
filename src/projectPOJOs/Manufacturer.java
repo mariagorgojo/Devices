@@ -19,7 +19,7 @@ import projectXMLutils.SQLDateAdapter;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement (name = "Manufacturer")
-@XmlType(propOrder = {"name", "address","phonenumber", "Device"})
+@XmlType(propOrder = {"email", "name", "address","phonenumber", "Device"})
 
 public class Manufacturer implements Serializable{
 
@@ -103,10 +103,10 @@ public class Manufacturer implements Serializable{
 	public List<Device> getDevices() {
 		return devices;
 	}
-	
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(address, id, name, phonenumber);
+		return Objects.hash(address, devices, email, id, name, phonenumber);
 	}
 
 	@Override
@@ -118,14 +118,15 @@ public class Manufacturer implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Manufacturer other = (Manufacturer) obj;
-		return Objects.equals(address, other.address) && id == other.id && Objects.equals(name, other.name)
+		return Objects.equals(address, other.address) && Objects.equals(devices, other.devices)
+				&& Objects.equals(email, other.email) && id == other.id && Objects.equals(name, other.name)
 				&& phonenumber == other.phonenumber;
 	}
 
 	@Override
 	public String toString() {
-		return "Manufacturer [id=" + id + ", name=" + name + ", address=" + address + ", phonenumber=" + phonenumber
-				+ ", devices=" + devices + "]";
+		return "Manufacturer [id=" + id + ", email=" + email + ", name=" + name + ", address=" + address
+				+ ", phonenumber=" + phonenumber + ", devices=" + devices + "]";
 	}
 
 }
