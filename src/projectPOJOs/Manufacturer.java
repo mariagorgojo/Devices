@@ -38,6 +38,10 @@ public class Manufacturer implements Serializable{
 	@XmlElementWrapper(name = "devices")
 	private List<Device> devices;
 	
+	public Manufacturer() {
+		super();
+	}
+	
 	public Manufacturer(String email, String name, String address, int phonenumber) {
 		super();
 		this.email = email;

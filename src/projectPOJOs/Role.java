@@ -29,14 +29,10 @@ public class Role implements Serializable{
 		super();
 	}
 	
-
-
 	public Role(String name) {
 		super();
 		this.name = name;
 	}
-
-
 
 	public Integer getId() {
 		return id;

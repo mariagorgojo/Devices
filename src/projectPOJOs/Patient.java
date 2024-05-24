@@ -40,7 +40,12 @@ public class Patient implements Serializable{
 	private List<Device> devices = new ArrayList<Device>();
 	@XmlElement (name = "Appointment")
 	@XmlElementWrapper(name = "Appointments")
-	private List<Appointment> appointments = new ArrayList<Appointment>();
+	private List<Appointment> appointments;
+	
+	public Patient() {
+		super();
+		appointments = new ArrayList<Appointment>();
+	}
 	
 	public Patient(String email, String name, String surname, Date birthday, String diagnosis) {
 		super();
@@ -49,6 +54,7 @@ public class Patient implements Serializable{
 		this.surname = surname;
 		this.birthday = birthday;
 		this.diagnosis = diagnosis;
+		appointments = new ArrayList<Appointment>();
 	}
 
 	public Patient(int id, String email, String name, String surname, Date birthday, String diagnosis) {
@@ -59,6 +65,7 @@ public class Patient implements Serializable{
 		this.surname = surname;
 		this.birthday = birthday;
 		this.diagnosis = diagnosis;
+		appointments = new ArrayList<Appointment>();
 	}
 	
 	public int getId() {

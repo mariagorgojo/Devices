@@ -19,7 +19,11 @@ public class Device implements Serializable{
 	
 	private int id;
 	private String type;
-	private Date expirationDate;	
+	private Date expirationDate;
+	
+	public Device() {
+		super();
+	}
 
 	public Device(int id, String type, Date expirationDate) {
 		super();

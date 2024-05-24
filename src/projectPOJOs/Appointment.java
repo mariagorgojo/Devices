@@ -22,6 +22,10 @@ public class Appointment implements Serializable {
 	private Doctor d;
 	private Patient p;
 	
+	public Appointment() {
+		super();
+	}
+	
 	public Appointment(Date date, String description, Doctor d, Patient p) {
 		super();
 		this.date = date;
