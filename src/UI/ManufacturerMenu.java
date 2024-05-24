@@ -6,23 +6,19 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
+import projectIfaces.XMLManager;
 import projectJDBC.JDBCManufacturerManager;
 import projectJDBC.JDBCDoctorManager;
 import projectPOJOs.Device;
-import projectPOJOs.Doctor;
 import projectPOJOs.Manufacturer;
-import projectPOJOs.Patient;
 
 public class ManufacturerMenu {
 	
-	private static Doctor d;
-	private static Patient p;
-	private static Device device;
 	private static Manufacturer m;
 	private static List <Device> devicesNeeded = new ArrayList<Device>();
 	private static BufferedReader reader = new BufferedReader (new InputStreamReader(System.in));
 
-	public static void menu(JDBCDoctorManager dmanager, JDBCManufacturerManager mmanager, String email) {
+	public static void menu(JDBCDoctorManager dmanager, JDBCManufacturerManager mmanager, String email, XMLManager xmlmanager) {
 		// TODO Auto-generated method stub
 		try {
 			int choice;
@@ -30,6 +26,7 @@ public class ManufacturerMenu {
 				System.out.println("Choose an option");
 				System.out.println("1. Edit personal information");
 				System.out.println("2. View devices needed");
+				System.out.println("3. Print me to xml");
 				System.out.println("0. Return");
 				
 				choice = Integer.parseInt(reader.readLine());
@@ -40,6 +37,9 @@ public class ManufacturerMenu {
 					break;
 				case 2:
 					viewDevices(mmanager);
+					break;
+				case 3:
+					printMe(xmlmanager, mmanager, email);
 					break;
 				case 0:
 					System.out.println("Back to main menu");
@@ -54,6 +54,13 @@ public class ManufacturerMenu {
 		}
 	}
 
+	//case 3
+	private static void printMe(XMLManager xmlmanager, JDBCManufacturerManager manufacturermanager, String email) {
+		m = manufacturermanager.getManufacturerbyEmail(email);
+		xmlmanager.patient2xml(m.getId());
+	}
+	
+	//case 2
 	private static void viewDevices(JDBCManufacturerManager mmanager) {
 		// TODO Auto-generated method stub
 		devicesNeeded = mmanager.getDeviceOrder();
@@ -62,6 +69,7 @@ public class ManufacturerMenu {
 		}
 	}
 
+	//case 1
 	private static void editInformation(JDBCManufacturerManager mmanager, String email) {
 		// TODO Auto-generated method stub
 		try {

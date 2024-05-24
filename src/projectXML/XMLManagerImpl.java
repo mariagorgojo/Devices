@@ -20,7 +20,7 @@ import projectPOJOs.Manufacturer;
 import projectJDBC.JDBCPatientManager;
 import projectJDBC.JDBCDeviceManager;
 
-public class XMLManagerlmpl implements XMLManager{
+public class XMLManagerImpl implements XMLManager{
 
 	private JDBCManager manager;
 	private PatientManager patientmanager;

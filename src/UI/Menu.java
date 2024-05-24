@@ -3,10 +3,13 @@ package UI;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.security.MessageDigest;
+
+import projectIfaces.XMLManager;
 import projectIfaces.UserManager;
 import projectJPA.JPAUserManager;
 import projectPOJOs.Role;
 import projectPOJOs.User;
+import projectXML.XMLManagerImpl;
 import projectJDBC.JDBCAppointmentManager;
 import projectJDBC.JDBCDeviceManager;
 import projectJDBC.JDBCDoctorManager;
@@ -24,6 +27,7 @@ public class Menu {
 	private static JDBCDeviceManager devicemanager;
 	private static UserManager usermanager;
 	private static User u;
+	private static XMLManager xmlmanager;
 	private static BufferedReader reader = new BufferedReader (new InputStreamReader(System.in));
 	
 	public static void main(String[] args) {
@@ -35,6 +39,7 @@ public class Menu {
 		appointmentmanager = new JDBCAppointmentManager(jdbcmanager);
 		devicemanager = new JDBCDeviceManager(jdbcmanager);
 		usermanager = new JPAUserManager();
+		xmlmanager = new XMLManagerImpl();
 		
 		try {
 			int choice;
@@ -115,11 +120,11 @@ public class Menu {
 				
 			}else if(u.getRole().getName().equals("patient")) { //user is a patient, we open patient menu
 				System.out.println("Login of patient successful!");
-				PatientMenu.menu(patientmanager, doctormanager, appointmentmanager, devicemanager, email);
+				PatientMenu.menu(patientmanager, doctormanager, appointmentmanager, devicemanager, email, xmlmanager);
 				
 			}else { //user is a manufacturer, we open manufacturer menu
 				System.out.println("Login of manufacturer successful!");
-				ManufacturerMenu.menu(doctormanager, manufacturermanager, email);
+				ManufacturerMenu.menu(doctormanager, manufacturermanager, email, xmlmanager);
 			}
 		
 	}

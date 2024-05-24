@@ -79,6 +79,7 @@ public class DoctorMenu {
 		}
 	}
 
+	//case 6
 	private static void assignDevice(JDBCDeviceManager devicemanager, JDBCPatientManager patientmanager, String email) throws IOException {
 		// TODO Auto-generated method stub
 
@@ -105,10 +106,10 @@ public class DoctorMenu {
 		devicemanager.assignDeviceToPatient(device, p);
 	}
 
-	//REVISAR
+	//case 2
 	private static void createPatient(JDBCDoctorManager doctormanager,JDBCPatientManager patientmanager) throws Exception {
 		// TODO Auto-generated method stub
-		// llamará al método addPatient para añadirlo a la lista de pacientes de este Doctor
+
 		System.out.println("Enter the email of the patient");
 		String email = reader.readLine();
 		System.out.println("Enter the name of the patient");
@@ -130,7 +131,7 @@ public class DoctorMenu {
 		
 	}
 
-	//ok
+	//case 1
 	private static void editInformation(JDBCDoctorManager dmanager, String email) {
 		
 		try {
@@ -198,7 +199,7 @@ public class DoctorMenu {
 		
 	}
 
-	//ok
+	//case 7
 	private static void viewInformationPatient(JDBCPatientManager pmanager) {
 		// TODO Auto-generated method stub
 		try {
@@ -224,7 +225,6 @@ public class DoctorMenu {
 		}
 	}
 
-	//ok
 	private static void printPatient(JDBCPatientManager pmanager) throws Exception {
 		System.out.println("Enter patient's id: ");
 		int id = Integer.parseInt(reader.readLine());
@@ -232,7 +232,7 @@ public class DoctorMenu {
 		System.out.println(p.toString());
 	}
 	
-	//ok
+	//case 5
 	private static void orderDevice(JDBCDeviceManager devicemanager, JDBCDoctorManager dmanager, String email) throws Exception {
 		// TODO Auto-generated method stub
 		
@@ -245,7 +245,7 @@ public class DoctorMenu {
 		devicemanager.orderDevice(d, device);
 	}
 
-	//ok
+	//case 4
 	private static void cancelAppointment(JDBCAppointmentManager amanager)throws Exception {
 		// TODO Auto-generated method stub
 
@@ -255,7 +255,7 @@ public class DoctorMenu {
 		
 	}
 
-	//ok
+	//case 3
 	private static void scheduleAppointment(JDBCDoctorManager doctormanager, JDBCPatientManager patientmanager, JDBCAppointmentManager amanager, String email) throws Exception{
 		// TODO Auto-generated method stub
 
