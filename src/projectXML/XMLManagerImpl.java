@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
 
 
 import projectIfaces.DeviceManager;
@@ -59,7 +60,16 @@ public class XMLManagerImpl implements XMLManager{
 	@Override
 	public Patient xml2Patient(File xml) {
 		// TODO Auto-generated method stub
-		return null;
+		Patient p = null;
+		try {
+			JAXBContext jaxbC = JAXBContext.newInstance(Patient.class);
+			Unmarshaller jaxbU = jaxbC.createUnmarshaller();
+			p = (Patient) jaxbU.unmarshal(xml);
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}		
+		return p;
 	}
 	
 	@Override
@@ -94,7 +104,17 @@ public class XMLManagerImpl implements XMLManager{
 	@Override
 	public Manufacturer xml2Manufacturer(File xml) {
 		// TODO Auto-generated method stub
-		return null;
+		Manufacturer m = null;
+		try {
+			JAXBContext jaxbC = JAXBContext.newInstance(Manufacturer.class);
+			Unmarshaller jaxbU = jaxbC.createUnmarshaller();
+			m = (Manufacturer) jaxbU.unmarshal(xml);			
+						
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+				
+		return m;
 	}
 	
 }
