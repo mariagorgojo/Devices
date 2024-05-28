@@ -143,6 +143,27 @@ public class JPAUserManager implements UserManager {
 		
 		return u;
 	}
+	
+	@Override
+	public void deleteUserByEmail(String email) {
+		try {
+			em.getTransaction().begin();
+			
+			Query q = em.createNativeQuery("Select * FROM users WHERE email=" +email, User.class);
+			User user = (User) q.getSingleResult();
+
+			em.remove(user);
+			em.getTransaction().commit();
+
+			System.out.println("User deleted successfully");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+
+			System.out.println("User failed to be deleted");
+
+		}	
+	}
 
 
 }
