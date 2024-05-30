@@ -1,6 +1,7 @@
 package UI;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.security.MessageDigest;
 
@@ -50,6 +51,7 @@ public class Menu {
 				System.out.println("1. Login User");
 				System.out.println("2. Sign-up new user");
 				System.out.println("3. Udpate the password of an exissting user");
+				System.out.println("4. Delete user");
 				System.out.println("0. Exit");
 								
 				choice = Integer.parseInt(reader.readLine());
@@ -65,6 +67,10 @@ public class Menu {
 				case 3: 
 					updatePassword();
 					break;
+				case 4:
+					deleteUser();
+					
+					
 				case 0:
 					System.out.println("Exiting application.");
 					jdbcmanager.disconnect();
@@ -155,6 +161,12 @@ public class Menu {
 		}catch(Exception e){
 			e.printStackTrace();
 		}
+	}
+	private static void deleteUser() throws IOException {
+		System.out.println("introduce email of the user you want to delete:");
+		String email=reader.readLine();
+		usermanager.deleteUserByEmail(email);
+
 	}
 	
 }
