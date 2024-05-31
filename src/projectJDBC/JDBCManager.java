@@ -39,23 +39,23 @@ public class JDBCManager {
 			Date expiration_date = Date.valueOf(date);
 			
 			String sql = "INSERT INTO devices (type, expiration_date)"
-					+ "VALUES (" +"pacemaker"+ ", " +expiration_date+ ")";
+					+ "VALUES ( 'pacemaker'," +expiration_date+ ")";
 			stmt.executeUpdate(sql);
 			
 			sql = "INSERT INTO devices (type, expiration_date)"
-					+ "VALUES (" +"prosthetic limb"+ ", " +expiration_date+ ")";
+					+ "VALUES ('prosthetic limb', " +expiration_date+ ")";
 			stmt.executeUpdate(sql);
 			
 			sql = "INSERT INTO devices (type, expiration_date)"
-					+ "VALUES (" +"insulin pump"+ ", " +expiration_date+ ")";
+					+ "VALUES ('insulin pump', " +expiration_date+ ")";
 			stmt.executeUpdate(sql);
 			
 			sql = "INSERT INTO devices (type, expiration_date)"
-					+ "VALUES (" +"coclear implant"+ ", " +expiration_date+ ")";
+					+ "VALUES ('coclear implant', " +expiration_date+ ")";
 			stmt.executeUpdate(sql);
 			
 			sql = "INSERT INTO devices (type, expiration_date)"
-					+ "VALUES (" +"bionic eye"+ ", " +expiration_date+ ")";
+					+ "VALUES ('bionic eye', " +expiration_date+ ")";
 			stmt.executeUpdate(sql);
 			
 		}catch(SQLException e) {
@@ -104,10 +104,9 @@ public class JDBCManager {
 					+ "surname TEXT,"
 					+ "device TEXT"
 					+ "birthdate TEXT,"
-					+ "diagnosis TEXT,"
-					+ "device_id INTEGER,"
-					+ "FOREIGN KEY device_id REFERENCES devices(device_id)"
+					+ "diagnosis TEXT"
 					+ ")";
+			
 			stmt.executeUpdate(sql);
 			
 			sql = "CREATE TABLE appointments ("
@@ -122,8 +121,8 @@ public class JDBCManager {
 			stmt.executeUpdate(sql);
 			
 			sql = "CREATE TABLE orders ("
-					+ "doctor_id	INTEGER AUTOINCREMENT,"
-					+ "device_id	INTEGER AUTOINCREMENT,"
+					+ "doctor_id INTEGER ,"
+					+ "device_id INTEGER ,"
 					+ "FOREIGN KEY(doctor_id) REFERENCES doctors(doctor_id),"
 					+ "FOREIGN KEY(device_id) REFERENCES devices(device_id),"
 					+ "PRIMARY KEY(doctor_id,device_id)"
@@ -131,8 +130,8 @@ public class JDBCManager {
 			stmt.executeUpdate(sql);
 			
 			sql = "CREATE TABLE devices_patient ("
-					+ "patient_id	INTEGER AUTOINCREMENT,"
-					+ "device_id	INTEGER AUTOINCREMENT,"
+					+ "patient_id	INTEGER ,"
+					+ "device_id	INTEGER ,"
 					+ "FOREIGN KEY(patient_id) REFERENCES patients(patient_id),"
 					+ "FOREIGN KEY(device_id) REFERENCES devices(device_id ),"
 					+ "PRIMARY KEY(patient_id,device_id)"
