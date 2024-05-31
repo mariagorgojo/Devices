@@ -77,6 +77,26 @@ public class JDBCManager {
 					+ ")";
 			stmt.executeUpdate(sql);
 			
+			sql = "CREATE TABLE manufacturers ("
+					+ "manufacturer_id	INTEGER PRIMARY KEY AUTOINCREMENT,"
+					+ "email TEXT,"
+					+ "name	TEXT,"
+					+ "address	TEXT,"
+					+ "phonenumber	INTEGER"
+					+ ")";
+			stmt.executeUpdate(sql);
+			
+			
+			
+			sql = "CREATE TABLE devices ("
+					+ "device_id INTEGER PRIMARY KEY AUTOINCREMENT,"
+					+ "type TEXT,"
+					+ "expiration_date TEXT,"
+					+ "manufacturer_id	INTEGER,"
+					+ "FOREIGN KEY(manufacturer_id) REFERENCES manufacturers(manufacturer_id)"
+					+ ")";
+			stmt.executeUpdate(sql);
+			
 			sql = "CREATE TABLE patients ("
 					+ "patient_id INTEGER PRIMARY KEY AUTOINCREMENT,"
 					+ "email TEXT,"
@@ -90,15 +110,6 @@ public class JDBCManager {
 					+ ")";
 			stmt.executeUpdate(sql);
 			
-			sql = "CREATE TABLE devices ("
-					+ "device_id INTEGER PRIMARY KEY AUTOINCREMENT,"
-					+ "type TEXT,"
-					+ "expiration_date TEXT,"
-					+ "manufacturer_id	INTEGER,"
-					+ "FOREIGN KEY(manufacturer_id) REFERENCES manufacturers(manufacturer_id)"
-					+ ")";
-			stmt.executeUpdate(sql);
-			
 			sql = "CREATE TABLE appointments ("
 					+ "appointment_id INTEGER PRIMARY KEY AUTOINCREMENT,"
 					+ "date TEXT,"
@@ -107,15 +118,6 @@ public class JDBCManager {
 					+ "patient_id INTEGER,"
 					+ "FOREIGN KEY (doctor_id) REFERENCES doctors(doctor_id),"
 					+ "FOREIGN KEY(patient_id) REFERENCES patients(patient_id) "
-					+ ")";
-			stmt.executeUpdate(sql);
-			
-			sql = "CREATE TABLE manufacturers ("
-					+ "manufacturer_id	INTEGER PRIMARY KEY AUTOINCREMENT,"
-					+ "email TEXT,"
-					+ "name	TEXT,"
-					+ "address	TEXT,"
-					+ "phonenumber	INTEGER"
 					+ ")";
 			stmt.executeUpdate(sql);
 			
