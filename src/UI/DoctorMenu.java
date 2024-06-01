@@ -34,12 +34,11 @@ public class DoctorMenu {
 			do {
 				System.out.println("Choose an option");
 				System.out.println("1. Edit personal information");
-				System.out.println("2. Add new patient");
-				System.out.println("3. Schedule appointment");
-				System.out.println("4. Cancel appointment");
-				System.out.println("5. Order device");
-				System.out.println("6. Assign device to patient");
-				System.out.println("7. View information about a patient");
+				System.out.println("2. Schedule appointment");
+				System.out.println("3. Cancel appointment");
+				System.out.println("4. Order device");
+				System.out.println("5. Assign device to patient");
+				System.out.println("6. View information about a patient");
 				System.out.println("0. Return");
 				
 				choice = Integer.parseInt(reader.readLine());
@@ -49,21 +48,18 @@ public class DoctorMenu {
 					editInformation(dmanager, email);
 					break;
 				case 2:
-					createPatient(dmanager, pmanager);
-					break;
-				case 3:
 					scheduleAppointment(dmanager, pmanager, amanager, email);
 					break;
-				case 4:
+				case 3:
 					cancelAppointment(amanager);
 					break;
-				case 5:
+				case 4:
 					orderDevice(devicemanager, dmanager, email);
 					break;
-				case 6:
+				case 5:
 					assignDevice(devicemanager, pmanager, email);
 					break;
-				case 7:
+				case 6:
 					viewInformationPatient(pmanager);
 					break;
 				case 0:
@@ -79,7 +75,7 @@ public class DoctorMenu {
 		}
 	}
 
-	//case 6
+	//case 5
 	private static void assignDevice(JDBCDeviceManager devicemanager, JDBCPatientManager patientmanager, String email) throws IOException {
 		// TODO Auto-generated method stub
 
@@ -104,31 +100,6 @@ public class DoctorMenu {
 		
 		device = devicemanager.getDeviceByType(type);
 		devicemanager.assignDeviceToPatient(device, p);
-	}
-
-	//case 2
-	private static void createPatient(JDBCDoctorManager doctormanager,JDBCPatientManager patientmanager) throws Exception {
-		// TODO Auto-generated method stub
-
-		System.out.println("Enter the email of the patient");
-		String email = reader.readLine();
-		System.out.println("Enter the name of the patient");
-		String name = reader.readLine();
-		System.out.println("Enter the surname of the patient");
-		String surname = reader.readLine();
-		System.out.println("Enter the birthday of the patient in format yyyy/mm/dd");
-		String dob = reader.readLine();
-		DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
-		Date birthday = (Date) df.parse(dob);
-		System.out.println("Type the diagnosis of the patient");
-		String diagnosis = reader.readLine();
-		System.out.println("Type the doctor id of the patient");
-		Integer doctor_id = Integer.parseInt(reader.readLine());
-		
-		doctormanager.searchDoctorById(doctor_id);
-		Patient p = new Patient(email,name,surname,birthday,diagnosis);
-		patientmanager.createPatient(p);
-		
 	}
 
 	//case 1
@@ -199,7 +170,7 @@ public class DoctorMenu {
 		
 	}
 
-	//case 7
+	//case 6
 	private static void viewInformationPatient(JDBCPatientManager pmanager) {
 		// TODO Auto-generated method stub
 		try {
@@ -239,7 +210,7 @@ public class DoctorMenu {
 		System.out.println(p.toString());
 	}
 	
-	//case 5
+	//case 4
 	private static void orderDevice(JDBCDeviceManager devicemanager, JDBCDoctorManager dmanager, String email) throws Exception {
 		// TODO Auto-generated method stub
 		
@@ -259,7 +230,7 @@ public class DoctorMenu {
 	}
 
 	//REVISAR, imprimir la lista de los appointments, comprobar que el doctor_id coincida para que no pueda cancelar un appointment que no sea suyo
-	//case 4
+	//case 3
 	private static void cancelAppointment(JDBCAppointmentManager amanager)throws Exception {
 		// TODO Auto-generated method stub
 
@@ -269,7 +240,7 @@ public class DoctorMenu {
 		
 	}
 
-	//case 3
+	//case 2
 	private static void scheduleAppointment(JDBCDoctorManager doctormanager, JDBCPatientManager patientmanager, JDBCAppointmentManager amanager, String email) throws Exception{
 		// TODO Auto-generated method stub
 
