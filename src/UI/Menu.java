@@ -150,7 +150,7 @@ public class Menu {
 			byte[] pass = md.digest();
 			//
 			
-			System.out.println("Introduce the role of the user. 51: doctor, 52: patient, 53: manufacturer");
+			System.out.println("Introduce the role of the user. 1: doctor, 2: patient, 3: manufacturer");
 			Integer rol = Integer.parseInt(reader.readLine());
 			Role r = usermanager.getRole(rol);
 			
