@@ -4,10 +4,17 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.security.MessageDigest;
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 import projectIfaces.XMLManager;
 import projectIfaces.UserManager;
 import projectJPA.JPAUserManager;
+import projectPOJOs.Doctor;
+import projectPOJOs.Manufacturer;
+import projectPOJOs.Patient;
 import projectPOJOs.Role;
 import projectPOJOs.User;
 import projectXML.XMLManagerImpl;
@@ -28,6 +35,9 @@ public class Menu {
 	private static JDBCDeviceManager devicemanager;
 	private static UserManager usermanager;
 	private static User u;
+	private static Patient p;
+	private static Doctor d;
+	private static Manufacturer m;
 	private static XMLManager xmlmanager;
 	private static BufferedReader reader = new BufferedReader (new InputStreamReader(System.in));
 	
@@ -128,7 +138,7 @@ public class Menu {
 				System.out.println("Login of patient successful!");
 				PatientMenu.menu(patientmanager, doctormanager, appointmentmanager, devicemanager, email, xmlmanager);
 				
-			}else { //user is a manufacturer, we open manufacturer menu
+			}else if(u.getRole().getName().equals("manufacturer")){ //user is a manufacturer, we open manufacturer menu
 				System.out.println("Login of manufacturer successful!");
 				ManufacturerMenu.menu(doctormanager, manufacturermanager, email, xmlmanager);
 			}
@@ -157,11 +167,68 @@ public class Menu {
 			User u = new User(email, pass, r);
 			
 			usermanager.newUser(u);
+			
+			if(rol==1) {
+				//initialising a doctor
+				d = infoDoctor(email);
+				doctormanager.createDoctor(d);
+			}else if(rol==2) {
+				//initialising a patient
+				p = infoPatient(email);
+				patientmanager.createPatient(p);
+			}else if(rol==3) {
+				//initialising a manufacturer
+				m = infoManufacturer(email);
+				manufacturermanager.createManufacturer(m);
+			}
 		
 		}catch(Exception e){
 			e.printStackTrace();
 		}
 	}
+	
+	private static Doctor infoDoctor(String email) throws Exception {
+		
+		System.out.println("Introduce your name: ");
+		String name = reader.readLine();
+		System.out.println("Introduce your surname: ");
+		String surname = reader.readLine();
+		System.out.println("Introduce your specialty: ");
+		String specialty = reader.readLine();
+		d = new Doctor(email, name, surname, specialty);
+		
+		return d;
+	}
+
+	private static Manufacturer infoManufacturer(String email) throws Exception {
+		
+		System.out.println("Introduce your name: ");
+		String name = reader.readLine();
+		System.out.println("Introduce your address: ");
+		String address = reader.readLine();
+		System.out.println("Introduce your birthday in format (yyyy/mm/dd): ");
+		int phonenumber = Integer.parseInt(reader.readLine());
+		m = new Manufacturer(email, name, address, phonenumber);
+		
+		return m;
+	}
+
+	private static Patient infoPatient(String email) throws Exception {
+		
+		System.out.println("Introduce your name: ");
+		String name = reader.readLine();
+		System.out.println("Introduce your surname: ");
+		String surname = reader.readLine();
+		System.out.println("Introduce your birthday in format (yyyy/mm/dd): ");
+		String dob = reader.readLine();
+		DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+		Date birthday = (Date) df.parse(dob);
+		String diagnosis = "";
+		p = new Patient(email, name, surname, birthday, diagnosis);
+		
+		return p;
+	}
+	
 	private static void deleteUser() throws IOException {
 		System.out.println("introduce email of the user you want to delete:");
 		String email=reader.readLine();

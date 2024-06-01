@@ -7,7 +7,6 @@ import projectPOJOs.Patient;
 
 public interface PatientManager {
 	
-	public void addPatient(Patient p);
 	public Patient getPatientById(Integer id);
 	public List<Patient> getListOfPatients();
 	public void createPatient(Patient p);

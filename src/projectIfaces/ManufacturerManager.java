@@ -6,7 +6,8 @@ import projectPOJOs.Device;
 import projectPOJOs.Manufacturer;
 
 public interface ManufacturerManager {
-
+	
+	public void createManufacturer(Manufacturer m);
 	public Manufacturer getManufacturerbyEmail(String email);
 	public Manufacturer getManufacturerById(Integer id);
 	public List<Device> getDeviceOrder();

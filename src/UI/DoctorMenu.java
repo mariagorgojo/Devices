@@ -127,7 +127,7 @@ public class DoctorMenu {
 		
 		doctormanager.searchDoctorById(doctor_id);
 		Patient p = new Patient(email,name,surname,birthday,diagnosis);
-		patientmanager.addPatient(p);
+		patientmanager.createPatient(p);
 		
 	}
 

@@ -140,30 +140,6 @@ public class JDBCPatientManager implements PatientManager{
 	}
 	
 	//ok
-	@Override
-	public void addPatient(Patient p) {
-		try {
-			 String sql = "INSERT INTO patients (email, name, surname, birthday, diagnosis)"
-					 + "VALUES(?,?,?,?,?,?)";
-			 
-			 PreparedStatement prep = manager.getConnection().prepareStatement(sql);
-		
-			 prep.setString(2, p.getEmail());
-			 prep.setString(3, p.getName());
-			 prep.setString(4, p.getSurname());
-			 prep.setDate(5, p.getBirthday());
-			 prep.setString(6, p.getDiagnosis());
-
-			 prep.executeUpdate();
-			 
-			}catch(Exception e)
-			{
-				e.printStackTrace();
-			}
-		
-	}
-	
-	//ok
 	//NOSE PUEDE USAR EL ATRIBUTO P????
 	@Override
 	public void editName(Patient p,String name) {

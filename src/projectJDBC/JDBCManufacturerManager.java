@@ -2,6 +2,7 @@ package projectJDBC;
 
 import projectPOJOs.Device;
 import projectPOJOs.Manufacturer;
+import projectPOJOs.Patient;
 
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -21,6 +22,27 @@ public class JDBCManufacturerManager implements ManufacturerManager{
 		// TODO Auto-generated constructor stub
 	}
 
+	@Override
+	public void createManufacturer(Manufacturer m) {
+		// TODO Auto-generated method stub
+		try {
+			String sql= "INSERT INTO patients (email, name, address, phonenumber)"
+						+ "VALUES (?,?,?,?)";
+			
+			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
+			prep.setString(1, m.getEmail());
+			prep.setString(2, m.getName());
+			prep.setString(3, m.getAddress());
+			prep.setInt(4, m.getPhoneNumber());
+			prep.executeUpdate();				
+			prep.close();
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+		
+	}
+	
 	@Override
 	public Manufacturer getManufacturerbyEmail(String email) {
 		// TODO Auto-generated method stub
