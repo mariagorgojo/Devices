@@ -27,7 +27,7 @@ public class JDBCManufacturerManager implements ManufacturerManager{
 	public void createManufacturer(Manufacturer m) {
 		// TODO Auto-generated method stub
 		try {
-			String sql= "INSERT INTO patients (email, name, address, phonenumber)"
+			String sql= "INSERT INTO manufacturers (email, name, address, phonenumber)"
 						+ "VALUES (?,?,?,?)";
 			
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
