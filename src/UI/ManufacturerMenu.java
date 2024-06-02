@@ -1,6 +1,7 @@
 package UI;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -27,6 +28,7 @@ public class ManufacturerMenu {
 				System.out.println("1. Edit personal information");
 				System.out.println("2. View devices needed");
 				System.out.println("3. Print me to xml");
+				System.out.println("4. Load me from xml");
 				System.out.println("0. Return");
 				
 				choice = Integer.parseInt(reader.readLine());
@@ -41,6 +43,9 @@ public class ManufacturerMenu {
 				case 3:
 					printMe(xmlmanager, mmanager, email);
 					break;
+				case 4:
+					loadManufacturer(xmlmanager);
+					break;
 				case 0:
 					System.out.println("Back to main menu");
 					break;
@@ -54,6 +59,18 @@ public class ManufacturerMenu {
 		}
 	}
 
+	//case 4
+	private static void loadManufacturer(XMLManager xmlmanager) throws IOException {
+		// TODO Auto-generated method stub
+		Manufacturer m = null;
+		System.out.println("Introduce the path of the xml file: ");
+		String path = reader.readLine();
+		File file = new File(path);
+		m = xmlmanager.xml2Manufacturer(file);
+		
+		System.out.print(m);
+	}
+	
 	//case 3
 	private static void printMe(XMLManager xmlmanager, JDBCManufacturerManager manufacturermanager, String email) {
 		m = manufacturermanager.getManufacturerbyEmail(email);
