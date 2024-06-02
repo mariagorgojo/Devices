@@ -11,7 +11,8 @@ import java.util.List;
 
 import projectIfaces.AppointmentManager;
 import projectPOJOs.Appointment;
-import projectPOJOs.Device;
+import projectPOJOs.Doctor;
+import projectPOJOs.Patient;
 
 public class JDBCAppointmentManager implements AppointmentManager{
 	
@@ -61,7 +62,7 @@ public class JDBCAppointmentManager implements AppointmentManager{
 	}
 	
 	@Override
-	public List <Appointment> getAppointmentsOfPatient(Integer id){
+	public List <Appointment> getAppointmentsOfPatient(Integer id, JDBCDoctorManager dmanager, JDBCPatientManager pmanager){
 		try {
 			Statement stmt = manager.getConnection().createStatement();
 			String sql = "SELECT appointment_id,date,description FROM appointments WHERE patient_id=" +id;
@@ -71,8 +72,13 @@ public class JDBCAppointmentManager implements AppointmentManager{
 				Integer a_id = rs.getInt("appointment_id");
 				Date date = rs.getDate("date");
 				String description = rs.getString("description");
+				Integer d_id = rs.getInt("doctor_id");
+				Integer p_id = rs.getInt("patient_id");
 
-				Appointment a = new Appointment(a_id, date, description);					
+				Doctor d = dmanager.searchDoctorById(d_id);
+				Patient p = pmanager.getPatientById(p_id);
+				
+				Appointment a = new Appointment(a_id, date, description, d, p);					
 				appointments.add(a);
 			}
 			rs.close();
@@ -86,7 +92,7 @@ public class JDBCAppointmentManager implements AppointmentManager{
 	}
 	
 	@Override
-	public List <Appointment> getAppointmentsOfDoctor(Integer id){
+	public List <Appointment> getAppointmentsOfDoctor(Integer id, JDBCDoctorManager dmanager, JDBCPatientManager pmanager){
 		try {
 			Statement stmt = manager.getConnection().createStatement();
 			String sql = "SELECT appointment_id,date,description FROM appointments WHERE doctor_id=" +id;
@@ -96,8 +102,13 @@ public class JDBCAppointmentManager implements AppointmentManager{
 				Integer a_id = rs.getInt("appointment_id");
 				Date date = rs.getDate("date");
 				String description = rs.getString("description");
+				Integer d_id = rs.getInt("doctor_id");
+				Integer p_id = rs.getInt("patient_id");
 
-				Appointment a = new Appointment(a_id, date, description);					
+				Doctor d = dmanager.searchDoctorById(d_id);
+				Patient p = pmanager.getPatientById(p_id);
+				
+				Appointment a = new Appointment(a_id, date, description, d, p);					
 				appointments.add(a);
 			}
 			rs.close();

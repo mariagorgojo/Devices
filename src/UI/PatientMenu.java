@@ -53,7 +53,7 @@ public class PatientMenu {
 					scheduleAppointment(dmanager, pmanager, amanager, email);
 					break;
 				case 3:
-					cancelAppointment(amanager, pmanager, email);
+					cancelAppointment(amanager, dmanager, pmanager, email);
 					break;
 				case 4:
 					viewInfoDevices(pmanager, devicemanager, email);
@@ -139,11 +139,11 @@ public class PatientMenu {
 	
 	//REVISAR, imprimir la lista de los appointments, comprobar que el patient_id coincida para que no pueda cancelar un appointment que no sea suyo
 	//case 3
-	private static void cancelAppointment(JDBCAppointmentManager amanager, JDBCPatientManager patientmanager, String email)throws Exception {
+	private static void cancelAppointment(JDBCAppointmentManager amanager, JDBCDoctorManager doctormanager, JDBCPatientManager patientmanager, String email)throws Exception {
 		// TODO Auto-generated method stub
 		p = patientmanager.getPatientByEmail(email);
 		
-		appointments = amanager.getAppointmentsOfPatient(p.getId());
+		appointments = amanager.getAppointmentsOfPatient(p.getId(), doctormanager, patientmanager);
 		System.out.println("Your appointments are: ");
 		for(Appointment a : appointments) {
 			System.out.println(a.toString());
