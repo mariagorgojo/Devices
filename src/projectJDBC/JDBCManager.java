@@ -66,8 +66,8 @@ public class JDBCManager {
 					+ "email TEXT,"
 					+ "name TEXT,"
 					+ "surname TEXT,"
-					+ "device TEXT"
-					+ "birthdate TEXT,"
+					+ "devices TEXT,"
+					+ "birthday TEXT,"
 					+ "diagnosis TEXT"
 					+ ")";
 			
