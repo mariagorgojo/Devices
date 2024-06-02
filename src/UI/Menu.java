@@ -110,7 +110,7 @@ public class Menu {
 		u = usermanager.checkPassword(email, passwd);
 				
 		if(u!=null){ //if user already existed
-			u = usermanager.changePassword(u, new_passwd);
+			usermanager.changePassword(u, new_passwd);
 		}
 				
 	}
