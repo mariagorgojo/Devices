@@ -28,7 +28,7 @@ public class ManufacturerMenu {
 				System.out.println("1. Edit personal information");
 				System.out.println("2. View devices needed");
 				System.out.println("3. Print me to xml");
-				System.out.println("4. Load me from xml");
+				System.out.println("4. Load manufacturer from xml");
 				System.out.println("0. Return");
 				
 				choice = Integer.parseInt(reader.readLine());
@@ -62,7 +62,6 @@ public class ManufacturerMenu {
 	//case 4
 	private static void loadManufacturer(XMLManager xmlmanager) throws IOException {
 		// TODO Auto-generated method stub
-		Manufacturer m = null;
 		System.out.println("Introduce the path of the xml file: ");
 		String path = reader.readLine();
 		File file = new File(path);

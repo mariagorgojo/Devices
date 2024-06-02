@@ -1,6 +1,8 @@
 package UI;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.sql.Date;
 import java.text.DateFormat;
@@ -37,6 +39,7 @@ public class PatientMenu {
 				System.out.println("3. Cancel appointment");
 				System.out.println("4. View information about devices");
 				System.out.println("5. Print me to xml");
+				System.out.println("6. Load patient from xml");
 				System.out.println("0. Return");
 				
 				choice = Integer.parseInt(reader.readLine());
@@ -57,6 +60,8 @@ public class PatientMenu {
 				case 5:
 					printMe(xmlmanager, pmanager, email);
 					break;
+				case 6:
+					loadPatient(xmlmanager);
 				case 0:
 					System.out.println("Back to main menu");
 					break;
@@ -69,7 +74,18 @@ public class PatientMenu {
 			e.printStackTrace();
 		}
 	}
-
+	
+	//case 6
+	private static void loadPatient(XMLManager xmlmanager) throws IOException {
+		// TODO Auto-generated method stub
+		System.out.println("Introduce the path of the xml file: ");
+		String path = reader.readLine();
+		File file = new File(path);
+		p = xmlmanager.xml2Patient(file);
+		
+		System.out.print(p);
+	}
+	
 	//case 5
 	private static void printMe(XMLManager xmlmanager, JDBCPatientManager patientmanager, String email) {
 		p = patientmanager.getPatientByEmail(email);
