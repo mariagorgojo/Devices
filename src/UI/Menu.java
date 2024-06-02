@@ -79,11 +79,12 @@ public class Menu {
 					break;
 				case 4:
 					deleteUser();
-					
-					
+					break;
 				case 0:
 					System.out.println("Exiting application.");
 					jdbcmanager.disconnect();
+				default:
+					System.out.println("Invalid option");
 					break;
 				}
 				

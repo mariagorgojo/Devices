@@ -169,6 +169,9 @@ public class PatientMenu {
 				case 0:
 					System.out.println("Back to patient menu");
 					break;
+				default:
+					System.out.println("Invalid option");
+					break;
 				}
 				
 			}while(choice!=0);
