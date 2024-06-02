@@ -159,7 +159,7 @@ public class JDBCDoctorManager implements DoctorManager {
 	@Override
 	public void editSurname(Doctor d,String surname) {
 		try{
-			String sql = "UPDATE doctors SET name=? WHERE doctor_id=?";
+			String sql = "UPDATE doctors SET surname=? WHERE doctor_id=?";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setString(1, surname);	
 			prep.setInt(2, d.getId());

@@ -48,12 +48,14 @@ public class JDBCManufacturerManager implements ManufacturerManager{
 	public Manufacturer getManufacturerbyEmail(String email) {
 		// TODO Auto-generated method stub
 		try {
-			Statement stmt = manager.getConnection().createStatement();
-			String sql = "SELECT * FROM manufacturers WHERE email=" + email;
+			String sql = "SELECT * FROM manufacturers WHERE email=?";
 		
-			ResultSet rs = stmt.executeQuery(sql);
+			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
+			prep.setString(1, email);
 			
-			Integer id = rs.getInt("id");
+			ResultSet rs = prep.executeQuery();
+			
+			Integer id = rs.getInt("manufacturer_id");
 			String name = rs.getString("name"); 
 			String address = rs.getString("address");
 			Integer phoneNumber = rs.getInt("phonenumber");
@@ -61,7 +63,7 @@ public class JDBCManufacturerManager implements ManufacturerManager{
 		    m = new Manufacturer (id, email, name, address, phoneNumber);
 		    
 		    rs.close();
-		    stmt.close();
+		    prep.close();
 		    
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -73,22 +75,23 @@ public class JDBCManufacturerManager implements ManufacturerManager{
 	public Manufacturer getManufacturerById(Integer id) {
 		// TODO Auto-generated method stub
 		try {
-			
-			Statement stmt = manager.getConnection().createStatement();
-			String sql = "SELECT * FROM manufacturers WHERE id=" + id;
+			String sql = "SELECT * FROM manufacturers WHERE manufacturer_id=?";
 		
-			ResultSet rs = stmt.executeQuery(sql);
+			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
+			prep.setInt(1, id);
 			
-			Integer m_id = rs.getInt("id"); 
+			ResultSet rs = prep.executeQuery();
+			
+			Integer m_id = rs.getInt("manufacturer_id");
 			String email = rs.getString("email");
-			String name = rs.getString("name");
-			String address = rs.getString("adrress");
-			Integer phonenumber = rs.getInt("phonenumber");
-
-		    m = new Manufacturer (m_id, email, name, address, phonenumber);
+			String name = rs.getString("name"); 
+			String address = rs.getString("address");
+			Integer phoneNumber = rs.getInt("phonenumber");
+			
+		    m = new Manufacturer (m_id, email, name, address, phoneNumber);
 		    
 		    rs.close();
-		    stmt.close();
+		    prep.close();
 		    
 		}catch(SQLException e) {
 			e.printStackTrace();
