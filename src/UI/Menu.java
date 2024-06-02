@@ -162,7 +162,7 @@ public class Menu {
 			byte[] pass = md.digest();
 			//
 			
-			System.out.println("Introduce the role of the user. 151: doctor, 152: patient, 153: manufacturer");
+			System.out.println("Introduce the role of the user. 201: doctor, 202: patient, 203: manufacturer");
 			Integer rol = Integer.parseInt(reader.readLine());
 			Role r = usermanager.getRole(rol);
 			
@@ -170,15 +170,15 @@ public class Menu {
 			
 			usermanager.newUser(u);
 			
-			if(rol==151) {
+			if(rol==201) {
 				//initialising a doctor
 				d = infoDoctor(email);
 				doctormanager.createDoctor(d);
-			}else if(rol==152) {
+			}else if(rol==202) {
 				//initialising a patient
 				p = infoPatient(email);
 				patientmanager.createPatient(p);
-			}else if(rol==153) {
+			}else if(rol==203) {
 				//initialising a manufacturer
 				m = infoManufacturer(email);
 				manufacturermanager.createManufacturer(m);
