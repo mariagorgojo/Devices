@@ -107,7 +107,8 @@ public class JPAUserManager implements UserManager {
 	@Override
 	public Role getRole(Integer id) {
 		// TODO Auto-generated method stub
-		Query q = em.createNativeQuery("SELECT * FROM roles where id="+id, Role.class);
+		Query q = em.createNativeQuery("SELECT * FROM roles where id=?", Role.class);
+		q.setParameter(1, id);
 		Role r = (Role) q.getSingleResult();
 		
 		return r;
@@ -116,7 +117,8 @@ public class JPAUserManager implements UserManager {
 	@Override
 	public User getUser(String email) {
 		// TODO Auto-generated method stub
-		Query q = em.createNativeQuery("SELECT * FROM users where email="+email, User.class);
+		Query q = em.createNativeQuery("SELECT * FROM users where email=?", User.class);
+		q.setParameter(1, email);
 		User u = (User) q.getSingleResult();
 		
 		return u;
@@ -145,7 +147,8 @@ public class JPAUserManager implements UserManager {
 		try {
 			em.getTransaction().begin();
 			
-			Query q = em.createNativeQuery("SELECT * FROM users WHERE email=" +email, User.class);
+			Query q = em.createNativeQuery("SELECT * FROM users WHERE email=?", User.class);
+			q.setParameter(1, email);
 			User user = (User) q.getSingleResult();
 
 			em.remove(user);
