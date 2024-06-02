@@ -90,6 +90,7 @@ public class PatientMenu {
 	private static void printMe(XMLManager xmlmanager, JDBCPatientManager patientmanager, String email) {
 		p = patientmanager.getPatientByEmail(email);
 		xmlmanager.patient2xml(p.getId());
+		xmlmanager.simpleTransform("./xmls/Patient.xml", "./xmls/patient-style.xslt", "./xmls/patient.html");
 	}
 	
 	//case 4

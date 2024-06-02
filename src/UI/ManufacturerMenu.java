@@ -74,6 +74,7 @@ public class ManufacturerMenu {
 	private static void printMe(XMLManager xmlmanager, JDBCManufacturerManager manufacturermanager, String email) {
 		m = manufacturermanager.getManufacturerbyEmail(email);
 		xmlmanager.manufacturer2xml(m.getId());
+		xmlmanager.simpleTransform("./xmls/Manufacturer.xml", "./xmls/manufacturer-style.xslt", "./xmls/manufacturer.html");
 	}
 	
 	//case 2

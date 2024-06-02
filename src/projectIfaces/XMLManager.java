@@ -9,32 +9,5 @@ public interface XMLManager {
 	public Patient xml2Patient(File xml);
 	public void manufacturer2xml(Integer id);
 	public Manufacturer xml2Manufacturer(File xml);
+	public void simpleTransform(String string, String string2, String string3);
 }
-
-/* unmarshal
- * // TODO Auto-generated method stub
-		Manufacturer m = null;
-		try {
-			JAXBContext jaxbC = JAXBContext.newInstance(Manufacturer.class);
-			Unmarshaller jaxbU = jaxbC.createUnmarshaller();
-			m = (Manufacturer) jaxbU.unmarshal(xml);			
-			
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-				
-		return m;*/
-
-/*/
- * marshal
- * / TODO Auto-generated method stub
-		Patient p = null;
-		try {
-			JAXBContext jaxbC = JAXBContext.newInstance(Patient.class);
-			Unmarshaller jaxbU = jaxbC.createUnmarshaller();
-			p = (Patient) jaxbU.unmarshal(xml);
-			
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-		*/
