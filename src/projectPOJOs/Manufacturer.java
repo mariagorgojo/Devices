@@ -19,7 +19,7 @@ import projectXMLutils.SQLDateAdapter;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement (name = "Manufacturer")
-@XmlType(propOrder = {"email", "name", "address","phonenumber", "Device"})
+@XmlType(propOrder = {"email", "name", "address","phonenumber", "devices"})
 
 public class Manufacturer implements Serializable{
 
@@ -28,14 +28,14 @@ public class Manufacturer implements Serializable{
 	private int id;
 	@XmlElement
 	private String email;
-	@XmlAttribute
+	@XmlElement
 	private String name;
 	@XmlElement
 	private String address;
 	@XmlElement
 	private int phonenumber;
-	@XmlElement(name = "Device")
-	@XmlElementWrapper(name = "devices")
+	@XmlElement(name = "devices")
+	@XmlElementWrapper(name = "Device")
 	private List<Device> devices;
 	
 	public Manufacturer() {
