@@ -128,13 +128,19 @@ public class XMLManagerImpl implements XMLManager{
 	
 	@Override
 	public void simpleTransform(String sourcePath, String xsltPath, String resultDir) {
-		TransformerFactory tFactory = TransformerFactory.newInstance();
-		try {
-			Transformer transformer = tFactory.newTransformer(new StreamSource(new File(xsltPath)));
-			transformer.transform(new StreamSource(new File(sourcePath)),new StreamResult(new File(resultDir)));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+        File xsltFile = new File(xsltPath);
+        if (!xsltFile.exists()) {
+            System.err.println("XSLT file not found: " + xsltPath);
+            return;
+        }
+
+        TransformerFactory tFactory = TransformerFactory.newInstance();
+        try {
+            Transformer transformer = tFactory.newTransformer(new StreamSource(xsltFile));
+            transformer.transform(new StreamSource(new File(sourcePath)), new StreamResult(new File(resultDir)));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 	
 }

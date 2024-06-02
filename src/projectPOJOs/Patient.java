@@ -20,7 +20,7 @@ import projectXMLutils.SQLDateAdapter;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement (name = "Patient")
-@XmlType(propOrder = {"name", "surname","birthday", "devices"})
+@XmlType(propOrder = {"email", "name", "surname","birthday", "diagnosis", "devices", "appointments"})
 public class Patient implements Serializable{
 	
 	private static final long serialVersionUID = -4423025978446522586L;
@@ -34,6 +34,7 @@ public class Patient implements Serializable{
 	private String surname;
 	@XmlJavaTypeAdapter(SQLDateAdapter.class)
 	private Date birthday;
+	@XmlElement
 	private String diagnosis;
 	@XmlElement (name = "Device")
 	@XmlElementWrapper(name = "devices")

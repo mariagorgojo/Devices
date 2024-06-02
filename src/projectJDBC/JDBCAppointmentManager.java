@@ -64,10 +64,11 @@ public class JDBCAppointmentManager implements AppointmentManager{
 	@Override
 	public List <Appointment> getAppointmentsOfPatient(Integer id, JDBCDoctorManager dmanager, JDBCPatientManager pmanager){
 		try {
-			Statement stmt = manager.getConnection().createStatement();
-			String sql = "SELECT appointment_id,date,description FROM appointments WHERE patient_id=" +id;
-			ResultSet rs = stmt.executeQuery(sql);
-				
+			String sql = "SELECT * FROM appointments WHERE patient_id=?";
+			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
+			prep.setInt(1, id);
+			ResultSet rs = prep.executeQuery();
+			
 			while(rs.next()){
 				Integer a_id = rs.getInt("appointment_id");
 				Date date = rs.getDate("date");
@@ -82,7 +83,7 @@ public class JDBCAppointmentManager implements AppointmentManager{
 				appointments.add(a);
 			}
 			rs.close();
-			stmt.close();
+			prep.close();
 				
 		}catch(SQLException e){
 			e.printStackTrace();
@@ -94,9 +95,10 @@ public class JDBCAppointmentManager implements AppointmentManager{
 	@Override
 	public List <Appointment> getAppointmentsOfDoctor(Integer id, JDBCDoctorManager dmanager, JDBCPatientManager pmanager){
 		try {
-			Statement stmt = manager.getConnection().createStatement();
-			String sql = "SELECT appointment_id,date,description FROM appointments WHERE doctor_id=" +id;
-			ResultSet rs = stmt.executeQuery(sql);
+			String sql = "SELECT * FROM appointments WHERE doctor_id=?";
+			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
+			prep.setInt(1, id);
+			ResultSet rs = prep.executeQuery();
 				
 			while(rs.next()){
 				Integer a_id = rs.getInt("appointment_id");
@@ -112,7 +114,7 @@ public class JDBCAppointmentManager implements AppointmentManager{
 				appointments.add(a);
 			}
 			rs.close();
-			stmt.close();
+			prep.close();
 				
 		}catch(SQLException e){
 			e.printStackTrace();
