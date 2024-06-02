@@ -220,12 +220,15 @@ public class Menu {
 		String name = reader.readLine();
 		System.out.println("Introduce your surname: ");
 		String surname = reader.readLine();
-		System.out.println("Introduce your birthday in format (yyyy/mm/dd): ");
+		System.out.println("Introduce your birthday in format (yyyy/MM/dd): ");
 		String dob = reader.readLine();
 		DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
-		Date birthday = (Date) df.parse(dob);
+		//util Date
+		java.util.Date birthday = df.parse(dob);
+		//convert from util to sql Date
+		java.sql.Date sqlBirthday = new java.sql.Date(birthday.getTime());
 		String diagnosis = "";
-		p = new Patient(email, name, surname, birthday, diagnosis);
+		p = new Patient(email, name, surname, sqlBirthday, diagnosis);
 		
 		return p;
 	}
