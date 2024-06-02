@@ -74,7 +74,7 @@ public class JDBCDeviceManager implements DeviceManager{
 			ResultSet rs = stmt.executeQuery(sql);
 				
 			while(rs.next()){
-				Integer id = rs.getInt("id");
+				Integer id = rs.getInt("device_id");
 				String type = rs.getString("type");
 				Date expiration_date = rs.getDate("expiration_date");
 					
@@ -99,7 +99,7 @@ public class JDBCDeviceManager implements DeviceManager{
 			String sql = "SELECT * FROM devices WHERE type=" +type;
 			ResultSet rs = stmt.executeQuery(sql);
 				
-			Integer id = rs.getInt("id");
+			Integer id = rs.getInt("device_id");
 			Date expiration_date = rs.getDate("expiration_date");	
 			d = new Device (id, type, expiration_date);					
 			
@@ -122,7 +122,7 @@ public class JDBCDeviceManager implements DeviceManager{
 			ResultSet rs = stmt.executeQuery(sql);
 				
 			while(rs.next()){
-				Integer id = rs.getInt("id");
+				Integer id = rs.getInt("device_id");
 				String type = rs.getString("type");
 				Date expiration_date = rs.getDate("expiration_date");
 					
