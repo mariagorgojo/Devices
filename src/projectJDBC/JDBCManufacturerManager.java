@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 import projectIfaces.ManufacturerManager;
@@ -16,7 +17,7 @@ public class JDBCManufacturerManager implements ManufacturerManager{
 	
 	private JDBCManager manager;
 	private Manufacturer m;
-	private List<Device> devices;
+	private List<Device> devices = new ArrayList<Device>();
 
 	public JDBCManufacturerManager(JDBCManager m) {
 		// TODO Auto-generated constructor stub
