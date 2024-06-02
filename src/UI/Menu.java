@@ -83,6 +83,7 @@ public class Menu {
 				case 0:
 					System.out.println("Exiting application.");
 					jdbcmanager.disconnect();
+					break;
 				default:
 					System.out.println("Invalid option");
 					break;

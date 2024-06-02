@@ -48,6 +48,7 @@ public class ManufacturerMenu {
 					break;
 				case 0:
 					System.out.println("Back to main menu");
+					break;
 				default:
 					System.out.println("Invalid option");
 					break;
