@@ -95,15 +95,17 @@ public class JDBCDeviceManager implements DeviceManager{
 		// TODO Auto-generated method stub
 		
 		try {
-			Statement stmt = manager.getConnection().createStatement();
-			String sql = "SELECT * FROM devices WHERE type=" +type;
-			ResultSet rs = stmt.executeQuery(sql);
+			String sql = "SELECT * FROM devices WHERE type=?";
+			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
+			prep.setString(1, type);
+			
+			ResultSet rs = prep.executeQuery();
 				
 			Integer id = rs.getInt("device_id");
 			d = new Device (id, type);					
 			
 			rs.close();
-			stmt.close();
+			prep.close();
 				
 		}catch(SQLException e){
 			e.printStackTrace();
