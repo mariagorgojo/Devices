@@ -92,8 +92,14 @@ public class DoctorMenu {
 		//selection of device
 		devices = devicemanager.getDevices();
 		System.out.println("Devices available: ");
+		int count = 0;
 		for(Device d : devices) {
-			System.out.println(d.toString());
+			if(count<=5) {
+				System.out.println(d.toString());
+				count++;
+			}else {
+				break;
+			}
 		}
 		System.out.println("Enter the type of the device: ");
 		String type = reader.readLine();
@@ -217,8 +223,14 @@ public class DoctorMenu {
 		//type of device
 		System.out.println("Devices available: ");
 		devices = devicemanager.getDevices();
+		int count = 0;
 		for(Device d : devices) {
-			System.out.println(d.toString());
+			if(count<=5) {
+				System.out.println(d.toString());
+				count++;
+			}else {
+				break;
+			}
 		}
 		
 		System.out.println("Enter type: ");
