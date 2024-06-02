@@ -177,7 +177,7 @@ public class JDBCManufacturerManager implements ManufacturerManager{
 				String sql2 = "SELECT * FROM devices WHERE device_id=" +device_id; //you use that id to search the type of device associated with it and add it to the list you return
 				ResultSet rs2 = stmt2.executeQuery(sql2);
 				
-				Integer id = rs2.getInt("id");
+				Integer id = rs2.getInt("device_id");
 				String type = rs2.getString("type");
 						
 				Device d = new Device (id, type);					
