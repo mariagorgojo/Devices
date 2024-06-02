@@ -30,38 +30,6 @@ public class JDBCManager {
 		}
 	}
 	
-	private void createDevices() {
-		try {
-			
-			Statement stmt = c.createStatement();
-			
-			String sql = "INSERT INTO devices (type)"
-					+ "VALUES ('pacemaker')";
-			stmt.executeUpdate(sql);
-			
-			sql = "INSERT INTO devices (type)"
-					+ "VALUES ('prosthetic limb')";
-			stmt.executeUpdate(sql);
-			
-			sql = "INSERT INTO devices (type)"
-					+ "VALUES ('insulin pump')";
-			stmt.executeUpdate(sql);
-			
-			sql = "INSERT INTO devices (type)"
-					+ "VALUES ('coclear implant')";
-			stmt.executeUpdate(sql);
-			
-			sql = "INSERT INTO devices (type)"
-					+ "VALUES ('bionic eye')";
-			stmt.executeUpdate(sql);
-			
-			stmt.close();
-			
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}
-	}
-	
 	private void createTables() {
 		try {
 			
@@ -142,6 +110,38 @@ public class JDBCManager {
 			}			
 		}
 		
+	}
+	
+	private void createDevices() {
+		try {
+			
+			Statement stmt = c.createStatement();
+			
+			String sql = "INSERT INTO devices (type)"
+					+ "VALUES ('pacemaker')";
+			stmt.executeUpdate(sql);
+			
+			sql = "INSERT INTO devices (type)"
+					+ "VALUES ('prosthetic limb')";
+			stmt.executeUpdate(sql);
+			
+			sql = "INSERT INTO devices (type)"
+					+ "VALUES ('insulin pump')";
+			stmt.executeUpdate(sql);
+			
+			sql = "INSERT INTO devices (type)"
+					+ "VALUES ('coclear implant')";
+			stmt.executeUpdate(sql);
+			
+			sql = "INSERT INTO devices (type)"
+					+ "VALUES ('bionic eye')";
+			stmt.executeUpdate(sql);
+			
+			stmt.close();
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public Connection getConnection() {
