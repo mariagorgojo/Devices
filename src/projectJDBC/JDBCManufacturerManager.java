@@ -18,8 +18,9 @@ public class JDBCManufacturerManager implements ManufacturerManager{
 	private Manufacturer m;
 	private List<Device> devices;
 
-	public JDBCManufacturerManager(JDBCManager jdbcmanager) {
+	public JDBCManufacturerManager(JDBCManager m) {
 		// TODO Auto-generated constructor stub
+		this.manager = m;
 	}
 
 	@Override
