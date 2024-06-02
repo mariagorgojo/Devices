@@ -42,7 +42,7 @@ public class JDBCAppointmentManager implements AppointmentManager{
 	public void deleteAppointment(Integer appointment_id) {
 		// TODO Auto-generated method stub
 		try {
-			String sql = "DELETE from appointments WHERE id= ?";
+			String sql = "DELETE from appointments WHERE appointment_id= ?";
 
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setInt(1, appointment_id);

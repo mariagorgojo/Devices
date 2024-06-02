@@ -80,12 +80,13 @@ public class JDBCDoctorManager implements DoctorManager {
 	@Override
 	public Doctor searchDoctorById(Integer id) {
 		// TODO Auto-generated method stub
-		
 		try {
-			Statement stmt = manager.getConnection().createStatement();
-			String sql = "SELECT * FROM doctors WHERE doctor_id=" + id;
-		
-			ResultSet rs = stmt.executeQuery(sql);
+			String sql = "SELECT * FROM doctors WHERE doctor_id=?";
+			
+			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
+			prep.setInt(1, id);
+						
+			ResultSet rs = prep.executeQuery();
 			
 			Integer d_id = rs.getInt("doctor_id");
 			String email = rs.getString("email"); 
@@ -96,7 +97,7 @@ public class JDBCDoctorManager implements DoctorManager {
 		    d = new Doctor (d_id, email, name, surname, specialty);
 		    
 		    rs.close();
-		    stmt.close();
+		    prep.close();
 		    
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -110,10 +111,12 @@ public class JDBCDoctorManager implements DoctorManager {
 	public Doctor getDoctorByEmail(String email) {
 		
 		try {
-			Statement stmt = manager.getConnection().createStatement();
-			String sql = "SELECT * FROM doctors WHERE email=" + email;
-		
-			ResultSet rs = stmt.executeQuery(sql);
+			String sql = "SELECT * FROM doctors WHERE email=?";
+			
+			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
+			prep.setString(1, email);
+						
+			ResultSet rs = prep.executeQuery();
 			
 			Integer id = rs.getInt("doctor_id");
 			String d_email = rs.getString("email"); 
@@ -124,7 +127,7 @@ public class JDBCDoctorManager implements DoctorManager {
 		    d = new Doctor (id, d_email, name, surname, specialty);
 		    
 		    rs.close();
-		    stmt.close();
+		    prep.close();
 		    
 		}catch(SQLException e) {
 			e.printStackTrace();
