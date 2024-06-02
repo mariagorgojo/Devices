@@ -60,7 +60,7 @@ public class Menu {
 				System.out.println("Choose an option");
 				System.out.println("1. Login User");
 				System.out.println("2. Sign-up new user");
-				System.out.println("3. Udpate the password of an exissting user");
+				System.out.println("3. Udpate the password of an exisisting user");
 				System.out.println("4. Delete user");
 				System.out.println("0. Exit");
 								
@@ -162,7 +162,7 @@ public class Menu {
 			byte[] pass = md.digest();
 			//
 			
-			System.out.println("Introduce the role of the user. 101: doctor, 102: patient, 103: manufacturer");
+			System.out.println("Introduce the role of the user. 151: doctor, 152: patient, 153: manufacturer");
 			Integer rol = Integer.parseInt(reader.readLine());
 			Role r = usermanager.getRole(rol);
 			
@@ -170,18 +170,20 @@ public class Menu {
 			
 			usermanager.newUser(u);
 			
-			if(rol==101) {
+			if(rol==151) {
 				//initialising a doctor
 				d = infoDoctor(email);
 				doctormanager.createDoctor(d);
-			}else if(rol==102) {
+			}else if(rol==152) {
 				//initialising a patient
 				p = infoPatient(email);
 				patientmanager.createPatient(p);
-			}else if(rol==103) {
+			}else if(rol==153) {
 				//initialising a manufacturer
 				m = infoManufacturer(email);
 				manufacturermanager.createManufacturer(m);
+			}else {
+				System.out.println("Invalid option");
 			}
 		
 		}catch(Exception e){

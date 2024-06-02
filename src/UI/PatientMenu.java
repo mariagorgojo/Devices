@@ -110,10 +110,13 @@ public class PatientMenu {
 		// TODO Auto-generated method stub
 
 		//ask for date of appointment
-		System.out.println("Enter date of appointment in format yyyy/mm/dd: ");
+		System.out.println("Introduce the date of the appointment in format (yyyy/MM/dd): ");
 		String ad = reader.readLine();
 		DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
-		Date date = (Date) df.parse(ad);
+		//util Date
+		java.util.Date date = df.parse(ad);
+		//convert from util to sql Date
+		java.sql.Date sqlDate = new java.sql.Date(date.getTime());
 		//description
 		System.out.println("Description: ");
 		String description = reader.readLine();
@@ -129,7 +132,7 @@ public class PatientMenu {
 		//patient
 		p = patientmanager.getPatientByEmail(email);
 		
-		Appointment a = new Appointment(date, description, d, p);
+		Appointment a = new Appointment(sqlDate, description, d, p);
 		amanager.addAppointment(a);
 	}
 	

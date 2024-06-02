@@ -67,7 +67,7 @@ public class JDBCManager {
 					+ "name TEXT,"
 					+ "surname TEXT,"
 					+ "devices TEXT,"
-					+ "birthday TEXT,"
+					+ "birthday DATE,"
 					+ "diagnosis TEXT"
 					+ ")";
 			
@@ -75,7 +75,7 @@ public class JDBCManager {
 			
 			sql = "CREATE TABLE appointments ("
 					+ "appointment_id INTEGER PRIMARY KEY AUTOINCREMENT,"
-					+ "date TEXT,"
+					+ "date DATE,"
 					+ "description TEXT,"
 					+ "doctor_id INTEGER,"
 					+ "patient_id INTEGER,"

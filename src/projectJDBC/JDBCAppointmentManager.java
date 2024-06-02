@@ -20,7 +20,7 @@ public class JDBCAppointmentManager implements AppointmentManager{
 	public void addAppointment(Appointment a) {
 		// TODO Auto-generated method stub
 		try {
-			String sql= "INSERT INTO appointments (date, description, doctor, patient)"
+			String sql= "INSERT INTO appointments (date, description, doctor_id, patient_id)"
 					+ "VALUES (?,?,?,?)";
 		
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);

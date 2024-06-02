@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import projectIfaces.PatientManager;
+import projectPOJOs.Device;
 import projectPOJOs.Patient;
 
 public class JDBCPatientManager implements PatientManager{
@@ -27,7 +28,7 @@ public class JDBCPatientManager implements PatientManager{
 		// TODO Auto-generated method stub
 		try {
 			String sql= "INSERT INTO patients (email, name, surname, birthday, diagnosis)"
-						+ "VALUES (?,?,?,?)";
+						+ "VALUES (?,?,?,?,?)";
 			
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setString(1, p.getEmail());
@@ -85,10 +86,11 @@ public class JDBCPatientManager implements PatientManager{
 		// TODO Auto-generated method stub
 		try {
 			
-			Statement stmt = manager.getConnection().createStatement();
-			String sql = "SELECT * FROM patients WHERE patient_id=" + id;
-		
-			ResultSet rs = stmt.executeQuery(sql);
+			String sql = "SELECT * FROM patients WHERE patient_id=?";
+			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
+			prep.setInt(1, id);
+			
+			ResultSet rs = prep.executeQuery();
 			
 			Integer p_id = rs.getInt("patient_id");
 			String email = rs.getString("email"); 
@@ -100,7 +102,7 @@ public class JDBCPatientManager implements PatientManager{
 		    p = new Patient (p_id, email, name, surname, birthday, diagnosis);
 		    
 		    rs.close();
-		    stmt.close();
+		    prep.close();
 		    
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -114,10 +116,11 @@ public class JDBCPatientManager implements PatientManager{
 	public Patient getPatientByEmail(String email) {
 		
 		try {
-			Statement stmt = manager.getConnection().createStatement();
-			String sql = "SELECT * FROM patients WHERE email=" + email;
-		
-			ResultSet rs = stmt.executeQuery(sql);
+			String sql = "SELECT * FROM patients WHERE email=?";
+			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
+			prep.setString(1, email);
+			
+			ResultSet rs = prep.executeQuery();
 			
 			Integer id = rs.getInt("patient_id");
 			String p_email = rs.getString("email"); 
@@ -125,13 +128,11 @@ public class JDBCPatientManager implements PatientManager{
 			String surname = rs.getString("surname");
 			Date bd = rs.getDate("birthday");
 			String diagnosis = rs.getString("diagnosis");
-			//List <Device> devices = rs.getList??? e incluir los devices en el constructor?
-
 			
 		    p = new Patient (id, p_email, name, surname, bd, diagnosis);
 		    
 		    rs.close();
-		    stmt.close();
+		    prep.close();
 		    
 		}catch(SQLException e) {
 			e.printStackTrace();
