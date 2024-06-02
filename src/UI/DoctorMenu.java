@@ -22,6 +22,7 @@ public class DoctorMenu {
 	
 	private static List<Patient> patients = new ArrayList<Patient>();
 	private static List<Device> devices = new ArrayList<Device>();
+	private static List<Appointment> appointments = new ArrayList<Appointment>();
 	private static Doctor d;
 	private static Patient p;
 	private static Device device;
@@ -51,7 +52,7 @@ public class DoctorMenu {
 					scheduleAppointment(dmanager, pmanager, amanager, email);
 					break;
 				case 3:
-					cancelAppointment(amanager);
+					cancelAppointment(amanager, dmanager, email);
 					break;
 				case 4:
 					orderDevice(devicemanager, dmanager, email);
@@ -245,9 +246,16 @@ public class DoctorMenu {
 
 	//REVISAR, imprimir la lista de los appointments, comprobar que el doctor_id coincida para que no pueda cancelar un appointment que no sea suyo
 	//case 3
-	private static void cancelAppointment(JDBCAppointmentManager amanager)throws Exception {
+	private static void cancelAppointment(JDBCAppointmentManager amanager, JDBCDoctorManager doctormanager, String email)throws Exception {
 		// TODO Auto-generated method stub
-
+		d = doctormanager.getDoctorByEmail(email);
+		
+		appointments = amanager.getAppointmentsOfDoctor(d.getId());
+		System.out.println("Your appointments are: ");
+		for(Appointment a : appointments) {
+			System.out.println(a.toString());
+		}
+		
 		System.out.println("Enter the appointments'id: ");
 		Integer a_id = Integer.parseInt(reader.readLine());
 		amanager.deleteAppointment(a_id);
