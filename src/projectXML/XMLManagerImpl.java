@@ -127,7 +127,7 @@ public class XMLManagerImpl implements XMLManager{
 	}
 	
 	@Override
-	public void simpleTransform(String sourcePath, String xsltPath,String resultDir) {
+	public void simpleTransform(String sourcePath, String xsltPath, String resultDir) {
 		TransformerFactory tFactory = TransformerFactory.newInstance();
 		try {
 			Transformer transformer = tFactory.newTransformer(new StreamSource(new File(xsltPath)));
