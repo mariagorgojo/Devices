@@ -50,7 +50,7 @@ public class Menu {
 		appointmentmanager = new JDBCAppointmentManager(jdbcmanager);
 		devicemanager = new JDBCDeviceManager(jdbcmanager);
 		usermanager = new JPAUserManager();
-		xmlmanager = new XMLManagerImpl();
+		xmlmanager = new XMLManagerImpl(jdbcmanager);
 		
 		try {
 			int choice;

@@ -35,28 +35,27 @@ public class JDBCManager {
 			
 			Statement stmt = c.createStatement();
 			
-			LocalDate date = LocalDate.of(2030, 01, 01);
-			Date expiration_date = Date.valueOf(date);
-			
-			String sql = "INSERT INTO devices (type, expiration_date)"
-					+ "VALUES ( 'pacemaker'," +expiration_date+ ")";
+			String sql = "INSERT INTO devices (type)"
+					+ "VALUES ('pacemaker')";
 			stmt.executeUpdate(sql);
 			
-			sql = "INSERT INTO devices (type, expiration_date)"
-					+ "VALUES ('prosthetic limb', " +expiration_date+ ")";
+			sql = "INSERT INTO devices (type)"
+					+ "VALUES ('prosthetic limb')";
 			stmt.executeUpdate(sql);
 			
-			sql = "INSERT INTO devices (type, expiration_date)"
-					+ "VALUES ('insulin pump', " +expiration_date+ ")";
+			sql = "INSERT INTO devices (type)"
+					+ "VALUES ('insulin pump')";
 			stmt.executeUpdate(sql);
 			
-			sql = "INSERT INTO devices (type, expiration_date)"
-					+ "VALUES ('coclear implant', " +expiration_date+ ")";
+			sql = "INSERT INTO devices (type)"
+					+ "VALUES ('coclear implant')";
 			stmt.executeUpdate(sql);
 			
-			sql = "INSERT INTO devices (type, expiration_date)"
-					+ "VALUES ('bionic eye', " +expiration_date+ ")";
+			sql = "INSERT INTO devices (type)"
+					+ "VALUES ('bionic eye')";
 			stmt.executeUpdate(sql);
+			
+			stmt.close();
 			
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -89,7 +88,6 @@ public class JDBCManager {
 			sql = "CREATE TABLE devices ("
 					+ "device_id INTEGER PRIMARY KEY AUTOINCREMENT,"
 					+ "type TEXT,"
-					+ "expiration_date TEXT,"
 					+ "manufacturer_id	INTEGER,"
 					+ "FOREIGN KEY(manufacturer_id) REFERENCES manufacturers(manufacturer_id)"
 					+ ")";

@@ -173,9 +173,8 @@ public class JDBCManufacturerManager implements ManufacturerManager{
 				
 				Integer id = rs2.getInt("id");
 				String type = rs2.getString("type");
-				Date expiration_date = rs2.getDate("expiration_date");
 						
-				Device d = new Device (id, type, expiration_date);					
+				Device d = new Device (id, type);					
 				devices.add(d);
 			}
 			rs.close();
