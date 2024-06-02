@@ -145,7 +145,6 @@ public class JDBCPatientManager implements PatientManager{
 	@Override
 	public void editName(Patient p,String name) {
 		try{
-			p.setName(name);
 			String sql = "UPDATE patients SET name=? WHERE patient_id=?";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setString(1, name);	
@@ -154,19 +153,18 @@ public class JDBCPatientManager implements PatientManager{
 			System.out.println("Update finished.");
 			prep.close();
 			System.out.println("Database connection closed.");
+			
 		}catch(SQLException e) {
 			e.printStackTrace();
-			
 		}
+		p.setName(name);
+
 	}
 	
 	//ok
 	@Override
 	public void editSurname(Patient p,String surname) {
-		p.setSurname(surname);
-		try{
-			p.setSurname(surname); //actualizas el objeto
-			
+		try{			
 			String sql = "UPDATE patients SET surname=? WHERE patient_id=?";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			
@@ -181,10 +179,11 @@ public class JDBCPatientManager implements PatientManager{
 		}catch(SQLException e) {
 				e.printStackTrace();
 		}
+		p.setSurname(surname);
 	}
 	
 	//ok
-	@Override
+	/*@Override
 	public void editDiagnosis(Patient p, String diagnosis) {
 		try {
 			
@@ -204,6 +203,6 @@ public class JDBCPatientManager implements PatientManager{
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}
-	}
+	}*/
 	
 }

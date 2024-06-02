@@ -14,6 +14,6 @@ public interface PatientManager {
 	
 	public void editName(Patient p, String name);
 	public void editSurname(Patient p, String surname);
-	public void editDiagnosis(Patient p, String diagnosis);
+	//public void editDiagnosis(Patient p, String diagnosis);
 	
 }

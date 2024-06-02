@@ -101,7 +101,6 @@ public class JDBCManufacturerManager implements ManufacturerManager{
 	public void editPhoneNumber(Manufacturer m, Integer phonenumber) {
 		// TODO Auto-generated method stub
 		try{
-			m.setPhoneNumber(phonenumber);
 			String sql = "UPDATE manufacturers SET phonenumber=? WHERE id=?";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setInt(1, phonenumber);	
@@ -114,13 +113,14 @@ public class JDBCManufacturerManager implements ManufacturerManager{
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}
+		m.setPhoneNumber(phonenumber);
+
 	}
 	
 	@Override
 	public void editAddress(Manufacturer m, String address) {
 		// TODO Auto-generated method stub
 		try{
-			m.setAddress(address);
 			String sql = "UPDATE manufacturers SET address=? WHERE id=?";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setString(1, address);	
@@ -133,13 +133,14 @@ public class JDBCManufacturerManager implements ManufacturerManager{
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}
+		m.setAddress(address);
+
 	}
 	
 	@Override
 	public void editName(Manufacturer m, String name) {
 		// TODO Auto-generated method stub
 		try{
-			m.setName(name);
 			String sql = "UPDATE manufacturers SET name=? WHERE id=?";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setString(1, name);	
@@ -152,7 +153,8 @@ public class JDBCManufacturerManager implements ManufacturerManager{
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}
-		
+		m.setName(name);
+
 	}
 
 	//doble query

@@ -138,7 +138,6 @@ public class PatientMenu {
 				System.out.println("Choose an option");
 				System.out.println("1. Edit name");
 				System.out.println("2. Edit surname");
-				System.out.println("3. Edit diagnosis");
 				System.out.println("0. Return");
 				
 				choice = Integer.parseInt(reader.readLine());
@@ -149,9 +148,6 @@ public class PatientMenu {
 					break;
 				case 2:
 					editSurname(pmanager, id);
-					break;
-				case 3:
-					editDiagnosis(pmanager, id);
 					break;
 				case 0:
 					System.out.println("Back to patient menu");
@@ -183,17 +179,6 @@ public class PatientMenu {
 		System.out.println("Enter new surname: ");
 		String surname = reader.readLine();
 		pmanager.editSurname(p, surname);
-				
-	}
-    
-    //ok
-    private static void editDiagnosis(JDBCPatientManager pmanager, Integer id)throws Exception  {
-		// TODO Auto-generated method stub
-				
-		p = pmanager.getPatientById(id);
-		System.out.println("Enter new diagnosis: ");
-		String diagnosis = reader.readLine();
-		pmanager.editDiagnosis(p, diagnosis);
 				
 	}
 

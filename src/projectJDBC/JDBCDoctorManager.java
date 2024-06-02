@@ -137,7 +137,6 @@ public class JDBCDoctorManager implements DoctorManager {
 	@Override
 	public void editName(Doctor d,String name) {
 		try{
-			d.setName(name);
 			String sql = "UPDATE doctors SET name=? WHERE doctor_id=?";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setString(1, name);	
@@ -146,18 +145,17 @@ public class JDBCDoctorManager implements DoctorManager {
 			System.out.println("Update finished.");
 			prep.close();
 			System.out.println("Database connection closed.");
+			
 		}catch(SQLException e) {
 			e.printStackTrace();
-			
 		}
+		d.setName(name);
 	}
 	
 	//ok
 	@Override
 	public void editSurname(Doctor d,String surname) {
-		d.setSurname(surname);
 		try{
-			d.setSurname(surname);
 			String sql = "UPDATE doctors SET name=? WHERE doctor_id=?";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setString(1, surname);	
@@ -166,18 +164,18 @@ public class JDBCDoctorManager implements DoctorManager {
 			System.out.println("Update finished.");
 			prep.close();
 			System.out.println("Database connection closed.");
+			
 		}catch(SQLException e) {
 				e.printStackTrace();
-				
 		}
+		d.setSurname(surname);
+
 	}
 	
 	//ok
 	@Override
 	public void editSpecialty(Doctor d,String specialty) {
-		d.setSpecialty(specialty);
 		try{
-			d.setName(specialty);
 			String sql = "UPDATE doctors SET specialty=? WHERE doctor_id=?";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setString(1, specialty);	
@@ -189,6 +187,8 @@ public class JDBCDoctorManager implements DoctorManager {
 		}catch(SQLException e) {
 			e.printStackTrace();			
 		}
+		d.setSpecialty(specialty);
+
 	}
 
 	
