@@ -1,7 +1,6 @@
 package projectJPA;
 
 import java.security.MessageDigest;
-import java.sql.PreparedStatement;
 import java.util.List;
 
 import javax.persistence.EntityManager;

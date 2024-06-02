@@ -3,6 +3,7 @@ package projectJDBC;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +38,7 @@ public class JDBCPatientManager implements PatientManager{
 			prep.executeUpdate();				
 			prep.close();
 		}
-		catch(Exception e){
+		catch(SQLException e){
 			e.printStackTrace();
 		}
 		
@@ -56,7 +57,7 @@ public class JDBCPatientManager implements PatientManager{
 			
 			while(rs.next())
 			{
-				Integer id = rs.getInt("id");
+				Integer id = rs.getInt("patient_id");
 				String email = rs.getString("email");
 				String name = rs.getString("name");
 				String surname = rs.getString("surname");
@@ -70,7 +71,7 @@ public class JDBCPatientManager implements PatientManager{
 			rs.close();
 			stmt.close();
 			
-		}catch(Exception e){
+		}catch(SQLException e){
 			e.printStackTrace();
 		}
 		
@@ -85,23 +86,23 @@ public class JDBCPatientManager implements PatientManager{
 		try {
 			
 			Statement stmt = manager.getConnection().createStatement();
-			String sql = "SELECT * FROM patients WHERE id=" + id;
+			String sql = "SELECT * FROM patients WHERE patient_id=" + id;
 		
 			ResultSet rs = stmt.executeQuery(sql);
 			
-			Integer d_id = rs.getInt("id");
+			Integer p_id = rs.getInt("patient_id");
 			String email = rs.getString("email"); 
 			String name = rs.getString("name");
 			String surname = rs.getString("surname");
 			Date birthday = rs.getDate("birthday");
 			String diagnosis = rs.getString("diagnosis");
 
-		    p = new Patient (d_id, email, name, surname, birthday, diagnosis);
+		    p = new Patient (p_id, email, name, surname, birthday, diagnosis);
 		    
 		    rs.close();
 		    stmt.close();
 		    
-		}catch(Exception e) {
+		}catch(SQLException e) {
 			e.printStackTrace();
 		}
 		
@@ -118,8 +119,8 @@ public class JDBCPatientManager implements PatientManager{
 		
 			ResultSet rs = stmt.executeQuery(sql);
 			
-			Integer id = rs.getInt("id");
-			String d_email = rs.getString("email"); 
+			Integer id = rs.getInt("patient_id");
+			String p_email = rs.getString("email"); 
 			String name = rs.getString("name");
 			String surname = rs.getString("surname");
 			Date bd = rs.getDate("birthday");
@@ -127,12 +128,12 @@ public class JDBCPatientManager implements PatientManager{
 			//List <Device> devices = rs.getList??? e incluir los devices en el constructor?
 
 			
-		    p = new Patient (id, d_email, name, surname, bd, diagnosis);
+		    p = new Patient (id, p_email, name, surname, bd, diagnosis);
 		    
 		    rs.close();
 		    stmt.close();
 		    
-		}catch(Exception e) {
+		}catch(SQLException e) {
 			e.printStackTrace();
 		}
 		
@@ -145,7 +146,7 @@ public class JDBCPatientManager implements PatientManager{
 	public void editName(Patient p,String name) {
 		try{
 			p.setName(name);
-			String sql = "UPDATE patients SET name=? WHERE id=?";
+			String sql = "UPDATE patients SET name=? WHERE patient_id=?";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setString(1, name);	
 			prep.setInt(2, p.getId());
@@ -153,7 +154,7 @@ public class JDBCPatientManager implements PatientManager{
 			System.out.println("Update finished.");
 			prep.close();
 			System.out.println("Database connection closed.");
-		}catch(Exception e) {
+		}catch(SQLException e) {
 			e.printStackTrace();
 			
 		}
@@ -166,7 +167,7 @@ public class JDBCPatientManager implements PatientManager{
 		try{
 			p.setSurname(surname); //actualizas el objeto
 			
-			String sql = "UPDATE patients SET surname=? WHERE id=?";
+			String sql = "UPDATE patients SET surname=? WHERE patient_id=?";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			
 			prep.setString(1, surname);	
@@ -177,7 +178,7 @@ public class JDBCPatientManager implements PatientManager{
 			prep.close();
 			System.out.println("Database connection closed.");
 			
-		}catch(Exception e) {
+		}catch(SQLException e) {
 				e.printStackTrace();
 		}
 	}
@@ -189,7 +190,7 @@ public class JDBCPatientManager implements PatientManager{
 			
 			p.setDiagnosis(diagnosis);
 			
-			String sql = "UPDATE patients SET diagnosis=? WHERE id=?";
+			String sql = "UPDATE patients SET diagnosis=? WHERE patient_id=?";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			
 			prep.setString(1, diagnosis);
@@ -200,7 +201,7 @@ public class JDBCPatientManager implements PatientManager{
 			prep.close();
 			System.out.println("Database connection closed.");
 			
-		}catch(Exception e) {
+		}catch(SQLException e) {
 			e.printStackTrace();
 		}
 	}

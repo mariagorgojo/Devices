@@ -2,6 +2,7 @@ package projectJDBC;
 
 
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 import projectIfaces.AppointmentManager;
 import projectPOJOs.Appointment;
@@ -31,7 +32,7 @@ public class JDBCAppointmentManager implements AppointmentManager{
 			prep.executeUpdate();				
 					
 		}
-		catch(Exception e){
+		catch(SQLException e){
 			e.printStackTrace();
 		}
 		
@@ -47,7 +48,7 @@ public class JDBCAppointmentManager implements AppointmentManager{
 			prep.setInt(1, appointment_id);
 			prep.executeUpdate();
 			
-		}catch(Exception e) {
+		}catch(SQLException e) {
 			e.printStackTrace();
 		}
 	}

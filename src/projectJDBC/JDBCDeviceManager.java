@@ -3,6 +3,7 @@ package projectJDBC;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +38,7 @@ public class JDBCDeviceManager implements DeviceManager{
 			
 			prep.executeUpdate();	
 			
-		}catch(Exception e) {
+		}catch(SQLException e) {
 			e.printStackTrace();
 		}
 	}
@@ -56,7 +57,7 @@ public class JDBCDeviceManager implements DeviceManager{
 			
 			prep.executeUpdate();
 			
-		}catch(Exception e){
+		}catch(SQLException e){
 			e.printStackTrace();
 		}
 	}
@@ -84,7 +85,7 @@ public class JDBCDeviceManager implements DeviceManager{
 			rs.close();
 			stmt.close();
 				
-		}catch(Exception e){
+		}catch(SQLException e){
 			e.printStackTrace();
 		}
 			
@@ -106,7 +107,7 @@ public class JDBCDeviceManager implements DeviceManager{
 			rs.close();
 			stmt.close();
 				
-		}catch(Exception e){
+		}catch(SQLException e){
 			e.printStackTrace();
 		}
 		return d;
@@ -125,14 +126,14 @@ public class JDBCDeviceManager implements DeviceManager{
 				Integer id = rs.getInt("device_id");
 				String type = rs.getString("type");
 				Date expiration_date = rs.getDate("expiration_date");
-					
+				
 				Device d = new Device (id, type, expiration_date);					
 				devices.add(d);
 			}
 			rs.close();
 			stmt.close();
 				
-		}catch(Exception e){
+		}catch(SQLException e){
 			e.printStackTrace();
 		}
 			

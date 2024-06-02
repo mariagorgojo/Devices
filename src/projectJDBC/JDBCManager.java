@@ -86,8 +86,6 @@ public class JDBCManager {
 					+ ")";
 			stmt.executeUpdate(sql);
 			
-			
-			
 			sql = "CREATE TABLE devices ("
 					+ "device_id INTEGER PRIMARY KEY AUTOINCREMENT,"
 					+ "type TEXT,"

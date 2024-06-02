@@ -8,7 +8,6 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
-
 import projectIfaces.DeviceManager;
 import projectIfaces.ManufacturerManager;
 import projectIfaces.PatientManager;
@@ -28,13 +27,19 @@ public class XMLManagerImpl implements XMLManager{
 	private ManufacturerManager manufacturermanager;
 	private DeviceManager devicemanager;
 	
+	public XMLManagerImpl(JDBCManager m) {
+		super();
+		this.manager = m;
+		this.patientmanager = new JDBCPatientManager(manager);
+		this.manufacturermanager = new JDBCManufacturerManager(manager);
+		this.devicemanager = new JDBCDeviceManager(manager);
+
+	}
+	
 	@Override
 	public void patient2xml(Integer id) {
 		Patient p=null;
 		List<Device> devices=new ArrayList<Device>();
-		manager = new JDBCManager();
-		patientmanager = new JDBCPatientManager(manager);
-		devicemanager = new JDBCDeviceManager(manager);
 		
 		try {
 			//Do a sql query to get the patient by the id

@@ -2,6 +2,7 @@ package projectJDBC;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +38,7 @@ public class JDBCDoctorManager implements DoctorManager {
 			prep.executeUpdate();				
 					
 		}
-		catch(Exception e){
+		catch(SQLException e){
 			e.printStackTrace();
 		}
 		
@@ -55,7 +56,7 @@ public class JDBCDoctorManager implements DoctorManager {
 			ResultSet rs = stmt.executeQuery(sql);
 			
 			while(rs.next()){
-				Integer id = rs.getInt("id");
+				Integer id = rs.getInt("doctor_id");
 				String email = rs.getString("email");
 				String name = rs.getString("name");
 				String surname = rs.getString("surname");
@@ -68,7 +69,7 @@ public class JDBCDoctorManager implements DoctorManager {
 			rs.close();
 			stmt.close();
 			
-		}catch(Exception e){
+		}catch(SQLException e){
 			e.printStackTrace();
 		
 		}
@@ -82,11 +83,11 @@ public class JDBCDoctorManager implements DoctorManager {
 		
 		try {
 			Statement stmt = manager.getConnection().createStatement();
-			String sql = "SELECT * FROM doctors WHERE id=" + id;
+			String sql = "SELECT * FROM doctors WHERE doctor_id=" + id;
 		
 			ResultSet rs = stmt.executeQuery(sql);
 			
-			Integer d_id = rs.getInt("id");
+			Integer d_id = rs.getInt("doctor_id");
 			String email = rs.getString("email"); 
 			String name = rs.getString("name");
 			String surname = rs.getString("surname");
@@ -97,7 +98,7 @@ public class JDBCDoctorManager implements DoctorManager {
 		    rs.close();
 		    stmt.close();
 		    
-		}catch(Exception e) {
+		}catch(SQLException e) {
 			e.printStackTrace();
 		}
 		
@@ -114,7 +115,7 @@ public class JDBCDoctorManager implements DoctorManager {
 		
 			ResultSet rs = stmt.executeQuery(sql);
 			
-			Integer id = rs.getInt("id");
+			Integer id = rs.getInt("doctor_id");
 			String d_email = rs.getString("email"); 
 			String name = rs.getString("name");
 			String surname = rs.getString("surname");
@@ -125,7 +126,7 @@ public class JDBCDoctorManager implements DoctorManager {
 		    rs.close();
 		    stmt.close();
 		    
-		}catch(Exception e) {
+		}catch(SQLException e) {
 			e.printStackTrace();
 		}
 		
@@ -137,7 +138,7 @@ public class JDBCDoctorManager implements DoctorManager {
 	public void editName(Doctor d,String name) {
 		try{
 			d.setName(name);
-			String sql = "UPDATE doctors SET name=? WHERE id=?";
+			String sql = "UPDATE doctors SET name=? WHERE doctor_id=?";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setString(1, name);	
 			prep.setInt(2, d.getId());
@@ -145,7 +146,7 @@ public class JDBCDoctorManager implements DoctorManager {
 			System.out.println("Update finished.");
 			prep.close();
 			System.out.println("Database connection closed.");
-		}catch(Exception e) {
+		}catch(SQLException e) {
 			e.printStackTrace();
 			
 		}
@@ -157,7 +158,7 @@ public class JDBCDoctorManager implements DoctorManager {
 		d.setSurname(surname);
 		try{
 			d.setSurname(surname);
-			String sql = "UPDATE doctors SET name=? WHERE id=?";
+			String sql = "UPDATE doctors SET name=? WHERE doctor_id=?";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setString(1, surname);	
 			prep.setInt(2, d.getId());
@@ -165,7 +166,7 @@ public class JDBCDoctorManager implements DoctorManager {
 			System.out.println("Update finished.");
 			prep.close();
 			System.out.println("Database connection closed.");
-		}catch(Exception e) {
+		}catch(SQLException e) {
 				e.printStackTrace();
 				
 		}
@@ -177,7 +178,7 @@ public class JDBCDoctorManager implements DoctorManager {
 		d.setSpecialty(specialty);
 		try{
 			d.setName(specialty);
-			String sql = "UPDATE doctors SET specialty=? WHERE id=?";
+			String sql = "UPDATE doctors SET specialty=? WHERE doctor_id=?";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setString(1, specialty);	
 			prep.setInt(2, d.getId());
@@ -185,7 +186,7 @@ public class JDBCDoctorManager implements DoctorManager {
 			System.out.println("Update finished.");
 			prep.close();
 			System.out.println("Database connection closed.");
-		}catch(Exception e) {
+		}catch(SQLException e) {
 			e.printStackTrace();			
 		}
 	}

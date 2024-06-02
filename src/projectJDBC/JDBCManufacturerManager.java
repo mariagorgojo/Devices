@@ -2,11 +2,11 @@ package projectJDBC;
 
 import projectPOJOs.Device;
 import projectPOJOs.Manufacturer;
-import projectPOJOs.Patient;
 
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
@@ -37,7 +37,7 @@ public class JDBCManufacturerManager implements ManufacturerManager{
 			prep.executeUpdate();				
 			prep.close();
 		}
-		catch(Exception e){
+		catch(SQLException e){
 			e.printStackTrace();
 		}
 		
@@ -62,7 +62,7 @@ public class JDBCManufacturerManager implements ManufacturerManager{
 		    rs.close();
 		    stmt.close();
 		    
-		}catch(Exception e) {
+		}catch(SQLException e) {
 			e.printStackTrace();
 		}
 		
@@ -89,7 +89,7 @@ public class JDBCManufacturerManager implements ManufacturerManager{
 		    rs.close();
 		    stmt.close();
 		    
-		}catch(Exception e) {
+		}catch(SQLException e) {
 			e.printStackTrace();
 		}
 		
@@ -110,7 +110,7 @@ public class JDBCManufacturerManager implements ManufacturerManager{
 			prep.close();
 			System.out.println("Database connection closed.");
 			
-		}catch(Exception e) {
+		}catch(SQLException e) {
 			e.printStackTrace();
 		}
 	}
@@ -129,7 +129,7 @@ public class JDBCManufacturerManager implements ManufacturerManager{
 			prep.close();
 			System.out.println("Database connection closed.");
 			
-		}catch(Exception e) {
+		}catch(SQLException e) {
 			e.printStackTrace();
 		}
 	}
@@ -148,7 +148,7 @@ public class JDBCManufacturerManager implements ManufacturerManager{
 			prep.close();
 			System.out.println("Database connection closed.");
 			
-		}catch(Exception e) {
+		}catch(SQLException e) {
 			e.printStackTrace();
 		}
 		
@@ -181,7 +181,7 @@ public class JDBCManufacturerManager implements ManufacturerManager{
 			rs.close();
 			stmt.close();
 			
-		}catch(Exception e){
+		}catch(SQLException e){
 			e.printStackTrace();
 		}
 		return devices;
