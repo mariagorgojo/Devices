@@ -206,7 +206,7 @@ public class Menu {
 		String name = reader.readLine();
 		System.out.println("Introduce your address: ");
 		String address = reader.readLine();
-		System.out.println("Introduce your birthday in format (yyyy/mm/dd): ");
+		System.out.println("Introduce your phonenumber: ");
 		int phonenumber = Integer.parseInt(reader.readLine());
 		m = new Manufacturer(email, name, address, phonenumber);
 		
