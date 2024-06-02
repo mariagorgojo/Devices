@@ -94,7 +94,7 @@ public class DoctorMenu {
 		System.out.println("Devices available: ");
 		int count = 0;
 		for(Device d : devices) {
-			if(count<=5) {
+			if(count<5) {
 				System.out.println(d.toString());
 				count++;
 			}else {
@@ -225,7 +225,7 @@ public class DoctorMenu {
 		devices = devicemanager.getDevices();
 		int count = 0;
 		for(Device d : devices) {
-			if(count<=5) {
+			if(count<5) {
 				System.out.println(d.toString());
 				count++;
 			}else {
