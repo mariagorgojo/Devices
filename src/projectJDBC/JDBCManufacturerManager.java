@@ -104,7 +104,7 @@ public class JDBCManufacturerManager implements ManufacturerManager{
 	public void editPhoneNumber(Manufacturer m, Integer phonenumber) {
 		// TODO Auto-generated method stub
 		try{
-			String sql = "UPDATE manufacturers SET phonenumber=? WHERE id=?";
+			String sql = "UPDATE manufacturers SET phonenumber=? WHERE manufacturer_id=?";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setInt(1, phonenumber);	
 			prep.setInt(2, m.getId());
@@ -124,7 +124,7 @@ public class JDBCManufacturerManager implements ManufacturerManager{
 	public void editAddress(Manufacturer m, String address) {
 		// TODO Auto-generated method stub
 		try{
-			String sql = "UPDATE manufacturers SET address=? WHERE id=?";
+			String sql = "UPDATE manufacturers SET address=? WHERE manufacturer_id=?";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setString(1, address);	
 			prep.setInt(2, m.getId());
@@ -144,7 +144,7 @@ public class JDBCManufacturerManager implements ManufacturerManager{
 	public void editName(Manufacturer m, String name) {
 		// TODO Auto-generated method stub
 		try{
-			String sql = "UPDATE manufacturers SET name=? WHERE id=?";
+			String sql = "UPDATE manufacturers SET name=? WHERE manufacturer_id=?";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setString(1, name);	
 			prep.setInt(2, m.getId());

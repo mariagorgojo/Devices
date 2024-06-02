@@ -57,7 +57,7 @@ public class ManufacturerMenu {
 	//case 3
 	private static void printMe(XMLManager xmlmanager, JDBCManufacturerManager manufacturermanager, String email) {
 		m = manufacturermanager.getManufacturerbyEmail(email);
-		xmlmanager.patient2xml(m.getId());
+		xmlmanager.manufacturer2xml(m.getId());
 	}
 	
 	//case 2
