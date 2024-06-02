@@ -171,10 +171,10 @@ public class JDBCManufacturerManager implements ManufacturerManager{
 			ResultSet rs = stmt.executeQuery(sql);
 			
 			while(rs.next()){
-				Integer device_id = rs.getInt("device_id"); //you obtain the id of the type of device ordered
+				Integer device_id = rs.getInt("device_id"); //you obtain the ids of the types of devices ordered
 				
 				Statement stmt2 = manager.getConnection().createStatement();
-				String sql2 = "SELECT * FROM devices WHERE id=" +device_id; //you use that id to search the type of device associated with it and add it to the list you return
+				String sql2 = "SELECT * FROM devices WHERE device_id=" +device_id; //you use that id to search the type of device associated with it and add it to the list you return
 				ResultSet rs2 = stmt2.executeQuery(sql2);
 				
 				Integer id = rs2.getInt("id");
