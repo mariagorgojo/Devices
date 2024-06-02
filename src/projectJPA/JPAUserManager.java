@@ -149,7 +149,7 @@ public class JPAUserManager implements UserManager {
 		try {
 			em.getTransaction().begin();
 			
-			Query q = em.createNativeQuery("Select * FROM users WHERE email=" +email, User.class);
+			Query q = em.createNativeQuery("SELECT * FROM users WHERE email=" +email, User.class);
 			User user = (User) q.getSingleResult();
 
 			em.remove(user);
